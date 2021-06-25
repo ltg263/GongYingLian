@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/my_toolbar"
+    style="@style/Toolbar"
+    android:background="@color/white"
+    android:elevation="0dp">
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="标题"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_you"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:visibility="gone"
+        android:padding="@dimen/dp_10"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/color_666666"
+        android:text="批量下架" />
+
+</androidx.appcompat.widget.Toolbar>

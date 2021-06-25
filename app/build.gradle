@@ -1,0 +1,93 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        applicationId "com.jxxx.gyl"
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+        ndk {
+            //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86","x86_64"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //网络请求
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+
+    implementation 'com.youth.banner:banner:1.4.10'
+
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    implementation 'jp.wasabeef:glide-transformations:3.3.0'
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
+
+
+    //下拉刷新上拉加载
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'
+
+    implementation 'com.blankj:utilcode:1.23.7'
+    //图片选择
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.4'
+    implementation 'com.contrarywind:Android-PickerView:4.1.7'
+
+//    implementation 'com.amap.api:navi-3dmap:5.0.0'
+//    implementation 'com.amap.api:location:5.3.1'
+//    implementation 'com.amap.api:3dmap:5.1.0'
+    //地图sdk
+    implementation 'com.amap.api:3dmap:5.1.0'
+    implementation 'com.amap.api:location:3.3.0'
+    implementation 'com.amap.api:search:5.1.0'
+}
+//MD5:  6D:AF:EC:5F:C5:FC:39:0B:69:66:64:6F:E3:45:2D:B1
+//SHA1: 40:D2:74:26:83:C1:82:5B:DD:EC:53:9F:73:C8:71:B4:52:C1:51:9E
+//SHA256: F1:14:B3:0C:58:EC:CC:A6:ED:D3:58:4D:B1:0B:68:38:9E:53:AE:A8:44:74:8B:50:18:BD:2B:44:E4:CA:27:A7

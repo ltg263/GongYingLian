@@ -1,0 +1,54 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/gaodeTv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/color_333333"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="高德地图"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"/>
+    <TextView
+        android:id="@+id/baiduTv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/color_333333"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="百度地图"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"/>
+    <TextView
+        android:id="@+id/txTv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/color_333333"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="腾讯地图"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/line_gray"/>
+
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/color_333333"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="取消"/>
+</LinearLayout>

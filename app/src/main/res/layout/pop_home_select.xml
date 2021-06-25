@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:background="@color/white"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content">
+
+<RadioGroup
+    android:id="@+id/rgb_sort"
+    android:orientation="vertical"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content">
+    <RadioButton
+        android:id="@+id/rb11"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:textColor="@color/selector_color"
+        android:text="3km以内"
+        android:button="@null"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"/>
+    <RadioButton
+        android:id="@+id/rb12"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:textColor="@color/selector_color"
+        android:text="5km以内"
+        android:button="@null"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"/>
+    <RadioButton
+        android:id="@+id/rb13"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:textColor="@color/selector_color"
+        android:text="10km以内"
+        android:button="@null"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"/>
+    <RadioButton
+        android:id="@+id/rb14"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:textColor="@color/selector_color"
+        android:text="不限"
+        android:button="@null"/>
+</RadioGroup>
+</LinearLayout>

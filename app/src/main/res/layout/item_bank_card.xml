@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/bankName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/color_333333"
+        android:text="宁波银行"/>
+
+    <TextView
+        android:id="@+id/cardNo"
+        android:layout_below="@id/bankName"
+        android:layout_marginTop="10dp"
+        android:text="5894156325741252368"
+        android:textColor="@color/color_333333"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_alignParentEnd="true"
+        android:src="@mipmap/common_delete"/>
+
+    <ImageView
+        android:id="@+id/iv_mr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_below="@id/iv_delete"
+        android:layout_alignParentEnd="true"
+        android:src="@mipmap/common_select_dev_no"/>
+
+</RelativeLayout>

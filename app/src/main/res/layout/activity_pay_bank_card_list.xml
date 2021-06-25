@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/include_toolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cardRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <TextView
+        android:id="@+id/addBankCard"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bnt_details_height"
+        android:layout_margin="20dp"
+        android:background="@drawable/circle_solid_theme_25"
+        android:gravity="center"
+        android:text="添加新账户"
+        android:textColor="@color/white"
+        android:textSize="@dimen/bnt_details_text_size" />
+
+
+</LinearLayout>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bj_theme"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="15dp"
+                android:paddingTop="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/group_927" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="0dp"
+                    android:layout_height="0.8dp"
+                    android:layout_weight="1"
+                    android:background="@color/color_eeeeee" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/group_930" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.8dp"
+                    android:layout_weight="1"
+                    android:background="@color/color_eeeeee" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/group_930" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.8dp"
+                    android:layout_weight="1"
+                    android:background="@color/color_eeeeee" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/group_930" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:background="@color/white"
+                android:paddingHorizontal="10dp"
+                android:paddingBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预约"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_12" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="认证"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_12" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="看房"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_12" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="签约"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_12" />
+
+            </LinearLayout>
+
+
+            <include layout="@layout/item_include_fyxx" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="30dp"
+                android:text="预约时间"
+                android:textColor="@color/color_666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:text="2021.02.02 11:11:00"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.8dp"
+                android:layout_margin="15dp"
+                android:background="@color/color_eeeeee" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:text="联系方式"
+                android:textColor="@color/color_666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:text="姓名：李四"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:text="电话：1311234567"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.8dp"
+                android:layout_margin="15dp"
+                android:background="@color/color_eeeeee" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:text="备注"
+                android:textColor="@color/color_666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:text="备注信息"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.8dp"
+                android:layout_margin="15dp"
+                android:background="@color/color_eeeeee" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:text="带看人员"
+                android:textColor="@color/color_666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="姓名：李四"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/bnt_lxyx"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/bnt_details_height"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/circle_line_theme_25"
+                    android:gravity="center"
+                    android:text="联系对方"
+                    android:textColor="@color/color_blue_theme"
+                    android:textSize="@dimen/bnt_details_text_size" />
+
+                <TextView
+                    android:id="@+id/bnt_qrz"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/bnt_details_height"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circle_solid_theme_25"
+                    android:gravity="center"
+                    android:text="去认证"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/bnt_details_text_size" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

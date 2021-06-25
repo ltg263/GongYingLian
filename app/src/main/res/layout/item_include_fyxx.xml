@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="8dp">
+
+    <ImageView
+        android:id="@+id/head_icon"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/name_type"
+        android:layout_alignBottom="@id/tv_je"
+        android:layout_centerVertical="true"
+        android:src="@android:mipmap/sym_def_app_icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/head_icon"
+        android:layout_alignEnd="@id/head_icon"
+        android:background="@drawable/circle_solid_666_10_tmbf"
+        android:paddingHorizontal="7dp"
+        android:paddingVertical="2dp"
+        android:text="实拍"
+        android:textColor="@color/white"
+        android:textSize="9sp" />
+
+    <TextView
+        android:id="@+id/name_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@id/head_icon"
+        android:drawablePadding="5dp"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="2dp"
+        android:text="整租· 孵化园科技楼"
+        android:textColor="@color/color_333333"
+        android:textSize="14sp" />
+
+
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_type"
+        android:layout_alignStart="@id/name_type"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="整套|90m²|首南社区"
+        android:textColor="@color/color_999999"
+        android:textSize="10sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/year"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@id/head_icon">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_solid_2186f7_2_tm40"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="2dp"
+            android:text="实拍视频"
+            android:textColor="@color/color_2186F7"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/circle_solid_2186f7_2_tm15"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="2dp"
+            android:text="押一付三"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/circle_solid_2186f7_2_tm15"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="2dp"
+            android:text="独栋公寓"
+            android:textColor="@color/color_333333"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_je"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_type"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@id/head_icon"
+        android:gravity="center"
+        android:text="88"
+        android:textColor="@color/red40"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_je1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_je"
+        android:layout_marginBottom="2dp"
+        android:layout_toEndOf="@id/tv_je"
+        android:gravity="bottom"
+        android:text="元/月"
+        android:textColor="@color/red40"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_je1"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@id/tv_je1"
+        android:gravity="center"
+        android:text="约看10人"
+        android:textColor="@color/color_999999"
+        android:textSize="12sp" />
+
+</RelativeLayout>
