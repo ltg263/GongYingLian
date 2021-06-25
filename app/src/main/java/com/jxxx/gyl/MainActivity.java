@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jxxx.gyl.base.BaseActivity;
+import com.jxxx.gyl.view.fragment.HomeFiveFragment;
 import com.jxxx.gyl.view.fragment.HomeFourFragment;
 import com.jxxx.gyl.view.fragment.HomeOneFragment;
 import com.jxxx.gyl.view.fragment.HomeThreeFragment;
@@ -27,6 +28,7 @@ public class MainActivity extends BaseActivity{
     private HomeOneFragment mHomeOneFragment;
     private HomeThreeFragment mHomeThreeFragment;
     private HomeFourFragment mHomeFourFragment;
+    private HomeFiveFragment mHomeFiveFragment;
     @Override
     public int intiLayout() {
         return R.layout.activity_main;
@@ -47,6 +49,7 @@ public class MainActivity extends BaseActivity{
         mHomeTwoFragment = new HomeTwoFragment();
         mHomeThreeFragment = new HomeThreeFragment();
         mHomeFourFragment = new HomeFourFragment();
+        mHomeFiveFragment = new HomeFiveFragment();
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -68,6 +71,9 @@ public class MainActivity extends BaseActivity{
                     switchFragment(mHomeThreeFragment);
                     break;
                 case R.id.menu_home_4:
+                    switchFragment(mHomeFourFragment);
+                    break;
+                case R.id.menu_home_5:
                     switchFragment(mHomeFourFragment);
                     break;
             }

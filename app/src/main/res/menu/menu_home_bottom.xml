@@ -17,4 +17,8 @@
         android:id="@+id/menu_home_4"
         android:icon="@drawable/home_tab_selector_4"
         android:title="@string/home_main_4"/>
+    <item
+        android:id="@+id/menu_home_5"
+        android:icon="@drawable/home_tab_selector_4"
+        android:title="@string/home_main_5"/>
 </menu>
