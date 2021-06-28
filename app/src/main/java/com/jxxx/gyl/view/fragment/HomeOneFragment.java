@@ -2,7 +2,6 @@ package com.jxxx.gyl.view.fragment;
 
 
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
