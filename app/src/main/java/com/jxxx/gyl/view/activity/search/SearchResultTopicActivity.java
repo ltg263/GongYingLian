@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.base.BaseActivity;
-import com.jxxx.gyl.view.adapter.HomeFyAdapter;
+import com.jxxx.gyl.view.adapter.HomeGoodsAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import butterknife.BindView;
@@ -28,7 +28,7 @@ public class SearchResultTopicActivity extends BaseActivity {
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
     private String search;
-    private HomeFyAdapter mHomeFyAdapter;
+    private HomeGoodsAdapter mHomeFyAdapter;
 
 
     @Override
@@ -43,7 +43,7 @@ public class SearchResultTopicActivity extends BaseActivity {
         mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setEnableRefresh(false);
 
-        mHomeFyAdapter = new HomeFyAdapter(null);
+        mHomeFyAdapter = new HomeGoodsAdapter(null);
         mRvList.setLayoutManager(new LinearLayoutManager(this));
         mRvList.setHasFixedSize(true);
         mRvList.setAdapter(mHomeFyAdapter);
