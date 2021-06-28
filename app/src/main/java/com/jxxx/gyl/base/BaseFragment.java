@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.view.LoadingDialog;
 
@@ -38,6 +39,7 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.savedInstanceState = savedInstanceState;
+        StatusBarUtil.setStatusBarMode(getActivity(), true, R.color.white);
         mContentView = inflater.inflate(setLayoutResourceID(),container,false);
         mContext = getActivity();
         unbinder = ButterKnife.bind(this, mContentView);

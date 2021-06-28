@@ -7,18 +7,40 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/white"
-        android:orientation="horizontal">
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginVertical="10dp"
+            android:drawableEnd="@mipmap/ic_jiantou_xia"
+            android:drawablePadding="5dp"
             android:gravity="center"
-            android:text="消息"
-            android:textColor="@color/color_000000"
-            android:textSize="16sp" />
+            android:text="宁波"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/circle_solid_fff_15"
+            android:drawableStart="@mipmap/ic_search"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="15dp"
+            android:text="输入小区名/商圈/地铁"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp" />
+
     </LinearLayout>
 
 </LinearLayout>

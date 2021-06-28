@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jxxx.gyl.base.BaseActivity;
+import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.view.fragment.HomeFiveFragment;
 import com.jxxx.gyl.view.fragment.HomeFourFragment;
 import com.jxxx.gyl.view.fragment.HomeOneFragment;

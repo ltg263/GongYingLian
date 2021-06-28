@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="个人中心"
+            android:text="订单"
             android:textColor="@color/color_000000"
             android:textSize="16sp" />
     </LinearLayout>
