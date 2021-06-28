@@ -110,16 +110,13 @@
             android:textColor="@color/red40"
             android:textSize="@dimen/sp_14" />
 
-        <ImageView
-            android:layout_width="25dp"
+        <com.jxxx.gyl.utils.view.AddandView
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/tv_price"
-            android:layout_alignParentEnd="true"
             android:layout_marginEnd="15dp"
-            android:adjustViewBounds="true"
-            android:padding="5dp"
-            android:src="@mipmap/ic_add_goods" />
-
+            android:layout_alignTop="@id/tv_price"
+            android:layout_alignParentEnd="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

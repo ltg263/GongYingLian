@@ -23,9 +23,9 @@ public class ConstValues {
     /**
      * 服务器后台地址
      */
-    public static final String BASE_URL = "https://5afit.nbqichen.com";
+    public static final String BASE_URL = "https://app.nbningjiang.com/ningjiangshengxian/api/v1/";
 
-    public static final String PORT_21 = "community-service/";//社群
+//    public static final String PORT_21 = "community-service/";//社群
 
     //默认连接超时时间
     public static final int DEFAULT_TIMEOUT =60;
