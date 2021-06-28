@@ -64,7 +64,7 @@ public class HomeFiveFragment extends BaseFragment {
 
     @Override
     protected int setLayoutResourceID() {
-        return R.layout.fragment_home_four;
+        return R.layout.fragment_home_five;
     }
 
     @Override

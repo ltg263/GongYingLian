@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity{
                     switchFragment(mHomeFourFragment);
                     break;
                 case R.id.menu_home_5:
-                    switchFragment(mHomeFourFragment);
+                    switchFragment(mHomeFiveFragment);
                     break;
             }
             return true;
