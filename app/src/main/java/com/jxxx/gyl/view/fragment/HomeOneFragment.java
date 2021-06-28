@@ -45,7 +45,6 @@ public class HomeOneFragment extends BaseFragment {
 
     @Override
     protected int setLayoutResourceID() {
-        StatusBarUtil.setTranslucentStatus(getActivity());
         return R.layout.fragment_home_one;
     }
 
