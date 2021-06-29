@@ -2,6 +2,7 @@ package com.jxxx.gyl.view.fragment;
 
 import android.view.View;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -16,6 +17,8 @@ import java.util.List;
 import butterknife.BindView;
 
 public class HomeOrderListFragment extends BaseFragment {
+    @BindView(R.id.my_toolbar)
+    Toolbar myToolbar;
     @BindView(R.id.rv_list)
     RecyclerView mRvList;
 
@@ -27,6 +30,7 @@ public class HomeOrderListFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        myToolbar.setVisibility(View.GONE);
         List<String> list = new ArrayList<>();
         list.add("");
         list.add("");

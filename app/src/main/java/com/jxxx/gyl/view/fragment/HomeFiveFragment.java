@@ -11,6 +11,7 @@ import com.jxxx.gyl.R;
 import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.view.activity.login.LoginActivity;
 import com.jxxx.gyl.view.activity.mine.MineHtListActivity;
+import com.jxxx.gyl.view.activity.mine.MineMessageListActivity;
 import com.jxxx.gyl.view.activity.mine.MineSetGyActivity;
 import com.jxxx.gyl.view.activity.mine.MineSetSmrzActivity;
 import com.jxxx.gyl.view.activity.mine.MineSettingActivity;
@@ -66,15 +67,21 @@ public class HomeFiveFragment extends BaseFragment {
     protected void initData() {
     }
 
-    @OnClick({R.id.rl_user_info, R.id.ll_top_1, R.id.ll_top_2, R.id.ll_top_3, R.id.ll_center_1,
+    @OnClick({R.id.iv_set,R.id.iv_msg,R.id.rl_user_info, R.id.ll_top_1, R.id.ll_top_2, R.id.ll_top_3, R.id.ll_center_1,
             R.id.ll_center_2, R.id.ll_center_3, R.id.ll_center_4, R.id.ll_below_1, R.id.ll_below_2, R.id.ll_below_3, R.id.ll_below_4})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.iv_set:
+                baseStartActivity(MineSettingActivity.class,null);
+                break;
+            case R.id.iv_msg:
+                baseStartActivity(MineMessageListActivity.class,null);
+                break;
             case R.id.rl_user_info:
                 baseStartActivity(LoginActivity.class,null);
                 break;
             case R.id.ll_top_1:
-                baseStartActivity(MineHtListActivity.class,null);
+                baseStartActivity(ActivityPayHomeQb.class,null);
                 break;
             case R.id.ll_top_2:
                 break;
@@ -90,12 +97,10 @@ public class HomeFiveFragment extends BaseFragment {
             case R.id.ll_center_4:
                 break;
             case R.id.ll_below_1:
-                baseStartActivity(MineSettingActivity.class,null);
                 break;
             case R.id.ll_below_2:
                 break;
             case R.id.ll_below_3:
-                baseStartActivity(MineSetGyActivity.class,null);
                 break;
             case R.id.ll_below_4:
                 break;

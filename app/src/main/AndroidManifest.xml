@@ -67,6 +67,7 @@
         <activity android:name="com.jxxx.gyl.view.activity.mine.MineSetGyActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.mine.MineSetSmrzActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.mine.MineSetSmrz2Activity" />
+        <activity android:name="com.jxxx.gyl.view.activity.mine.MineMessageListActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.MineJdxqActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.mine.MineInfoActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.payActivity.ActivityPayHomeQb" />

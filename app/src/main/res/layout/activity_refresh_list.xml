@@ -7,6 +7,8 @@
     android:background="@color/color_bj_theme"
     android:orientation="vertical">
 
+    <include layout="@layout/include_toolbar" />
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"

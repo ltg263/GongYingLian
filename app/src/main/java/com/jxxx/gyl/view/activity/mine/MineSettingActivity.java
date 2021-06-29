@@ -61,6 +61,7 @@ public class MineSettingActivity extends BaseActivity {
                 case R.id.ll_3:
                     break;
                 case R.id.ll_4:
+                    baseStartActivity(MineSetGyActivity.class,null);
                     break;
         }
     }
