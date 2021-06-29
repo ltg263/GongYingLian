@@ -1,9 +1,17 @@
 package com.jxxx.gyl.view.adapter;
 
+import android.content.Intent;
+import android.view.View;
+
+import androidx.annotation.Nullable;
+
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.utils.GlideImageLoader;
+import com.jxxx.gyl.utils.ToastUtil;
+import com.jxxx.gyl.view.activity.ShopDetailsActivity;
 
 import java.util.List;
 
@@ -23,6 +31,11 @@ public class HomeGoodsAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
             GlideImageLoader.loadImageViewRadius(mContext,str,30,helper.getView(R.id.siv_img));
             helper.setGone(R.id.rl1,true).setGone(R.id.rl_contact,false);
         }
+        helper.getView(R.id.rl_contact).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    ShopDetailsActivity.startActivityIntent(mContext,"");
+            }
+        });
     }
-
 }
