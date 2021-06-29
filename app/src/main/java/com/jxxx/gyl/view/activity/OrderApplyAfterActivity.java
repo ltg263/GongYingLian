@@ -1,6 +1,7 @@
 package com.jxxx.gyl.view.activity;
 
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,8 @@ public class OrderApplyAfterActivity extends BaseActivity {
     RecyclerView mRvShopList;
     @BindView(R.id.rv_list_tksm)
     RecyclerView mRvListTksm;
+    @BindView(R.id.bnt)
+    TextView bnt;
     OrderShopAdapter mOrderShopAdapter;
     OrderAfterSmAdapter mOrderAfterSmAdapter;
     @Override
@@ -33,6 +36,12 @@ public class OrderApplyAfterActivity extends BaseActivity {
     @Override
     public void initView() {
         setToolbar(mMyToolbar, "申请退款");
+        bnt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                baseStartActivity(OrderApplyAfterListActivity.class,null);
+            }
+        });
     }
 
     @Override
