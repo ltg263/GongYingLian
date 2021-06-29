@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bnt_details_height"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginVertical="50dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/circle_solid_theme_25"
                 android:gravity="center"
