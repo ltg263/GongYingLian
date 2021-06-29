@@ -35,8 +35,6 @@ public class HomeFiveFragment extends BaseFragment {
     LinearLayout mLlTop2;
     @BindView(R.id.ll_top_3)
     LinearLayout mLlTop3;
-    @BindView(R.id.ll_top_4)
-    LinearLayout mLlTop4;
     @BindView(R.id.ll_center_1)
     LinearLayout mLlCenter1;
     @BindView(R.id.ll_center_2)
@@ -45,14 +43,6 @@ public class HomeFiveFragment extends BaseFragment {
     LinearLayout mLlCenter3;
     @BindView(R.id.ll_center_4)
     LinearLayout mLlCenter4;
-    @BindView(R.id.ll_center_5)
-    LinearLayout mLlCenter5;
-    @BindView(R.id.ll_center_6)
-    LinearLayout mLlCenter6;
-    @BindView(R.id.ll_center_7)
-    LinearLayout mLlCenter7;
-    @BindView(R.id.ll_center_8)
-    LinearLayout mLlCenter8;
     @BindView(R.id.ll_below_1)
     LinearLayout mLlBelow1;
     @BindView(R.id.ll_below_2)
@@ -76,9 +66,8 @@ public class HomeFiveFragment extends BaseFragment {
     protected void initData() {
     }
 
-    @OnClick({R.id.rl_user_info, R.id.ll_top_1, R.id.ll_top_2, R.id.ll_top_3, R.id.ll_top_4, R.id.ll_center_1,
-            R.id.ll_center_2, R.id.ll_center_3, R.id.ll_center_4, R.id.ll_center_5, R.id.ll_center_6, R.id.ll_center_7,
-            R.id.ll_center_8, R.id.ll_below_1, R.id.ll_below_2, R.id.ll_below_3, R.id.ll_below_4})
+    @OnClick({R.id.rl_user_info, R.id.ll_top_1, R.id.ll_top_2, R.id.ll_top_3, R.id.ll_center_1,
+            R.id.ll_center_2, R.id.ll_center_3, R.id.ll_center_4, R.id.ll_below_1, R.id.ll_below_2, R.id.ll_below_3, R.id.ll_below_4})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_user_info:
@@ -91,9 +80,6 @@ public class HomeFiveFragment extends BaseFragment {
                 break;
             case R.id.ll_top_3:
                 break;
-            case R.id.ll_top_4:
-                baseStartActivity(ActivityPayHomeQb.class,null);
-                break;
             case R.id.ll_center_1:
                 break;
             case R.id.ll_center_2:
@@ -102,14 +88,6 @@ public class HomeFiveFragment extends BaseFragment {
                 baseStartActivity(MineSetSmrzActivity.class,null);
                 break;
             case R.id.ll_center_4:
-                break;
-            case R.id.ll_center_5:
-                break;
-            case R.id.ll_center_6:
-                break;
-            case R.id.ll_center_7:
-                break;
-            case R.id.ll_center_8:
                 break;
             case R.id.ll_below_1:
                 baseStartActivity(MineSettingActivity.class,null);

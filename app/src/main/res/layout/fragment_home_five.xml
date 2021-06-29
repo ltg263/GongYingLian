@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/color_bj_theme"
     android:orientation="vertical">
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"
@@ -18,7 +19,25 @@
             android:text="个人中心"
             android:textColor="@color/color_000000"
             android:textSize="16sp" />
-    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_set"
+            android:layout_toStartOf="@id/iv_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/dp_10"
+            android:src="@drawable/group_993" />
+
+        <ImageView
+            android:id="@+id/iv_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/dp_10"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/group_993" />
+    </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -45,6 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
+                    android:layout_toEndOf="@id/tv_user_img"
                     android:text="请先登录"
                     android:textColor="@color/color_000000"
                     android:textSize="22sp"
@@ -56,15 +76,16 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_user_name"
                     android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@id/tv_user_img"
+                    android:text="查看并编辑个人资料"
                     android:textColor="@color/color_999999"
-                    android:textSize="@dimen/sp_12"
-                    android:text="查看并编辑个人资料" />
+                    android:textSize="@dimen/sp_12" />
 
                 <ImageView
                     android:id="@+id/tv_user_img"
                     android:layout_width="65dp"
+                    android:layout_marginEnd="@dimen/dp_10"
                     android:layout_height="65dp"
-                    android:layout_alignParentEnd="true"
                     android:src="@mipmap/ic_launcher_round" />
             </RelativeLayout>
 
@@ -72,9 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:layout_marginTop="1dp"
-                android:background="@drawable/circle_solid_fff_15"
-                android:padding="15dp">
+                android:layout_marginTop="1dp">
 
                 <LinearLayout
                     android:id="@+id/ll_top_1"
@@ -85,21 +104,24 @@
                     android:orientation="vertical"
                     android:padding="@dimen/dp_10">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/group_977" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="合同"
+                        android:text="0.00"
+                        android:textStyle="bold"
                         android:textColor="@color/color_333333"
-                        android:textSize="@dimen/sp_14" />
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="余额"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp_12" />
 
                 </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/ll_top_2"
                     android:layout_width="0dp"
@@ -109,21 +131,24 @@
                     android:orientation="vertical"
                     android:padding="@dimen/dp_10">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/group_980" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="账单"
+                        android:text="0.00"
+                        android:textStyle="bold"
                         android:textColor="@color/color_333333"
-                        android:textSize="@dimen/sp_14" />
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="欠款"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp_12" />
 
                 </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/ll_top_3"
                     android:layout_width="0dp"
@@ -133,68 +158,48 @@
                     android:orientation="vertical"
                     android:padding="@dimen/dp_10">
 
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/group_975" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="预约"
+                        android:text="0.00"
+                        android:textStyle="bold"
                         android:textColor="@color/color_333333"
-                        android:textSize="@dimen/sp_14" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_top_4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dp_10">
-
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/group_976" />
+                        android:textSize="@dimen/sp_16" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="钱包"
+                        android:layout_marginTop="5dp"
+                        android:text="优惠券"
                         android:textColor="@color/color_333333"
-                        android:textSize="@dimen/sp_14" />
+                        android:textSize="@dimen/sp_12" />
 
                 </LinearLayout>
+
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:layout_marginHorizontal="15dp"
+                android:padding="5dp"
+                android:background="@drawable/circle_solid_fff_15"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="常用功能"
+                    android:text="常用服务"
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp_14" />
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:padding="10dp">
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:id="@+id/ll_center_1"
@@ -214,7 +219,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
-                            android:text="我的收藏"
+                            android:text="地址管理"
                             android:textColor="@color/color_333333"
                             android:textSize="@dimen/sp_14" />
 
@@ -238,7 +243,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
-                            android:text="我的租客"
+                            android:text="开发票"
                             android:textColor="@color/color_333333"
                             android:textSize="@dimen/sp_14" />
 
@@ -263,7 +268,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
-                            android:text="实名认证"
+                            android:text="账单"
                             android:textColor="@color/color_333333"
                             android:textSize="@dimen/sp_14" />
 
@@ -288,112 +293,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
-                            android:text="我的客户"
-                            android:textColor="@color/color_333333"
-                            android:textSize="@dimen/sp_14" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:padding="10dp">
-
-                    <LinearLayout
-                        android:id="@+id/ll_center_5"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:padding="@dimen/dp_10">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/group_1047" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:text="我的接单"
-                            android:textColor="@color/color_333333"
-                            android:textSize="@dimen/sp_14" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_center_6"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:padding="@dimen/dp_10">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/group_1043" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:text="看房状态"
-                            android:textColor="@color/color_333333"
-                            android:textSize="@dimen/sp_14" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_center_7"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:padding="@dimen/dp_10">
-
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/group_1052" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:text="房源上架"
-                            android:textColor="@color/color_333333"
-                            android:textSize="@dimen/sp_14" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_center_8"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:padding="@dimen/dp_10">
-
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/group_1048" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:text="成为房东"
+                            android:text="退款/售后"
                             android:textColor="@color/color_333333"
                             android:textSize="@dimen/sp_14" />
 
@@ -405,9 +305,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_margin="15dp"
                 android:layout_marginBottom="30dp"
-                android:background="@color/white"
+                android:padding="5dp"
+                android:background="@drawable/circle_solid_fff_15"
                 android:orientation="vertical">
 
                 <TextView
@@ -421,9 +322,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:padding="10dp">
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:id="@+id/ll_below_1"
@@ -443,7 +342,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
-                            android:text="设置"
+                            android:text="常见问题"
                             android:textColor="@color/color_333333"
                             android:textSize="@dimen/sp_14" />
 
@@ -467,7 +366,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
-                            android:text="在线客服"
+                            android:text="售后规则"
                             android:textColor="@color/color_333333"
                             android:textSize="@dimen/sp_14" />
 
@@ -486,13 +385,13 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/group_990" />
+                            android:src="@drawable/group_991" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
-                            android:text="关于我们"
+                            android:text="联系客户"
                             android:textColor="@color/color_333333"
                             android:textSize="@dimen/sp_14" />
 
@@ -517,7 +416,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
-                            android:text="推荐房源"
+                            android:text="分享APP"
                             android:textColor="@color/color_333333"
                             android:textSize="@dimen/sp_14" />
 
