@@ -1,5 +1,7 @@
 package com.jxxx.gyl.view.activity.login;
 
+import android.content.Context;
+import android.content.Intent;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.EditText;
@@ -43,6 +45,10 @@ public class LoginActivity extends BaseActivity {
     LinearLayout ll_password;
 
     private int type = 0;
+
+    public static void startActivityLogin(Context mContext){
+        mContext.startActivity(new Intent(mContext,LoginActivity.class));
+    }
 
     @Override
     public int intiLayout() {
