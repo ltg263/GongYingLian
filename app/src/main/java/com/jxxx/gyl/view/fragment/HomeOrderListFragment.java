@@ -4,6 +4,7 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.base.BaseFragment;
@@ -34,7 +35,7 @@ public class HomeOrderListFragment extends BaseFragment {
         list.add("");
         mMineListHtAdapter = new HomeOrderAdapter(list);
         mRvList.setAdapter(mMineListHtAdapter);
-
+        mMineListHtAdapter.addHeaderView(getTopView());
         mMineListHtAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -56,7 +57,18 @@ public class HomeOrderListFragment extends BaseFragment {
         });
 
     }
-
+    private View getTopView(){
+        View view = View.inflate(getActivity(), R.layout.item_home_order, null);
+        view.findViewById(R.id.ll).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.rl).setVisibility(View.GONE);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.showLong("去常用清单");
+            }
+        });
+        return view;
+    }
     @Override
     protected void initData() {
 
