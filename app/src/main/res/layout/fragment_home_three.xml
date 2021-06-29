@@ -34,6 +34,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/rl_not_shop"
                 android:layout_width="match_parent"
                 android:layout_height="420dp"
                 android:background="@color/white">
@@ -67,9 +68,11 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_shop_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/white"
                 android:orientation="vertical"
                 android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

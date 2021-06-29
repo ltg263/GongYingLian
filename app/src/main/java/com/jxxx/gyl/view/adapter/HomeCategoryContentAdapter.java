@@ -10,7 +10,7 @@ import java.util.List;
 public class HomeCategoryContentAdapter extends BaseQuickAdapter<CommodityCategory.ListBean.ChildrenBean, BaseViewHolder> {
 
     public HomeCategoryContentAdapter(List<CommodityCategory.ListBean.ChildrenBean> data) {
-        super(R.layout.item_shop_contnt, data);
+        super(R.layout.include_item_shop, data);
     }
 
     @Override

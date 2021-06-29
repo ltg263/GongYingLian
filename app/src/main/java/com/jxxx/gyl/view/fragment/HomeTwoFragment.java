@@ -79,6 +79,7 @@ public class HomeTwoFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+        showLoading();
         RetrofitUtil.getInstance().apiService()
                 .getCategoryListAll()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -91,6 +92,7 @@ public class HomeTwoFragment extends BaseFragment {
 
                     @Override
                     public void onNext(Result<List<CommodityCategory.ListBean>> listResult) {
+                        hideLoading();
                         mHomeCategoryParentAdapter.setNewData(listResult.getData());
                         mHomeCategoryChildAdapter.setNewData(listResult.getData().get(0).getChildren());
                         mHomeCategoryContentAdapter.setNewData(listResult.getData().get(0).getChildren());
@@ -98,12 +100,12 @@ public class HomeTwoFragment extends BaseFragment {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        hideLoading();
                     }
 
                     @Override
                     public void onComplete() {
-
+                        hideLoading();
                     }
                 });
     }
