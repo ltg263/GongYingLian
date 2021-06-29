@@ -296,20 +296,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:drawableTop="@mipmap/ic_zf_zfb"
+            android:drawableTop="@mipmap/ic_select_xin_no"
             android:padding="@dimen/dp_10"
             android:text="加入常买"
-            android:textColor="@color/color_333333" />
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/sp_12" />
 
         <TextView
             android:id="@+id/btn_zx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:drawableTop="@mipmap/ic_zf_zfb"
+            android:drawableTop="@mipmap/ic_shop_car"
             android:padding="@dimen/dp_10"
             android:text="购物车"
-            android:textColor="@color/color_333333" />
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/sp_12" />
 
         <TextView
             android:id="@+id/btn_yykf"

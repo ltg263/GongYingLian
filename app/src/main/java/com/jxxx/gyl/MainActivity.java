@@ -11,7 +11,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseActivity;
+import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.view.fragment.HomeFiveFragment;
 import com.jxxx.gyl.view.fragment.HomeFourFragment;
@@ -19,7 +22,13 @@ import com.jxxx.gyl.view.fragment.HomeOneFragment;
 import com.jxxx.gyl.view.fragment.HomeThreeFragment;
 import com.jxxx.gyl.view.fragment.HomeTwoFragment;
 
+import java.util.List;
+
 import butterknife.BindView;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity{
     @BindView(R.id.bnv_home_navigation)
@@ -42,7 +51,36 @@ public class MainActivity extends BaseActivity{
 
     @Override
     public void initData() {
+        showLoading();
+        RetrofitUtil.getInstance().apiService()
+                .getCategoryListAll()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<List<CommodityCategory.ListBean>>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(Result<List<CommodityCategory.ListBean>> listResult) {
+                        hideLoading();
+                        if(listResult.getData()!=null){
+                            mHomeOneFragment.setData(listResult.getData());
+                            mHomeTwoFragment.setData(listResult.getData());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        hideLoading();
+                    }
+                });
     }
     private void initBottomBar() {
         openLocation();
@@ -81,7 +119,6 @@ public class MainActivity extends BaseActivity{
             return true;
         });
         mBnvHomeNavigation.setSelectedItemId(R.id.menu_home_1);
-
     }
     public void switchFragment(Fragment fragment) {
         //判断当前显示的Fragment是不是切换的Fragment
@@ -112,8 +149,9 @@ public class MainActivity extends BaseActivity{
 //            ZsnaviManager.getInstance(getActivity()).setOnLocationCallback(locationCallback);//设置定位回调
 //            ZsnaviManager.getInstance(getActivity()).startLocation();//开启定位，该定位只会回调一次定位信息，建议使用完后调用停止定位接口
         }
-
     }
-
-
+    public void startFragmentTwo(int pos){
+        mBnvHomeNavigation.setSelectedItemId(R.id.menu_home_2);
+        mHomeTwoFragment.setPos(pos);
+    }
 }

@@ -6,11 +6,12 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.jxxx.gyl.MainActivity;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseFragment;
+import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.utils.GlideImageLoader;
-import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.view.adapter.HomeGoodsAdapter;
 import com.jxxx.gyl.view.adapter.HomeTypeAdapter;
 import com.jxxx.gyl.view.adapter.HomeTypeTjAdapter;
@@ -42,7 +43,7 @@ public class HomeOneFragment extends BaseFragment {
     private HomeTypeAdapter mHomeTypeAdapter;
     private HomeTypeTjAdapter mHomeTypeTjAdapter;
     private HomeGoodsAdapter mHomeGoodsAdapter;
-
+    List<CommodityCategory.ListBean> data;
     @Override
     protected int setLayoutResourceID() {
         return R.layout.fragment_home_one;
@@ -63,8 +64,14 @@ public class HomeOneFragment extends BaseFragment {
     @Override
     protected void initData() {
 
-        mHomeTypeAdapter = new HomeTypeAdapter(Arrays.asList(ConstValues.HOME_TYPE_NAME));
+        mHomeTypeAdapter = new HomeTypeAdapter(data);
         mRvListType.setAdapter(mHomeTypeAdapter);
+        mHomeTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ((MainActivity)getActivity()).startFragmentTwo(position);
+            }
+        });
 
         mHomeTypeTjAdapter = new HomeTypeTjAdapter(Arrays.asList(ConstValues.HOME_TYPE_NAME_TJ));
         mRvListTypeTj.setAdapter(mHomeTypeTjAdapter);
@@ -80,12 +87,16 @@ public class HomeOneFragment extends BaseFragment {
         mHomeGoodsAdapter = new HomeGoodsAdapter(Arrays.asList(ConstValues.HOME_TYPE_NAME));
         mRvList.setAdapter(mHomeGoodsAdapter);
 
-        mHomeTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+    }
 
-            }
-        });
+
+    public void setData(List<CommodityCategory.ListBean> data) {
+        data = data.subList(0,10);
+        this.data = data;
+        if(mHomeTypeAdapter!=null){
+            mHomeTypeAdapter.setNewData(data);
+        }
+
     }
 
     @OnClick({R.id.address, R.id.tv_search})
