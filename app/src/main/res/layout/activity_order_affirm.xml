@@ -20,6 +20,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/rl_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -351,7 +352,7 @@
 
 
                 <TextView
-                    android:id="@+id/bnt_3"
+                    android:id="@+id/bnt"
                     android:layout_width="120dp"
                     android:layout_height="@dimen/bnt_details_height"
                     android:background="@drawable/circle_solid_theme_25"
