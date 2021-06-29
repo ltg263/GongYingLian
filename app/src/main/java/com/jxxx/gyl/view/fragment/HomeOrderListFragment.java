@@ -9,6 +9,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.base.BaseFragment;
+import com.jxxx.gyl.view.activity.OrderDetailsActivity;
 import com.jxxx.gyl.view.adapter.HomeOrderAdapter;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class HomeOrderListFragment extends BaseFragment {
         mMineListHtAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                baseStartActivity(OrderDetailsActivity.class,null);
             }
         });
         mMineListHtAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {

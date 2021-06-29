@@ -20,7 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MineJdxqActivity extends BaseActivity {
+public class OrderDetailsActivity_1 extends BaseActivity {
     @BindView(R.id.my_toolbar)
     Toolbar mMyToolbar;
     @BindView(R.id.magic_indicator)

@@ -69,7 +69,7 @@
         <activity android:name="com.jxxx.gyl.view.activity.mine.MineSetSmrz2Activity" />
         <activity android:name="com.jxxx.gyl.view.activity.mine.MineMessageListActivity" />
         <activity android:name=".view.activity.ShopDetailsActivity" />
-        <activity android:name="com.jxxx.gyl.view.activity.MineJdxqActivity" />
+        <activity android:name="com.jxxx.gyl.view.activity.OrderDetailsActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.mine.MineInfoActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.payActivity.ActivityPayHomeQb" />
         <activity android:name="com.jxxx.gyl.view.activity.payActivity.ActivityPayBankCardAdd" />
