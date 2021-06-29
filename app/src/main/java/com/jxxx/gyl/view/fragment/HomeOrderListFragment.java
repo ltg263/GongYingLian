@@ -1,13 +1,12 @@
-package com.jxxx.gyl.view.activity.mine;
+package com.jxxx.gyl.view.fragment;
 
 import android.view.View;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
-import com.jxxx.gyl.base.BaseActivity;
+import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.view.adapter.HomeOrderAdapter;
 
 import java.util.ArrayList;
@@ -15,27 +14,18 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MineHtListActivity extends BaseActivity {
-
-    @BindView(R.id.my_toolbar)
-    Toolbar mMyToolbar;
+public class HomeOrderListFragment extends BaseFragment {
     @BindView(R.id.rv_list)
     RecyclerView mRvList;
 
     private HomeOrderAdapter mMineListHtAdapter;
-
     @Override
-    public int intiLayout() {
+    protected int setLayoutResourceID() {
         return R.layout.activity_refresh_list;
     }
 
     @Override
-    public void initView() {
-        setToolbar(mMyToolbar, "我的合同");
-    }
-
-    @Override
-    public void initData() {
+    protected void initView() {
         List<String> list = new ArrayList<>();
         list.add("");
         list.add("");
@@ -64,5 +54,11 @@ public class MineHtListActivity extends BaseActivity {
                 }
             }
         });
+
+    }
+
+    @Override
+    protected void initData() {
+
     }
 }

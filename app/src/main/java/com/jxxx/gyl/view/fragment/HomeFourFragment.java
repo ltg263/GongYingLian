@@ -68,7 +68,7 @@ public class HomeFourFragment extends BaseFragment {
     List<Fragment> fragments = new ArrayList<>();
     private List<Fragment> getFragments() {
         for(int i = 0;i<mDataList.size();i++){
-            fragments.add( new MineJdxq1Fragment());
+            fragments.add( new HomeOrderListFragment());
         }
         return fragments;
     }
