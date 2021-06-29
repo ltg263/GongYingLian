@@ -22,6 +22,8 @@ import com.jxxx.gyl.view.adapter.HomeGoodsGzAdapter;
 import java.util.Arrays;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ShopDetailsActivity extends BaseActivity {
     @BindView(R.id.rv_xgsp)
@@ -48,7 +50,7 @@ public class ShopDetailsActivity extends BaseActivity {
         mRvXgsp.setAdapter(mHomeGoodsAdapter);
         mRvTjsp.setAdapter(mHomeGoodsAdapter);
 
-        mHomeGoodsGzAdapter = new HomeGoodsGzAdapter(Arrays.asList(ConstValues.HOME_TYPE_NAME).subList(0,3));
+        mHomeGoodsGzAdapter = new HomeGoodsGzAdapter(Arrays.asList(ConstValues.HOME_TYPE_NAME).subList(0, 3));
         mRvGuiZe.setAdapter(mHomeGoodsGzAdapter);
         mHomeGoodsGzAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -76,8 +78,24 @@ public class ShopDetailsActivity extends BaseActivity {
         mWebView.loadData(
                 StringUtil.getNewContent1(details), "text/html; charset=UTF-8", null);//这种写法可以正确解码
     }
+
     public static void startActivityIntent(Context mContext, String id) {
         Intent mIntent = new Intent(mContext, ShopDetailsActivity.class);
         mContext.startActivity(mIntent);
+    }
+
+    @OnClick({R.id.btn_brcm, R.id.btn_gwc, R.id.btn_ljgm})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_brcm:
+
+                break;
+            case R.id.btn_gwc:
+
+                break;
+            case R.id.btn_ljgm:
+                baseStartActivity(OrderAffirmActivity.class,null);
+                break;
+        }
     }
 }

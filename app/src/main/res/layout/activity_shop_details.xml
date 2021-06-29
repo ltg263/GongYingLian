@@ -293,7 +293,7 @@
 
 
         <TextView
-            android:id="@+id/btn_bd"
+            android:id="@+id/btn_brcm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -304,7 +304,7 @@
             android:textSize="@dimen/sp_12" />
 
         <TextView
-            android:id="@+id/btn_zx"
+            android:id="@+id/btn_gwc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -315,7 +315,7 @@
             android:textSize="@dimen/sp_12" />
 
         <TextView
-            android:id="@+id/btn_yykf"
+            android:id="@+id/btn_ljgm"
             android:layout_width="0dp"
             android:layout_height="@dimen/bnt_details_height"
             android:layout_gravity="center_vertical"
