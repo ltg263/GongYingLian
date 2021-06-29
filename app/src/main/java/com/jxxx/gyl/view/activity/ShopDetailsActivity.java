@@ -4,31 +4,36 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.view.adapter.HomeGoodsAdapter;
+import com.jxxx.gyl.view.adapter.HomeGoodsGzAdapter;
 
 import java.util.Arrays;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ShopDetailsActivity extends BaseActivity {
     @BindView(R.id.rv_xgsp)
     RecyclerView mRvXgsp;
+    @BindView(R.id.rv_gui_ze)
+    RecyclerView mRvGuiZe;
     @BindView(R.id.rv_tjsp)
     RecyclerView mRvTjsp;
     @BindView(R.id.web)
     WebView mWebView;
     private HomeGoodsAdapter mHomeGoodsAdapter;
+    private HomeGoodsGzAdapter mHomeGoodsGzAdapter;
 
     @Override
     public int intiLayout() {
@@ -41,8 +46,17 @@ public class ShopDetailsActivity extends BaseActivity {
         initWebView("123456");
         mHomeGoodsAdapter = new HomeGoodsAdapter(Arrays.asList(ConstValues.HOME_TYPE_NAME));
         mRvXgsp.setAdapter(mHomeGoodsAdapter);
-
         mRvTjsp.setAdapter(mHomeGoodsAdapter);
+
+        mHomeGoodsGzAdapter = new HomeGoodsGzAdapter(Arrays.asList(ConstValues.HOME_TYPE_NAME).subList(0,3));
+        mRvGuiZe.setAdapter(mHomeGoodsGzAdapter);
+        mHomeGoodsGzAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                mHomeGoodsGzAdapter.setCurPos(position);
+                mHomeGoodsGzAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
