@@ -103,12 +103,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/view"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:paddingVertical="10dp">
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="2" />
+                android:layout_weight="0.5" />
 
             <TextView
                 android:id="@+id/bnt_1"
@@ -118,7 +118,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/circle_line_666_20"
                 android:gravity="center"
-                android:text="解约"
+                android:text="取消订单"
                 android:textColor="@color/color_666666"
                 android:textSize="@dimen/bnt_list_text_size" />
 
@@ -130,7 +130,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/circle_line_666_20"
                 android:gravity="center"
-                android:text="续约"
+                android:text="申请售后"
                 android:textColor="@color/color_666666"
                 android:textSize="@dimen/bnt_list_text_size" />
 
