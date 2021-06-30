@@ -9,8 +9,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.utils.MagicIndicatorUtils;
-import com.jxxx.gyl.view.fragment.MineJdxq1Fragment;
-import com.jxxx.gyl.view.fragment.MineJdxq2Fragment;
+import com.jxxx.gyl.view.fragment.MineInvoice1Fragment;
+import com.jxxx.gyl.view.fragment.MineInvoice2Fragment;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 
@@ -20,7 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class OrderDetailsActivity_1 extends BaseActivity {
+public class MineInvoiceActivity extends BaseActivity {
     @BindView(R.id.my_toolbar)
     Toolbar mMyToolbar;
     @BindView(R.id.magic_indicator)
@@ -28,7 +28,7 @@ public class OrderDetailsActivity_1 extends BaseActivity {
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
 
-    private final String[] CHANNELS = new String[]{"订单详情", "订单状态"};
+    private final String[] CHANNELS = new String[]{"电子普通发票", "专用发票"};
     private List<String> mDataList = Arrays.asList(CHANNELS);
     @Override
     public int intiLayout() {
@@ -37,7 +37,7 @@ public class OrderDetailsActivity_1 extends BaseActivity {
 
     @Override
     public void initView() {
-        setToolbar(mMyToolbar, "接单详情");
+        setToolbar(mMyToolbar, "发票信息");
         MagicIndicatorUtils.initMagicIndicator_1(this, mDataList, mMagicIndicator, mViewPager);
         initVP();
     }
@@ -68,8 +68,8 @@ public class OrderDetailsActivity_1 extends BaseActivity {
     //1,待支付;2,待发货;3,待收货;4,待评价;5,已完成;6,已取消;7,已过期;8,已结束
     List<Fragment> fragments = new ArrayList<>();
     private List<Fragment> getFragments() {
-        fragments.add( new MineJdxq1Fragment());
-        fragments.add( new MineJdxq2Fragment());
+        fragments.add( new MineInvoice1Fragment());
+        fragments.add( new MineInvoice2Fragment());
         return fragments;
     }
     @Override

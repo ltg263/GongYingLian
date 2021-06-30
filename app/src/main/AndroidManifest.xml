@@ -75,6 +75,7 @@
         <activity android:name="com.jxxx.gyl.view.activity.OrderAffirmActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.OrderPayActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.OrderPayOkActivity" />
+        <activity android:name="com.jxxx.gyl.view.activity.MineInvoiceActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.mine.MineInfoActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.payActivity.ActivityPayHomeQb" />
         <activity android:name="com.jxxx.gyl.view.activity.payActivity.ActivityPayBankCardAdd" />
