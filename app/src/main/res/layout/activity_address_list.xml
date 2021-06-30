@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f5f5f5"
+    android:orientation="vertical">
+    <include layout="@layout/include_toolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/lv_not"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/common_not_address" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="还没有地址哦~"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_14" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bnt_details_height"
+        android:layout_marginLeft="20dp"
+        android:layout_marginVertical="50dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/circle_solid_theme_25"
+        android:gravity="center"
+        android:text="新增地址"
+        android:textColor="@color/white"
+        android:textSize="@dimen/bnt_details_text_size" />
+</LinearLayout>

@@ -68,7 +68,7 @@ dependencies {
     implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 
     implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
-
+    implementation files('libs/fastjson-1.2.62.jar')
 
     //下拉刷新上拉加载
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
@@ -88,6 +88,9 @@ dependencies {
     implementation 'com.amap.api:location:3.3.0'
     implementation 'com.amap.api:search:5.1.0'
     implementation 'org.jsoup:jsoup:1.10.2'
+
+    implementation 'com.github.addappcn:android-pickers:1.0.3'
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }
 //MD5:  6D:AF:EC:5F:C5:FC:39:0B:69:66:64:6F:E3:45:2D:B1
 //SHA1: 40:D2:74:26:83:C1:82:5B:DD:EC:53:9F:73:C8:71:B4:52:C1:51:9E

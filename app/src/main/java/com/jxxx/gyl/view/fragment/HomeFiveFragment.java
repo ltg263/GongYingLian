@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.base.BaseFragment;
+import com.jxxx.gyl.view.activity.address.ActivityAddressList;
 import com.jxxx.gyl.view.activity.login.LoginActivity;
 import com.jxxx.gyl.view.activity.mine.MineHtListActivity;
 import com.jxxx.gyl.view.activity.mine.MineMessageListActivity;
@@ -88,6 +89,7 @@ public class HomeFiveFragment extends BaseFragment {
             case R.id.ll_top_3:
                 break;
             case R.id.ll_center_1:
+                ActivityAddressList.startActivity(getActivity(),0);
                 break;
             case R.id.ll_center_2:
                 break;

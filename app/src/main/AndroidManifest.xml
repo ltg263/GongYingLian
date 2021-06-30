@@ -86,6 +86,8 @@
         <activity android:name="com.jxxx.gyl.view.activity.mapAddress.ActivitySearchLocation" />
         <activity android:name=".view.activity.search.SearchGoodsActivity" />
         <activity android:name=".view.activity.search.SearchResultTopicActivity" />
+        <activity android:name=".view.activity.address.ActivityAddressList" />
+        <activity android:name=".view.activity.address.ActivityAddressEdit" />
 
         <!--com.deepexp.zsnavidemo对应的key-->
         <meta-data
