@@ -1,6 +1,7 @@
 package com.jxxx.gyl.view.activity;
 
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,8 @@ public class MineInvoiceOrderActivity extends BaseActivity {
     Toolbar myToolbar;
     @BindView(R.id.rv_list)
     RecyclerView mRvListMsg;
+    @BindView(R.id.bnt)
+    TextView mBnt;
     private MineInvoiceOrderAdapter mMineInvoiceOrderAdapter;
 
 
@@ -32,7 +35,12 @@ public class MineInvoiceOrderActivity extends BaseActivity {
     @Override
     public void initView() {
         setToolbar(myToolbar, "开发票");
-
+        mBnt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                baseStartActivity(MineInvoiceActivity.class,null);
+            }
+        });
     }
 
     @Override

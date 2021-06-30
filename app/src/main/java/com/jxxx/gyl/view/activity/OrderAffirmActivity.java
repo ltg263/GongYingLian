@@ -54,11 +54,14 @@ public class OrderAffirmActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_address, R.id.bnt})
+    @OnClick({R.id.rl_address, R.id.tv_invoice,R.id.bnt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_address:
                 ActivityAddressList.startActivity(OrderAffirmActivity.this,2);
+                break;
+            case R.id.tv_invoice:
+                baseStartActivity(MineInvoiceActivity.class,null);
                 break;
             case R.id.bnt:
                 baseStartActivity(OrderPayActivity.class,null);
