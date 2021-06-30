@@ -353,7 +353,7 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_10"
                         android:text="复制"
-                        android:textColor="@color/color_F65532"
+                        android:textColor="@color/color_FF6814"
                         android:textSize="@dimen/sp_12" />
 
                 </LinearLayout>

@@ -6,15 +6,15 @@ import com.jxxx.gyl.R;
 
 import java.util.List;
 
-public class MineListJdAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+public class MineCouponListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
-    public MineListJdAdapter(List<String> data) {
-        super(R.layout.item_mine_jd, data);
+    public MineCouponListAdapter(List<String> data) {
+        super(R.layout.item_mine_coupon, data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, String item) {
-        helper.addOnClickListener(R.id.bnt_lx).addOnClickListener(R.id.bnt_jd);
+
     }
 
 }

@@ -83,7 +83,7 @@
                         android:drawableEnd="@mipmap/ic_right_gray"
                         android:padding="@dimen/dp_10"
                         android:text="约1分钟"
-                        android:textColor="@color/color_F65532"
+                        android:textColor="@color/color_FF6814"
                         android:textSize="@dimen/sp_14" />
 
 
@@ -208,7 +208,7 @@
                         android:drawableEnd="@mipmap/ic_right_gray"
                         android:padding="@dimen/dp_10"
                         android:text="￥0"
-                        android:textColor="@color/color_F65532"
+                        android:textColor="@color/color_FF6814"
                         android:textSize="@dimen/sp_14" />
 
 
