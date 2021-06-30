@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@drawable/circle_solid_fff_5"
+    android:orientation="vertical"
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="8dp">
+
+    <ImageView
+        android:id="@+id/iv_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/common_selected_circle" />
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_toEndOf="@id/iv_select">
+
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2020-01-01 00:00:00下单"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/sp_12" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_shop_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_time"
+            android:layout_marginVertical="@dimen/dp_10"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="5" />
+
+        <TextView
+            android:id="@+id/tv_shop_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rv_shop_list"
+            android:text="共3件 商品"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_shop_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rv_shop_list"
+            android:layout_alignParentEnd="true"
+            android:text="￥0.0"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/sp_14" />
+
+
+    </RelativeLayout>
+</RelativeLayout>
