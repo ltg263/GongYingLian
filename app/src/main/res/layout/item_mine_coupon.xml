@@ -78,7 +78,7 @@
         android:layout_above="@id/view"
         android:layout_alignParentEnd="true"
         android:gravity="center_vertical"
-        android:drawableEnd="@mipmap/ic_right_gray"
+        android:drawableEnd="@mipmap/ic_back_ff6814"
         android:text="去使用"
         android:textColor="@color/color_FF6814"
         android:textSize="14sp" />

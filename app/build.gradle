@@ -91,6 +91,11 @@ dependencies {
 
     implementation 'com.github.addappcn:android-pickers:1.0.3'
     implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation files('libs/umeng_shareboard_widget.jar')
+    implementation files('libs/umeng_social_api.jar')
+    implementation files('libs/umeng_social_net.jar')
+    implementation files('libs/umeng_social_shareboard.jar')
+    implementation files('libs/umeng_social_tool.jar')
 }
 //MD5:  6D:AF:EC:5F:C5:FC:39:0B:69:66:64:6F:E3:45:2D:B1
 //SHA1: 40:D2:74:26:83:C1:82:5B:DD:EC:53:9F:73:C8:71:B4:52:C1:51:9E

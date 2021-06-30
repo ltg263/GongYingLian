@@ -61,7 +61,6 @@
                     android:layout_width="60dp"
                     android:layout_height="25dp"
                     android:layout_centerVertical="true"
-                    android:visibility="invisible"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="@dimen/dp_10"
                     android:layout_toStartOf="@id/tv_yz_tx"

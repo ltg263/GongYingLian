@@ -81,8 +81,10 @@ public class ActivityPayHomeQb extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_yz_tx:
-            case R.id.tv_yz_zz:
                 baseStartActivity(ActivityPayTiXian.class,null);
+                break;
+            case R.id.tv_yz_zz:
+                baseStartActivity(ActivityPayChongZhi.class,null);
                 break;
             case R.id.tv_yz_rq:
 //                baseStartActivity(MineWdyzDdcxActivity.class,null);

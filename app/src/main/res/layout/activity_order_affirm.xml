@@ -203,11 +203,13 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
+                        android:id="@+id/tv_coupon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@mipmap/ic_right_gray"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:drawableEnd="@mipmap/ic_back_ff6814"
                         android:padding="@dimen/dp_10"
-                        android:text="￥0"
+                        android:text="选择优惠券"
                         android:textColor="@color/color_FF6814"
                         android:textSize="@dimen/sp_14" />
 
