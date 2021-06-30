@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <include
+        android:id="@+id/include"
+        layout="@layout/include_toolbar" />
 
     <RelativeLayout
         android:id="@+id/rl_actionbar"
@@ -12,16 +15,9 @@
         android:background="@color/white">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:background="#fff" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,17 +25,6 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="6dp">
-
-                <ImageView
-                    android:id="@+id/img_top_back"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:paddingTop="9dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="9dp"
-                    android:src="@mipmap/common_back" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -59,13 +44,13 @@
                         android:id="@+id/tv_top_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_10"
+                        android:paddingVertical="10dp"
                         android:background="@null"
                         android:gravity="center_vertical"
                         android:hint="输入您要去的目的地"
                         android:textColor="@color/color_333333"
                         android:textColorHint="@color/color_999999"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
 
@@ -99,8 +84,8 @@
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="抱歉没有相关数据"
-            android:textColor="#ff333333"
-            android:textSize="20sp" />
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/sp_14" />
 
     </LinearLayout>
 

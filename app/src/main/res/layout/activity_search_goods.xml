@@ -5,21 +5,21 @@
     android:background="@color/color_f5f5f5"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/include_toolbar" />
+
     <RelativeLayout
         android:id="@+id/rl_actionbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/include"
         android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:background="#fff" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,18 +28,6 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="6dp">
-
-                <ImageView
-                    android:id="@+id/img_top_back"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="9dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="9dp"
-                    android:src="@mipmap/common_back" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -55,18 +43,18 @@
                         android:padding="5dp"
                         android:src="@mipmap/ic_search" />
 
-
                     <EditText
                         android:id="@+id/tv_top_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_10"
                         android:background="@null"
                         android:gravity="center_vertical"
-                        android:hint="输入您要去的目的地"
+                        android:hint="输入商品名称"
+                        android:paddingVertical="10dp"
                         android:textColor="@color/color_333333"
                         android:textColorHint="@color/color_999999"
-                        android:textSize="15sp" />
+                        android:textCursorDrawable="@drawable/common_edit_input_line"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
 
@@ -103,7 +91,7 @@
             android:textColor="#ff6b6b6b"
             android:textSize="14sp" />
 
-        <com.jxxx.gyl.utils.view.ShoppingFlowLayout
+        <com.jxxx.gyl.view.activity.search.ShoppingFlowLayout
             android:id="@+id/flowlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -129,7 +117,7 @@
             android:textColor="#ff6b6b6b"
             android:textSize="14sp" />
 
-        <com.jxxx.gyl.utils.view.ShoppingFlowLayout
+        <com.jxxx.gyl.view.activity.search.ShoppingFlowLayout
             android:id="@+id/flowlayout_rm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -13,6 +13,7 @@ import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.utils.GlideImageLoader;
 import com.jxxx.gyl.view.activity.login.LoginActivity;
+import com.jxxx.gyl.view.activity.search.SearchGoodsActivity;
 import com.jxxx.gyl.view.adapter.HomeGoodsAdapter;
 import com.jxxx.gyl.view.adapter.HomeTypeAdapter;
 import com.jxxx.gyl.view.adapter.HomeTypeTjAdapter;
@@ -107,7 +108,7 @@ public class HomeOneFragment extends BaseFragment {
 
                 break;
             case R.id.tv_search:
-
+                baseStartActivity(SearchGoodsActivity.class,null);
                 break;
             case R.id.rl_include_login:
                 LoginActivity.startActivityLogin(getActivity());

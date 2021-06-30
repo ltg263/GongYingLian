@@ -3,18 +3,15 @@ package com.jxxx.gyl.view.fragment;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.R;
-import com.jxxx.gyl.api.Result;
-import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.view.activity.ShopDetailsActivity;
 import com.jxxx.gyl.view.activity.login.LoginActivity;
+import com.jxxx.gyl.view.activity.search.SearchGoodsActivity;
 import com.jxxx.gyl.view.adapter.HomeCategoryChildAdapter;
 import com.jxxx.gyl.view.adapter.HomeCategoryContentAdapter;
 import com.jxxx.gyl.view.adapter.HomeCategoryParentAdapter;
@@ -22,10 +19,7 @@ import com.jxxx.gyl.view.adapter.HomeCategoryParentAdapter;
 import java.util.List;
 
 import butterknife.BindView;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+import butterknife.OnClick;
 
 /**
  * 1000D 订单管理
@@ -37,8 +31,6 @@ public class HomeTwoFragment extends BaseFragment {
     RecyclerView rvCategoryChirld;
     @BindView(R.id.rv_content)
     RecyclerView rvContent;
-    @BindView(R.id.rl_include_login)
-    RelativeLayout mRlIncludeLogin;
     HomeCategoryParentAdapter mHomeCategoryParentAdapter;
     private HomeCategoryChildAdapter mHomeCategoryChildAdapter;
     private HomeCategoryContentAdapter mHomeCategoryContentAdapter;
@@ -51,12 +43,6 @@ public class HomeTwoFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        mRlIncludeLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginActivity.startActivityLogin(getActivity());
-            }
-        });
         mHomeCategoryParentAdapter = new HomeCategoryParentAdapter(data);
         mHomeCategoryParentAdapter.setCurPos(pos);
         rvCategoryParent.setAdapter(mHomeCategoryParentAdapter);
@@ -145,6 +131,18 @@ public class HomeTwoFragment extends BaseFragment {
             // 如果要跳转的位置在最后可见项之后，则先调用smoothScrollToPosition将要跳转的位置滚动到可见位置
             // 再通过onScrollStateChanged控制再次调用smoothMoveToPosition，执行上一个判断中的方法
             mRecyclerView.smoothScrollToPosition(position);
+        }
+    }
+
+    @OnClick({R.id.tv_search, R.id.rl_include_login})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_search:
+                baseStartActivity(SearchGoodsActivity.class,null);
+                break;
+            case R.id.rl_include_login:
+                LoginActivity.startActivityLogin(getActivity());
+                break;
         }
     }
 }
