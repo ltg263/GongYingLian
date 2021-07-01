@@ -19,11 +19,12 @@ public class ConstValues {
 
     public static final String endpoint = "endpoint";
     public static final String host = "host";
+    public static final String TOKENID = "tokenid";
 
     /**
      * 服务器后台地址
      */
-    public static final String BASE_URL = "https://app.nbningjiang.com/ningjiangshengxian/api/v1/";
+    public static final String BASE_URL = "http://192.168.50.246:8000/";
 
 //    public static final String PORT_21 = "community-service/";//社群
 

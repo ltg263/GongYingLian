@@ -7,12 +7,23 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.HttpsUtils;
+import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseActivity;
+import com.jxxx.gyl.bean.LoginRequest;
+import com.jxxx.gyl.utils.StringUtil;
+import com.jxxx.gyl.utils.ToastUtil;
 import com.jxxx.gyl.view.activity.mine.WebViewActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -54,7 +65,12 @@ public class RegisterActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.auth_code:
-                getVerifyCode();
+                String account = etAccount.getText().toString();
+                if (StringUtil.isBlank(account)) {
+                    ToastUtil.showLongStrToast(this, "请输入手机号");
+                    return;
+                }
+                HttpsUtils.getVerifyCode(this,authCode,account,"1");
                 break;
             case R.id.tv_register:
                 toRegister();
@@ -72,52 +88,45 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void toRegister() {
-//        RegisterBean bean = new RegisterBean();
-//        bean.setUsername(etAccount.getText().toString());
-//        bean.setPassword(etPass.getText().toString());
-//        bean.setVerifyCode(etVerify.getText().toString());
-//        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(bean));
-//        RetrofitManager.build().create(UserService.class)
-//                .register(requestBody)
-//                .compose(RxScheduler.<BaseResponse<EmptyResponse>>observeOnMainThread())
-//                .as(RxScheduler.<BaseResponse<EmptyResponse>>bindLifecycle(this))
-//                .subscribe(new BaseObserver<EmptyResponse>() {
-//                    @Override
-//                    public void onSuccess(EmptyResponse emptyResponse) {
-//                        ToastUtils.showShort("注册成功");
-//                        finish();
-//                        readyGoActivity(LoginActivity.class);
-//                    }
-//
-//                    @Override
-//                    public void onFail(int code, String error) {
-//
-//                    }
-//                });
-    }
+        String account = etAccount.getText().toString();
+        String verify = etVerify.getText().toString();
+        String pass = etPass.getText().toString();
+        if (StringUtil.isBlank(account) || StringUtil.isBlank(verify)|| StringUtil.isBlank(pass)) {
+            ToastUtil.showLongStrToast(this, "请输入完整信息");
+            return;
+        }
+        LoginRequest bean = new LoginRequest();
+        bean.setPhone(etAccount.getText().toString());
+        bean.setPassword(pass);
+        bean.setSmsVerificationCode(verify);
+        RetrofitUtil.getInstance().apiService()
+                .smsRegister(bean)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-    private void getVerifyCode() {
-//        String account = etAccount.getText().toString();
-//        if ("".equals(account)) {
-//            ToastUtils.showShort("请输入手机号");
-//            return;
-//        }
-//        RetrofitManager.build().create(UserService.class)
-//                .getCode(0, account)
-//                .compose(RxScheduler.<BaseResponse<EmptyResponse>>observeOnMainThread())
-//                .as(RxScheduler.<BaseResponse<EmptyResponse>>bindLifecycle(this))
-//                .subscribe(new BaseObserver<EmptyResponse>() {
-//                    @Override
-//                    public void onSuccess(EmptyResponse emptyResponse) {
-//                        ToastUtils.showShort("验证码发送成功");
-//                        CountDownTimerUtils count = new CountDownTimerUtils(authCode, 60000);
-//                        count.start();
-//                    }
-//
-//                    @Override
-//                    public void onFail(int code, String error) {
-//
-//                    }
-//                });
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        hideLoading();
+                        if(isResultOk(result)) {
+                            ToastUtils.showLong("注册成功");
+                            baseStartActivity(LoginActivity.class,null);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        hideLoading();
+                    }
+                });
     }
 }

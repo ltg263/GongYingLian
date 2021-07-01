@@ -65,10 +65,12 @@ public class MainActivity extends BaseActivity{
                     @Override
                     public void onNext(Result<List<CommodityCategory.ListBean>> listResult) {
                         hideLoading();
-                        if(listResult.getData()!=null){
-                            mHomeOneFragment.setData(listResult.getData());
-                            mHomeTwoFragment.setData(listResult.getData());
-                        }
+                        if(isResultOk(listResult)){
+                            if(listResult.getData()!=null){
+                                mHomeOneFragment.setData(listResult.getData());
+                                mHomeTwoFragment.setData(listResult.getData());
+                            }
+                        };
                     }
 
                     @Override

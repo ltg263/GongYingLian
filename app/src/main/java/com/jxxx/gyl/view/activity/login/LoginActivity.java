@@ -1,7 +1,9 @@
 package com.jxxx.gyl.view.activity.login;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.EditText;
@@ -9,15 +11,32 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.HttpsUtils;
+import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.api.RetrofitUtil;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseActivity;
+import com.jxxx.gyl.bean.LoginData;
 import com.jxxx.gyl.bean.LoginRequest;
+import com.jxxx.gyl.bean.ParamData;
+import com.jxxx.gyl.utils.SharedUtils;
+import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.ToastUtil;
 import com.jxxx.gyl.view.activity.mine.WebViewActivity;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class LoginActivity extends BaseActivity {
 
@@ -44,10 +63,10 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.ll_password)
     LinearLayout ll_password;
 
-    private int type = 0;
+    private int type = 0;//0密码登录  1验证码
 
-    public static void startActivityLogin(Context mContext){
-        mContext.startActivity(new Intent(mContext,LoginActivity.class));
+    public static void startActivityLogin(Context mContext) {
+        mContext.startActivity(new Intent(mContext, LoginActivity.class));
     }
 
     @Override
@@ -66,7 +85,7 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_phone, R.id.tv_code, R.id.auth_code, R.id.tv_forget, R.id.tv_register, R.id.tv_login,R.id.ll_yhxy})
+    @OnClick({R.id.tv_phone, R.id.tv_code, R.id.auth_code, R.id.tv_forget, R.id.tv_register, R.id.tv_login, R.id.ll_yhxy})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_phone:
@@ -78,7 +97,12 @@ public class LoginActivity extends BaseActivity {
                 changeUI();
                 break;
             case R.id.auth_code:
-                getVerifyCode();
+                String account = etAccount.getText().toString();
+                if (StringUtil.isBlank(account)) {
+                    ToastUtil.showLongStrToast(this, "请输入手机号");
+                    return;
+                }
+                HttpsUtils.getVerifyCode(this,authCode,account,"2");
                 break;
             case R.id.tv_forget:
                 readyGoActivity(ForgetPasswordActivity.class);
@@ -87,7 +111,12 @@ public class LoginActivity extends BaseActivity {
                 readyGoActivity(RegisterActivity.class);
                 break;
             case R.id.tv_login:
-                login();
+                showLoading();
+                if(type==0){
+                    pwdLogin();
+                }else{
+                    smsLogin();
+                }
                 break;
             case R.id.ll_yhxy:
                 readyGoActivity(WebViewActivity.class);
@@ -95,40 +124,79 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    private void login() {
-        finish();
+    private void pwdLogin() {
         LoginRequest bean = new LoginRequest();
-        bean.setUsername(etAccount.getText().toString());
-        bean.setAndroidId( Settings.Secure.getString(getApplication().getContentResolver(),Settings.Secure.ANDROID_ID));
-//        bean.setRegistrationId(SPUtils.getInstance().getString("registrationId"));
-//        if (type == 0) {
-//            bean.setPassword(etPassword.getText().toString());
-//            bean.setGrantType("account_password");
-//        }else {
-//            bean.setVerifyCode(etVerify.getText().toString());
-//            bean.setGrantType("sms_code" );
-//        }
-//        SPUtils.getInstance().put(ConstValues.TOKENID, "");
-//        final RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(bean));
-//        RetrofitManager.build().create(UserService.class)
-//                .login(requestBody)
-//                .compose(RxScheduler.<BaseResponse<LoginResponse>>observeOnMainThread())
-//                .as(RxScheduler.<BaseResponse<LoginResponse>>bindLifecycle(this))
-//                .subscribe(new BaseObserver<LoginResponse>() {
-//                    @Override
-//                    public void onSuccess(LoginResponse response) {
-//                        SPUtils.getInstance().put(ConstValues.TOKENID, "Bearer" + " " + response.getAccess_token());
-//                        App.getInstance().setUserInfo(response.getUserInfo());
-//                        ToastUtils.showShort("登录成功");
-//                        EventBus.getDefault().post(new LoginEvent());
-//                        finish();
-//                    }
-//
-//                    @Override
-//                    public void onFail(int code, String msg) {
-//                        super.onFail(code, msg);
-//                    }
-//                });
+        bean.setPhone(etAccount.getText().toString());
+        bean.setCaptchaKey(Settings.Secure.getString(getApplication().getContentResolver(), Settings.Secure.ANDROID_ID));
+        bean.setPassword(etPassword.getText().toString());
+        RetrofitUtil.getInstance().apiService()
+                .pwdLogin(bean)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<LoginData>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<LoginData> result) {
+                        hideLoading();
+                        if(isResultOk(result)){
+                            SharedUtils.singleton().put(ConstValues.TOKENID,result.getData().getAccessToken());
+                            SharedUtils.singleton().put(ConstValues.USERID,result.getData().getUserId());
+                            ToastUtils.showShort("登录成功");
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        hideLoading();
+                    }
+                });
+    }
+
+    private void smsLogin() {
+        LoginRequest bean = new LoginRequest();
+        bean.setPhone(etAccount.getText().toString());
+        bean.setSmsVerificationCode(etVerify.getText().toString());
+        RetrofitUtil.getInstance().apiService()
+                .smsLogin(bean)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<LoginData>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<LoginData> result) {
+                        hideLoading();
+                        if(isResultOk(result)){
+                            SharedUtils.singleton().put(ConstValues.TOKENID,result.getData().getAccessToken());
+                            SharedUtils.singleton().put(ConstValues.USERID,result.getData().getUserId());
+                            ToastUtils.showShort("登录成功");
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        hideLoading();
+                    }
+                });
     }
 
 
@@ -153,53 +221,4 @@ public class LoginActivity extends BaseActivity {
 //            authCode.setVisibility(View.VISIBLE);
         }
     }
-
-    private void getVerifyCode() {
-        String account = etAccount.getText().toString();
-        if ("".equals(account)) {
-            ToastUtil.showLongStrToast(this,"请输入手机号");
-            return;
-        }
-//        RetrofitManager.build().create(UserService.class)
-//                .getCode(2, account)
-//                .compose(RxScheduler.<BaseResponse<EmptyResponse>>observeOnMainThread())
-//                .as(RxScheduler.<BaseResponse<EmptyResponse>>bindLifecycle(this))
-//                .subscribe(new BaseObserver<EmptyResponse>() {
-//                    @Override
-//                    public void onSuccess(EmptyResponse emptyResponse) {
-//                        ToastUtil.showLongStrToast(LoginActivity.this,"验证码发送成功");
-//                        CountDownTimerUtils count = new CountDownTimerUtils(authCode, 60000);
-//                        count.start();
-//                    }
-//
-//                    @Override
-//                    public void onFail(int code, String error) {
-//
-//                    }
-//                });
-    }
-
-//    private class CountDownTimerUtils extends CountDownTimer {
-//        private TextView mTextView;
-//
-//        public CountDownTimerUtils(TextView textView, long millisInFuture) {
-//            super(millisInFuture, 1000);
-//            this.mTextView = textView;
-//        }
-//
-//        @Override
-//        public void onTick(long millisUntilFinished) {
-//            mTextView.setClickable(false); //设置不可点击
-//            mTextView.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorButtonDisable));
-//            mTextView.setText(millisUntilFinished / 1000 + "秒后重新获取"); //设置倒计时时间
-//        }
-//
-//        @Override
-//        public void onFinish() {
-//            mTextView.setText("再次获取");
-//            mTextView.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.color_blue_theme));
-//            mTextView.setClickable(true);//重新获得点击
-//        }
-//    }
-
 }

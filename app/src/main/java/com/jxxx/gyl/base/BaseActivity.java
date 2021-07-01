@@ -13,9 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.view.LoadingDialog;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -105,6 +108,15 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     };
 
+
+
+    public boolean isResultOk(Result mResult) {
+        if(mResult.getCode()==200){
+            return true;
+        }
+        return false;
+    }
+
     public void readyGoActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls);
         startActivity(intent);
@@ -112,9 +124,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showLoading() {
         if (mLoading != null && !mLoading.isShowing()) {
-            mLoading.show();
+//            mLoading.show();
         } else {
-            mLoading = LoadingDialog.show(this, R.string.loading_text, false, null);
+//            mLoading = LoadingDialog.show(this, R.string.loading_text, false, null);
         }
     }
 

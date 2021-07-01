@@ -7,37 +7,58 @@ import com.jxxx.gyl.base.BaseResponse;
  * Create by Sxl on 2020/11/20.
  */
 public class LoginRequest extends BaseResponse {
+//    {
+//        "captchaKey": "1234-1234-1234-1234",
+//            "clientType": "APP",
+//            "password": "123456",
+//            "phone": "18058525327",
+//            "pictureVerificationCode": "1234"
 
-    private String grantType;
+//    smsVerificationCode
+//    }
+    private String captchaKey;
+    private String clientType = "Android-APP";
     private String password;
-    private String tokenInfo;
-    private String username;
-    private String verifyCode;
-    private String androidId;
-    private String registrationId;
+    private String newPassword;
+    private String phone;
+    private String pictureVerificationCode;
+    private String smsVerificationCode;
+    private String scene;//场景枚举 1注册 2登录 3找回密码
 
-    public String getRegistrationId() {
-        return registrationId;
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 
-    public void setRegistrationId(String registrationId) {
-        this.registrationId = registrationId;
+    public String getNewPassword() {
+        return newPassword;
     }
 
-    public void setAndroidId(String androidId) {
-        this.androidId = androidId;
+    public void setScene(String scene) {
+        this.scene = scene;
     }
 
-    public String getAndroidId() {
-        return androidId;
+    public String getScene() {
+        return scene;
     }
 
-    public String getGrantType() {
-        return grantType;
+    public void setSmsVerificationCode(String smsVerificationCode) {
+        this.smsVerificationCode = smsVerificationCode;
     }
 
-    public void setGrantType(String grantType) {
-        this.grantType = grantType;
+    public String getSmsVerificationCode() {
+        return smsVerificationCode;
+    }
+
+    public String getCaptchaKey() {
+        return captchaKey;
+    }
+
+    public void setCaptchaKey(String captchaKey) {
+        this.captchaKey = captchaKey;
+    }
+
+    public String getClientType() {
+        return clientType;
     }
 
     public String getPassword() {
@@ -48,27 +69,19 @@ public class LoginRequest extends BaseResponse {
         this.password = password;
     }
 
-    public String getTokenInfo() {
-        return tokenInfo;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTokenInfo(String tokenInfo) {
-        this.tokenInfo = tokenInfo;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getUsername() {
-        return username;
+    public String getPictureVerificationCode() {
+        return pictureVerificationCode;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getVerifyCode() {
-        return verifyCode;
-    }
-
-    public void setVerifyCode(String verifyCode) {
-        this.verifyCode = verifyCode;
+    public void setPictureVerificationCode(String pictureVerificationCode) {
+        this.pictureVerificationCode = pictureVerificationCode;
     }
 }
