@@ -97,9 +97,13 @@ public interface ApiService {
     @GET(ConstValues.BASE_URL + "api/scmp-application-mall/product/detail")
     Observable<Result<ShopInfoListData>> productDetail(@Query("id") String id);
 
+    /**
+     * 商品页-分类列表
+     * @return
+     */
+    @GET(ConstValues.BASE_URL + "api/scmp-application-mall/product/listCategoryAll")
+    Observable<Result<List<CommodityCategory>>> getCategoryListAll();
 
-    @GET(ConstValues.BASE_URL + "api/scmp-application-mall/product/listCategoryTop")
-    Observable<Result<List<CommodityCategory.ListBean>>> getCategoryListAll();
 
 
     /**

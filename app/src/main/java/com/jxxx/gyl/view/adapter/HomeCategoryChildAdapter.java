@@ -7,18 +7,18 @@ import com.jxxx.gyl.base.CommodityCategory;
 
 import java.util.List;
 
-public class HomeCategoryChildAdapter extends BaseQuickAdapter<CommodityCategory.ListBean.ChildrenBean, BaseViewHolder> {
+public class HomeCategoryChildAdapter extends BaseQuickAdapter<CommodityCategory.SubListBean, BaseViewHolder> {
     int curPos = 0;
 
-    public HomeCategoryChildAdapter(List<CommodityCategory.ListBean.ChildrenBean> data) {
+    public HomeCategoryChildAdapter(List<CommodityCategory.SubListBean> data) {
         super(R.layout.item_type_category_child, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, CommodityCategory.ListBean.ChildrenBean item) {
-        helper.setText(R.id.tv_name,item.getCategoryName()).setBackgroundColor(R.id.tv_name,0);
+    protected void convert(BaseViewHolder helper, CommodityCategory.SubListBean item) {
+        helper.setText(R.id.tv_name,item.getCateName()).setBackgroundColor(R.id.tv_name,0);
         if(curPos==helper.getLayoutPosition()){
-            helper.setText(R.id.tv_name,item.getCategoryName()).setBackgroundColor(R.id.tv_name,mContext.getResources().getColor(R.color.white));
+            helper.setText(R.id.tv_name,item.getCateName()).setBackgroundColor(R.id.tv_name,mContext.getResources().getColor(R.color.white));
         }
     }
 

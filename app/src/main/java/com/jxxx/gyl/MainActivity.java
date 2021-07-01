@@ -51,38 +51,6 @@ public class MainActivity extends BaseActivity{
 
     @Override
     public void initData() {
-        showLoading();
-        RetrofitUtil.getInstance().apiService()
-                .getCategoryListAll()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Result<List<CommodityCategory.ListBean>>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Result<List<CommodityCategory.ListBean>> listResult) {
-                        hideLoading();
-                        if(isResultOk(listResult)){
-                            if(listResult.getData()!=null){
-//                                mHomeOneFragment.setData(listResult.getData());
-                                mHomeTwoFragment.setData(listResult.getData());
-                            }
-                        };
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        hideLoading();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        hideLoading();
-                    }
-                });
     }
     private void initBottomBar() {
         openLocation();

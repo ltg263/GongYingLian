@@ -1,6 +1,5 @@
 package com.jxxx.gyl.base;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,183 +8,123 @@ import java.util.List;
  */
 public class CommodityCategory {
 
-    private List<ListBean> list;
+    /**
+     * cateName :
+     * iconUrl :
+     * id :
+     * imageUrl :
+     * parentId :
+     * subList : [{"cateName":"","iconUrl":"","id":"","imageUrl":"","parentId":""}]
+     */
 
-    public List<ListBean> getList() {
-        if (list == null) {
-            list= new ArrayList<>();
-        }
-        if (list.size()==0) {
-            list.add(new ListBean());
-        }
+    private String cateName;
+    private String iconUrl;
+    private String id;
+    private String imageUrl;
+    private String parentId;
+    private List<SubListBean> subList;
 
-        return list;
+    public String getCateName() {
+        return cateName;
     }
 
-    public void setList(List<ListBean> list) {
-        this.list = list;
+    public void setCateName(String cateName) {
+        this.cateName = cateName;
     }
 
-    public static class ListBean {
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public List<SubListBean> getSubList() {
+        return subList;
+    }
+
+    public void setSubList(List<SubListBean> subList) {
+        this.subList = subList;
+    }
+
+    public static class SubListBean {
         /**
-         * categoryId : 1
-         * categoryName : 肉食品
-         * categoryOrder : 1
-         * children : [{"categoryId":3,"categoryName":"猪肉","categoryOrder":1,"id":9,"image":"https://app.nbningjiang.com/ningjiangshengxian/upload/category-default.png","parentId":1,"siteId":2},{"categoryId":5,"categoryName":"羊肉","categoryOrder":3,"id":2,"image":"https://app.nbningjiang.com/ningjiangshengxian/upload/category-default.png","parentId":1,"siteId":2}]
-         * image : https://app.nbningjiang.com/ningjiangshengxian/upload/category-default.png
+         * cateName :
+         * iconUrl :
+         * id :
+         * imageUrl :
+         * parentId :
          */
 
-        private int categoryId;
-        private String categoryName;
-        private int categoryOrder;
-        private String image;
-        private List<ChildrenBean> children;
-        private boolean isCheck=false;
+        private String cateName;
+        private String iconUrl;
+        private String id;
+        private String imageUrl;
+        private String parentId;
 
-        public boolean isCheck() {
-            return isCheck;
+        public String getCateName() {
+            return cateName;
         }
 
-        public void setCheck(boolean check) {
-            isCheck = check;
+        public void setCateName(String cateName) {
+            this.cateName = cateName;
         }
 
-        public int getCategoryId() {
-            return categoryId;
+        public String getIconUrl() {
+            return iconUrl;
         }
 
-        public void setCategoryId(int categoryId) {
-            this.categoryId = categoryId;
+        public void setIconUrl(String iconUrl) {
+            this.iconUrl = iconUrl;
         }
 
-        public String getCategoryName() {
-            return categoryName;
+        public String getId() {
+            return id;
         }
 
-        public void setCategoryName(String categoryName) {
-            this.categoryName = categoryName;
+        public void setId(String id) {
+            this.id = id;
         }
 
-        public int getCategoryOrder() {
-            return categoryOrder;
+        public String getImageUrl() {
+            return imageUrl;
         }
 
-        public void setCategoryOrder(int categoryOrder) {
-            this.categoryOrder = categoryOrder;
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
         }
 
-        public String getImage() {
-            return image;
+        public String getParentId() {
+            return parentId;
         }
 
-        public void setImage(String image) {
-            this.image = image;
-        }
-
-        public List<ChildrenBean> getChildren() {
-            if (children == null) {
-                return new ArrayList<>();
-            }
-            return children;
-        }
-
-        public void setChildren(List<ChildrenBean> children) {
-            this.children = children;
-        }
-
-        public static class ChildrenBean {
-            /**
-             * categoryId : 3
-             * categoryName : 猪肉
-             * categoryOrder : 1
-             * id : 9
-             * image : https://app.nbningjiang.com/ningjiangshengxian/upload/category-default.png
-             * parentId : 1
-             * siteId : 2
-             */
-
-            private int categoryId;
-            private String categoryName;
-            private String siteName;
-            private int categoryOrder;
-            private int id;
-            private String image;
-            private int parentId;
-            private int siteId;
-            private boolean isCheck=false;
-
-            public String getSiteName() {
-                return siteName == null ? "" : siteName;
-            }
-
-            public void setSiteName(String siteName) {
-                this.siteName = siteName;
-            }
-
-            public boolean isCheck() {
-                return isCheck;
-            }
-
-            public ChildrenBean setCheck(boolean check) {
-                isCheck = check;
-                return this;
-            }
-
-            public int getCategoryId() {
-                return categoryId;
-            }
-
-            public void setCategoryId(int categoryId) {
-                this.categoryId = categoryId;
-            }
-
-            public String getCategoryName() {
-                return categoryName;
-            }
-
-            public void setCategoryName(String categoryName) {
-                this.categoryName = categoryName;
-            }
-
-            public int getCategoryOrder() {
-                return categoryOrder;
-            }
-
-            public void setCategoryOrder(int categoryOrder) {
-                this.categoryOrder = categoryOrder;
-            }
-
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public String getImage() {
-                return image;
-            }
-
-            public void setImage(String image) {
-                this.image = image;
-            }
-
-            public int getParentId() {
-                return parentId;
-            }
-
-            public void setParentId(int parentId) {
-                this.parentId = parentId;
-            }
-
-            public int getSiteId() {
-                return siteId;
-            }
-
-            public void setSiteId(int siteId) {
-                this.siteId = siteId;
-            }
+        public void setParentId(String parentId) {
+            this.parentId = parentId;
         }
     }
 }

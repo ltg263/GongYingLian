@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.view.activity.ShopDetailsActivity;
@@ -20,6 +22,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 1000D 订单管理
@@ -31,10 +37,9 @@ public class HomeTwoFragment extends BaseFragment {
     RecyclerView rvCategoryChirld;
     @BindView(R.id.rv_content)
     RecyclerView rvContent;
-    HomeCategoryParentAdapter mHomeCategoryParentAdapter;
+    private HomeCategoryParentAdapter mHomeCategoryParentAdapter;
     private HomeCategoryChildAdapter mHomeCategoryChildAdapter;
     private HomeCategoryContentAdapter mHomeCategoryContentAdapter;
-    List<CommodityCategory.ListBean> data;
 
     @Override
     protected int setLayoutResourceID() {
@@ -43,30 +48,26 @@ public class HomeTwoFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        mHomeCategoryParentAdapter = new HomeCategoryParentAdapter(data);
-        mHomeCategoryParentAdapter.setCurPos(pos);
+        mHomeCategoryParentAdapter = new HomeCategoryParentAdapter(null);
+        mHomeCategoryParentAdapter.setCurPos(0);
         rvCategoryParent.setAdapter(mHomeCategoryParentAdapter);
         mHomeCategoryParentAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 mHomeCategoryParentAdapter.setCurPos(position);
                 mHomeCategoryParentAdapter.notifyDataSetChanged();
-                mHomeCategoryChildAdapter.setNewData(mHomeCategoryParentAdapter.getData().get(position).getChildren());
+                mHomeCategoryChildAdapter.setNewData(mHomeCategoryParentAdapter.getData().get(position).getSubList());
             }
         });
-        smoothMoveToPosition(rvCategoryParent, pos);
-        if (data != null && data.size() > 0) {
-            mHomeCategoryChildAdapter = new HomeCategoryChildAdapter(data.get(pos).getChildren());
-            rvCategoryChirld.setAdapter(mHomeCategoryChildAdapter);
-            mHomeCategoryChildAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    mHomeCategoryChildAdapter.setCurPos(position);
-                    mHomeCategoryChildAdapter.notifyDataSetChanged();
-                }
-            });
-
-        }
+        mHomeCategoryChildAdapter = new HomeCategoryChildAdapter(null);
+        rvCategoryChirld.setAdapter(mHomeCategoryChildAdapter);
+        mHomeCategoryChildAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                mHomeCategoryChildAdapter.setCurPos(position);
+                mHomeCategoryChildAdapter.notifyDataSetChanged();
+            }
+        });
         mHomeCategoryContentAdapter = new HomeCategoryContentAdapter(null);
         rvContent.setAdapter(mHomeCategoryContentAdapter);
         mHomeCategoryContentAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -79,32 +80,52 @@ public class HomeTwoFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        if(data!=null){
-            mHomeCategoryContentAdapter.setNewData(data.get(0).getChildren());
-        }
-    }
+        RetrofitUtil.getInstance().apiService()
+                .getCategoryListAll()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<List<CommodityCategory>>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-    public void setData(List<CommodityCategory.ListBean> data) {
-        this.data = data;
-        if (mHomeCategoryParentAdapter != null) {
-            mHomeCategoryParentAdapter.setNewData(data);
-        }
-        if (mHomeCategoryChildAdapter != null) {
-            mHomeCategoryChildAdapter.setNewData(data.get(0).getChildren());
-        }
-    }
+                    }
 
-    int pos = 0;
+                    @Override
+                    public void onNext(Result<List<CommodityCategory>> result) {
+                        hideLoading();
+                        if(isResultOk(result)){
+                            if(result.getData()!=null){
+                                mHomeCategoryParentAdapter.setNewData(result.getData());
+                                if(result.getData().size()>0){
+                                    mHomeCategoryChildAdapter.setCurPos(0);
+                                    mHomeCategoryChildAdapter.setNewData(result.getData().get(0).getSubList());
+                                }
+                            }
+                        };
+                    }
 
-    public void setPos(int pos) {
-        this.pos = pos;
-        if (mHomeCategoryParentAdapter != null && mHomeCategoryChildAdapter != null) {
-            mHomeCategoryParentAdapter.setCurPos(pos);
-            mHomeCategoryParentAdapter.notifyDataSetChanged();
-            mHomeCategoryChildAdapter.setNewData(mHomeCategoryParentAdapter.getData().get(pos).getChildren());
-            smoothMoveToPosition(rvCategoryParent, pos);
-        }
+                    @Override
+                    public void onError(Throwable e) {
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        hideLoading();
+                    }
+                });
     }
+//    int pos = 0;
+//
+//    public void setPos(int pos) {
+//        this.pos = pos;
+//        if (mHomeCategoryParentAdapter != null && mHomeCategoryChildAdapter != null) {
+//            mHomeCategoryParentAdapter.setCurPos(pos);
+//            mHomeCategoryParentAdapter.notifyDataSetChanged();
+//            mHomeCategoryChildAdapter.setNewData(mHomeCategoryParentAdapter.getData().get(pos).getChildren());
+//            smoothMoveToPosition(rvCategoryParent, pos);
+//        }
+//    }
 
     /**
      * 滑动到指定位置
