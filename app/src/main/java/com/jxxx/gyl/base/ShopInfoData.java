@@ -3,6 +3,7 @@ package com.jxxx.gyl.base;
 
 import java.util.List;
 
+
 public class ShopInfoData {
 
     /**
