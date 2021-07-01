@@ -79,7 +79,9 @@ public class HomeTwoFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        mHomeCategoryContentAdapter.setNewData(data.get(0).getChildren());
+        if(data!=null){
+            mHomeCategoryContentAdapter.setNewData(data.get(0).getChildren());
+        }
     }
 
     public void setData(List<CommodityCategory.ListBean> data) {

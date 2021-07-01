@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.view.LoadingDialog;
@@ -192,7 +193,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void baseStartActivity(Class<?> cls,String str){
         Intent mIntent = new Intent(this,cls);
         if(StringUtil.isNotBlank(str)){
-            mIntent.putExtra("str",str);
+            mIntent.putExtra(ConstValues.BASE_STR,str);
         }
         startActivity(mIntent);
 

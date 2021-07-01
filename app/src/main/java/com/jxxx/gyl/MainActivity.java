@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity{
                         hideLoading();
                         if(isResultOk(listResult)){
                             if(listResult.getData()!=null){
-                                mHomeOneFragment.setData(listResult.getData());
+//                                mHomeOneFragment.setData(listResult.getData());
                                 mHomeTwoFragment.setData(listResult.getData());
                             }
                         };

@@ -1,6 +1,5 @@
 package com.jxxx.gyl.view.activity.login;
 
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -13,11 +12,8 @@ import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
-import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseActivity;
-import com.jxxx.gyl.bean.LoginData;
 import com.jxxx.gyl.bean.LoginRequest;
-import com.jxxx.gyl.utils.SharedUtils;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.ToastUtil;
 

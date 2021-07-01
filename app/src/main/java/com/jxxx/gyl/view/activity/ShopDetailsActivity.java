@@ -12,18 +12,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseActivity;
+import com.jxxx.gyl.base.CommodityCategory;
+import com.jxxx.gyl.base.ShopInfoListData;
 import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.view.adapter.HomeGoodsAdapter;
 import com.jxxx.gyl.view.adapter.HomeGoodsGzAdapter;
 
 import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class ShopDetailsActivity extends BaseActivity {
     @BindView(R.id.rv_xgsp)
@@ -46,7 +55,7 @@ public class ShopDetailsActivity extends BaseActivity {
     @Override
     public void initView() {
         initWebView("123456");
-        mHomeGoodsAdapter = new HomeGoodsAdapter(Arrays.asList(ConstValues.HOME_TYPE_NAME));
+        mHomeGoodsAdapter = new HomeGoodsAdapter(null);
         mRvXgsp.setAdapter(mHomeGoodsAdapter);
         mRvTjsp.setAdapter(mHomeGoodsAdapter);
 
@@ -63,7 +72,34 @@ public class ShopDetailsActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        RetrofitUtil.getInstance().apiService()
+                .productDetail(getIntent().getStringExtra(ConstValues.BASE_STR))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<ShopInfoListData>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(Result<ShopInfoListData> result) {
+                        hideLoading();
+                        if(isResultOk(result)){
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        hideLoading();
+                    }
+                });
     }
 
     private void initWebView(String details) {

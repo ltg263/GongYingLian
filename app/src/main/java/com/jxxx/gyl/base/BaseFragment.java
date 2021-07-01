@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.view.LoadingDialog;
@@ -92,6 +93,13 @@ public abstract class BaseFragment extends Fragment {
         }
         startActivity(mIntent);
 
+    }
+
+    public boolean isResultOk(Result mResult) {
+        if(mResult.getCode()==200){
+            return true;
+        }
+        return false;
     }
 
 }

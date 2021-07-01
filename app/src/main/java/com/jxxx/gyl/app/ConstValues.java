@@ -5,6 +5,7 @@ package com.jxxx.gyl.app;
  */
 
 public class ConstValues {
+    public static final String BASE_STR = "base_put";
     /**
      * 应用名称
      */

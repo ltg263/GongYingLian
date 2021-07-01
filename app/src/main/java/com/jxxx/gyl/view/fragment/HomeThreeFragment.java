@@ -40,7 +40,7 @@ public class HomeThreeFragment extends BaseFragment {
         mRvShopList.setAdapter(mShopCarGoodsAdapter);
 
         mRvList.setHasFixedSize(true);
-        mHomeGoodsAdapter = new HomeGoodsAdapter(Arrays.asList(ConstValues.HOME_TYPE_NAME));
+        mHomeGoodsAdapter = new HomeGoodsAdapter(null);
         mRvList.setAdapter(mHomeGoodsAdapter);
     }
 
