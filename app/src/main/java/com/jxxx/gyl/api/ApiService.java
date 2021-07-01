@@ -3,6 +3,7 @@ package com.jxxx.gyl.api;
 
 import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.CommodityCategory;
+import com.jxxx.gyl.base.HomeCategoryTypeData;
 import com.jxxx.gyl.base.ShopInfoListData;
 import com.jxxx.gyl.bean.HomeActivityData;
 import com.jxxx.gyl.bean.HomeBannerData;
@@ -89,6 +90,13 @@ public interface ApiService {
      */
     @GET(ConstValues.BASE_URL + "api/scmp-application-mall/activity/list")
     Observable<Result<List<HomeActivityData>>> homeActivityList(@Query("category") String category);
+
+    /**
+     * 分类页-商品列表
+     * @return
+     */
+    @GET(ConstValues.BASE_URL + "api/scmp-application-mall/product/listProductByCategory")
+    Observable<Result<HomeCategoryTypeData>> listProductByCategory(@Query("categoryId") String categoryId);
 
     /**
      * 商品-详情

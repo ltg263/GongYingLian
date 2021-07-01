@@ -11,6 +11,7 @@ import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.base.CommodityCategory;
+import com.jxxx.gyl.base.HomeCategoryTypeData;
 import com.jxxx.gyl.view.activity.ShopDetailsActivity;
 import com.jxxx.gyl.view.activity.login.LoginActivity;
 import com.jxxx.gyl.view.activity.search.SearchGoodsActivity;
@@ -57,6 +58,7 @@ public class HomeTwoFragment extends BaseFragment {
                 mHomeCategoryParentAdapter.setCurPos(position);
                 mHomeCategoryParentAdapter.notifyDataSetChanged();
                 mHomeCategoryChildAdapter.setNewData(mHomeCategoryParentAdapter.getData().get(position).getSubList());
+                listProductByCategory(mHomeCategoryParentAdapter.getData().get(position).getSubList().get(0).getId());
             }
         });
         mHomeCategoryChildAdapter = new HomeCategoryChildAdapter(null);
@@ -73,7 +75,8 @@ public class HomeTwoFragment extends BaseFragment {
         mHomeCategoryContentAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ShopDetailsActivity.startActivityIntent(getActivity(), "id");
+                ShopDetailsActivity.startActivityIntent(getActivity(), mHomeCategoryContentAdapter.getData().get(position).getId());
+                listProductByCategory(mHomeCategoryContentAdapter.getData().get(position).getId());
             }
         });
     }
@@ -99,6 +102,42 @@ public class HomeTwoFragment extends BaseFragment {
                                 if(result.getData().size()>0){
                                     mHomeCategoryChildAdapter.setCurPos(0);
                                     mHomeCategoryChildAdapter.setNewData(result.getData().get(0).getSubList());
+                                    listProductByCategory(result.getData().get(0).getId());
+                                }
+                            }
+                        };
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        hideLoading();
+                    }
+                });
+    }
+
+    private void listProductByCategory(String id) {
+        RetrofitUtil.getInstance().apiService()
+                .listProductByCategory(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<HomeCategoryTypeData>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<HomeCategoryTypeData> result) {
+                        hideLoading();
+                        if(isResultOk(result)){
+                            if(result.getData()!=null){
+                                if(result.getData().getSpuList()!=null){
+                                    mHomeCategoryContentAdapter.setNewData(result.getData().getSpuList());
                                 }
                             }
                         };
