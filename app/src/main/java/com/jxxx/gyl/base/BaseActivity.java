@@ -117,11 +117,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         return false;
     }
 
-    public void readyGoActivity(Class<?> cls) {
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
-    }
-
     public void showLoading() {
         if (mLoading != null && !mLoading.isShowing()) {
 //            mLoading.show();
@@ -190,6 +185,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         return false;
     }
 
+
+    public void baseStartActivity(Class<?> cls) {
+        baseStartActivity(cls,null);
+    }
     protected void baseStartActivity(Class<?> cls,String str){
         Intent mIntent = new Intent(this,cls);
         if(StringUtil.isNotBlank(str)){

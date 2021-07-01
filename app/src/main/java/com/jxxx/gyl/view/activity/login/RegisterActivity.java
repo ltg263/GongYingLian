@@ -76,13 +76,13 @@ public class RegisterActivity extends BaseActivity {
                 toRegister();
                 break;
             case R.id.tv_forget:
-                readyGoActivity(ForgetPasswordActivity.class);
+                baseStartActivity(ForgetPasswordActivity.class);
                 break;
             case R.id.tv_login:
-                readyGoActivity(LoginActivity.class);
+                baseStartActivity(LoginActivity.class);
                 break;
             case R.id.ll_yhxy:
-                readyGoActivity(WebViewActivity.class);
+                baseStartActivity(WebViewActivity.class);
                 break;
         }
     }

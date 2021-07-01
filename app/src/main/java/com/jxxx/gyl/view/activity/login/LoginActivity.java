@@ -71,6 +71,8 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public int intiLayout() {
+        SharedUtils.singleton().put(ConstValues.TOKEN,"");
+        SharedUtils.singleton().put(ConstValues.USERID,"");
         return R.layout.activity_login;
     }
 
@@ -105,10 +107,10 @@ public class LoginActivity extends BaseActivity {
                 HttpsUtils.getVerifyCode(this,authCode,account,"2");
                 break;
             case R.id.tv_forget:
-                readyGoActivity(ForgetPasswordActivity.class);
+                baseStartActivity(ForgetPasswordActivity.class);
                 break;
             case R.id.tv_register:
-                readyGoActivity(RegisterActivity.class);
+                baseStartActivity(RegisterActivity.class);
                 break;
             case R.id.tv_login:
                 showLoading();
@@ -119,7 +121,7 @@ public class LoginActivity extends BaseActivity {
                 }
                 break;
             case R.id.ll_yhxy:
-                readyGoActivity(WebViewActivity.class);
+                baseStartActivity(WebViewActivity.class);
                 break;
         }
     }

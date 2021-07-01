@@ -36,6 +36,9 @@ public interface ApiService {
     @GET(ConstValues.BASE_URL + "api/scmp-application-mall/findPwd/sms")
     Observable<Result> smsFindPwd(@Body LoginRequest request);
 
+    @GET(ConstValues.BASE_URL + "api/scmp-application-mall/authentication/logout")
+    Observable<Result> logout();
+
     @GET(ConstValues.BASE_URL + "api/scmp-application-mall/product/listCategoryTop")
     Observable<Result<List<CommodityCategory.ListBean>>> getCategoryListAll();
 
