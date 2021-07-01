@@ -8,25 +8,42 @@ package com.jxxx.gyl.api;
 public class Result<T> {
 
 
-    private int status;
+    private int code;
     private String error;
-
+    private String message;
+    private boolean success;
     private T data;
 
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
     public String getError() {
-        return error == null ? "" : error;
+        return error;
     }
 
     public void setError(String error) {
         this.error = error;
     }
 
-    public int getStatus() {
-        return status;
+    public String getMessage() {
+        return message;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
     public T getData() {
