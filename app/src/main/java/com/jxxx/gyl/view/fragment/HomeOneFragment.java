@@ -67,7 +67,7 @@ public class HomeOneFragment extends BaseFragment {
         mHomeTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ((MainActivity)getActivity()).startFragmentTwo(position);
+//                ((MainActivity)getActivity()).startFragmentTwo(position);
             }
         });
 

@@ -57,8 +57,9 @@ public class HomeTwoFragment extends BaseFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 mHomeCategoryParentAdapter.setCurPos(position);
                 mHomeCategoryParentAdapter.notifyDataSetChanged();
+                mHomeCategoryChildAdapter.setCurPos(0);
                 mHomeCategoryChildAdapter.setNewData(mHomeCategoryParentAdapter.getData().get(position).getSubList());
-                listProductByCategory(mHomeCategoryParentAdapter.getData().get(position).getSubList().get(0).getId());
+                listProductByCategory(mHomeCategoryChildAdapter.getData().get(0).getId());
             }
         });
         mHomeCategoryChildAdapter = new HomeCategoryChildAdapter(null);
@@ -68,6 +69,7 @@ public class HomeTwoFragment extends BaseFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 mHomeCategoryChildAdapter.setCurPos(position);
                 mHomeCategoryChildAdapter.notifyDataSetChanged();
+                listProductByCategory(mHomeCategoryChildAdapter.getData().get(position).getId());
             }
         });
         mHomeCategoryContentAdapter = new HomeCategoryContentAdapter(null);
@@ -102,7 +104,7 @@ public class HomeTwoFragment extends BaseFragment {
                                 if(result.getData().size()>0){
                                     mHomeCategoryChildAdapter.setCurPos(0);
                                     mHomeCategoryChildAdapter.setNewData(result.getData().get(0).getSubList());
-                                    listProductByCategory(result.getData().get(0).getId());
+                                    listProductByCategory(mHomeCategoryChildAdapter.getData().get(0).getId());
                                 }
                             }
                         };

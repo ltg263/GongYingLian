@@ -122,6 +122,6 @@ public class MainActivity extends BaseActivity{
     }
     public void startFragmentTwo(int pos){
         mBnvHomeNavigation.setSelectedItemId(R.id.menu_home_2);
-        mHomeTwoFragment.setPos(pos);
+//        mHomeTwoFragment.setPos(pos);
     }
 }

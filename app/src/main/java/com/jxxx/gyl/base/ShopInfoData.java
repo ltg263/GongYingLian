@@ -1,8 +1,6 @@
 package com.jxxx.gyl.base;
 
-
 import java.util.List;
-
 
 public class ShopInfoData {
 
@@ -10,15 +8,15 @@ public class ShopInfoData {
      * iconUrl : 
      * id : 
      * offSaleTime : 
-     * skus : [{"id":"","levelPrice":{"level":"","skuId":0,"skuLevelPrice":0},"skuImage":"","skuName":"","skuSaleNum":0,"skuUnit":"","spuId":"","stockNum":0}]
+     * priceInfo : {"price":0}
+     * skus : [{"id":"","priceInfo":{"price":0},"skuImage":"","skuName":"","skuSaleNum":0,"skuUnit":"","spuId":"","stockNum":0}]
      * spuDesc : 
      * spuImgs : 
      * spuName : 
      * spuParams : 
-     * spuPrice : 0
      * spuSaleNum : 0
-     * spuSelfSupply : false
      * spuShortDesc : 
+     * spuSupplyType : 0
      * suppliersId : 
      * suppliersName : 
      */
@@ -26,14 +24,14 @@ public class ShopInfoData {
     private String iconUrl;
     private String id;
     private String offSaleTime;
+    private PriceInfoBean priceInfo;
     private String spuDesc;
     private String spuImgs;
     private String spuName;
     private String spuParams;
-    private String spuPrice;
     private String spuSaleNum;
-    private boolean spuSelfSupply;
     private String spuShortDesc;
+    private String spuSupplyType;
     private String suppliersId;
     private String suppliersName;
     private List<SkusBean> skus;
@@ -60,6 +58,14 @@ public class ShopInfoData {
 
     public void setOffSaleTime(String offSaleTime) {
         this.offSaleTime = offSaleTime;
+    }
+
+    public PriceInfoBean getPriceInfo() {
+        return priceInfo;
+    }
+
+    public void setPriceInfo(PriceInfoBean priceInfo) {
+        this.priceInfo = priceInfo;
     }
 
     public String getSpuDesc() {
@@ -94,14 +100,6 @@ public class ShopInfoData {
         this.spuParams = spuParams;
     }
 
-    public String getSpuPrice() {
-        return spuPrice;
-    }
-
-    public void setSpuPrice(String spuPrice) {
-        this.spuPrice = spuPrice;
-    }
-
     public String getSpuSaleNum() {
         return spuSaleNum;
     }
@@ -110,20 +108,20 @@ public class ShopInfoData {
         this.spuSaleNum = spuSaleNum;
     }
 
-    public boolean isSpuSelfSupply() {
-        return spuSelfSupply;
-    }
-
-    public void setSpuSelfSupply(boolean spuSelfSupply) {
-        this.spuSelfSupply = spuSelfSupply;
-    }
-
     public String getSpuShortDesc() {
         return spuShortDesc;
     }
 
     public void setSpuShortDesc(String spuShortDesc) {
         this.spuShortDesc = spuShortDesc;
+    }
+
+    public String getSpuSupplyType() {
+        return spuSupplyType;
+    }
+
+    public void setSpuSupplyType(String spuSupplyType) {
+        this.spuSupplyType = spuSupplyType;
     }
 
     public String getSuppliersId() {
@@ -150,10 +148,26 @@ public class ShopInfoData {
         this.skus = skus;
     }
 
+    public static class PriceInfoBean {
+        /**
+         * price : 0
+         */
+
+        private String price;
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
+        }
+    }
+
     public static class SkusBean {
         /**
          * id : 
-         * levelPrice : {"level":"","skuId":0,"skuLevelPrice":0}
+         * priceInfo : {"price":0}
          * skuImage : 
          * skuName : 
          * skuSaleNum : 0
@@ -163,7 +177,7 @@ public class ShopInfoData {
          */
 
         private String id;
-        private LevelPriceBean levelPrice;
+        private PriceInfoBean priceInfo;
         private String skuImage;
         private String skuName;
         private String skuSaleNum;
@@ -179,12 +193,12 @@ public class ShopInfoData {
             this.id = id;
         }
 
-        public LevelPriceBean getLevelPrice() {
-            return levelPrice;
+        public PriceInfoBean getPriceInfo() {
+            return priceInfo;
         }
 
-        public void setLevelPrice(LevelPriceBean levelPrice) {
-            this.levelPrice = levelPrice;
+        public void setPriceInfo(PriceInfoBean priceInfo) {
+            this.priceInfo = priceInfo;
         }
 
         public String getSkuImage() {
@@ -233,42 +247,6 @@ public class ShopInfoData {
 
         public void setStockNum(String stockNum) {
             this.stockNum = stockNum;
-        }
-
-        public static class LevelPriceBean {
-            /**
-             * level : 
-             * skuId : 0
-             * skuLevelPrice : 0
-             */
-
-            private String level;
-            private String skuId;
-            private String skuLevelPrice;
-
-            public String getLevel() {
-                return level;
-            }
-
-            public void setLevel(String level) {
-                this.level = level;
-            }
-
-            public String getSkuId() {
-                return skuId;
-            }
-
-            public void setSkuId(String skuId) {
-                this.skuId = skuId;
-            }
-
-            public String getSkuLevelPrice() {
-                return skuLevelPrice;
-            }
-
-            public void setSkuLevelPrice(String skuLevelPrice) {
-                this.skuLevelPrice = skuLevelPrice;
-            }
         }
     }
 }

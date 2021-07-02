@@ -5,6 +5,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.utils.GlideImageLoader;
+import com.jxxx.gyl.utils.StringUtil;
 
 import java.util.List;
 
@@ -16,16 +17,37 @@ public class HomeCategoryContentAdapter extends BaseQuickAdapter<ShopInfoData, B
 
     @Override
     protected void convert(BaseViewHolder helper, ShopInfoData item) {
+        GlideImageLoader.loadImageViewRadius(mContext,item.getIconUrl(),30,helper.getView(R.id.iv_img));
         helper.setText(R.id.tv_name,item.getSpuName());
+
+        if(item.getSpuSupplyType().equals("1")){
+            helper.setText(R.id.tv_spuSupplyType,"自营");
+        }else if(item.getSpuSupplyType().equals("2")){
+            helper.setText(R.id.tv_spuSupplyType,"供应商");
+        }
+        helper.setText(R.id.tv_price,"无价格");
+        if(item.getPriceInfo()!=null){
+            helper.setText(R.id.tv_price,item.getPriceInfo().getPrice());
+        }
         if(item.getSkus()!=null){
-            if(item.getSkus().size()>0){
-                GlideImageLoader.loadImageViewRadius(mContext,item.getSkus().get(0).getSkuImage(),30,helper.getView(R.id.iv_img));
-                helper.setText(R.id.tv_type,item.getSkus().get(0).getSkuName());
-                helper.setText(R.id.tv_price,"无价格");
-                if(item.getSkus().get(0).getLevelPrice()==null){
-                    helper.setText(R.id.tv_price,item.getSkus().get(0).getLevelPrice().getSkuLevelPrice());
+            String skuName = "";
+            for(int i=0;i<item.getSkus().size();i++){
+                if(i==0){
+                    skuName = item.getSkus().get(i).getSkuName();
+                }else{
+                    skuName = skuName+"|"+item.getSkus().get(i).getSkuName();
                 }
             }
+            if(StringUtil.isBlank(skuName)){
+                for(int i=0;i<item.getSkus().size();i++){
+                    if(i==0){
+                        skuName = item.getSkus().get(i).getSkuUnit();
+                    }else{
+                        skuName = skuName+"|"+item.getSkus().get(i).getSkuUnit();
+                    }
+                }
+            }
+            helper.setText(R.id.tv_type,skuName);
         }
     }
 

@@ -30,9 +30,9 @@ public class HomeGoodsAdapter extends BaseQuickAdapter<HomeActivityData, BaseVie
                 GlideImageLoader.loadImageViewRadius(mContext,data.getSkus().get(0).getSkuImage(),30,helper.getView(R.id.iv_img));
                 helper.setText(R.id.tv_type,data.getSkus().get(0).getSkuName());
                 helper.setText(R.id.tv_price,"无价格");
-                if(data.getSkus().get(0).getLevelPrice()==null){
-                    helper.setText(R.id.tv_price,data.getSkus().get(0).getLevelPrice().getSkuLevelPrice());
-                }
+//                if(data.getSkus().get(0).getLevelPrice()==null){
+//                    helper.setText(R.id.tv_price,data.getSkus().get(0).getLevelPrice().getSkuLevelPrice());
+//                }
             }
         }else if(item.getActivityType().equals("2")){
             helper.setGone(R.id.rl1,true).setGone(R.id.rl_contact,false).setText(R.id.tv_1,item.getStartTime());

@@ -25,7 +25,7 @@ public class ConstValues {
     /**
      * 服务器后台地址
      */
-    public static final String BASE_URL = "http://192.168.50.246:8000/";
+    public static final String BASE_URL = "http://47.114.152.36:8000/";
 
 //    public static final String PORT_21 = "community-service/";//社群
 
