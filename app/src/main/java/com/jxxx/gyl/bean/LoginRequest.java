@@ -17,7 +17,7 @@ public class LoginRequest extends BaseResponse {
 //    smsVerificationCode
 //    }
     private String captchaKey;
-    private String clientType = "Android-APP";
+    private String clientType = "APP";
     private String password;
     private String newPassword;
     private String phone;

@@ -27,6 +27,7 @@ import com.jxxx.gyl.bean.ParamData;
 import com.jxxx.gyl.utils.SharedUtils;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.ToastUtil;
+import com.jxxx.gyl.view.activity.CreateShopActivity;
 import com.jxxx.gyl.view.activity.mine.WebViewActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -127,9 +128,13 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void pwdLogin() {
+        if(StringUtil.isBlank(etAccount.getText().toString()) || StringUtil.isBlank(etAccount.getText().toString()) ){
+            ToastUtils.showLong("手机号或密码不能为空");
+            return;
+        }
         LoginRequest bean = new LoginRequest();
+        bean.setCaptchaKey(null);
         bean.setPhone(etAccount.getText().toString());
-        bean.setCaptchaKey(Settings.Secure.getString(getApplication().getContentResolver(), Settings.Secure.ANDROID_ID));
         bean.setPassword(etPassword.getText().toString());
         RetrofitUtil.getInstance().apiService()
                 .pwdLogin(bean)
@@ -145,10 +150,7 @@ public class LoginActivity extends BaseActivity {
                     public void onNext(Result<LoginData> result) {
                         hideLoading();
                         if(isResultOk(result)){
-                            SharedUtils.singleton().put(ConstValues.TOKENID,result.getData().getAccessToken());
-                            SharedUtils.singleton().put(ConstValues.USERID,result.getData().getUserId());
-                            ToastUtils.showShort("登录成功");
-                            finish();
+                            startActivityLoinOk(result.getData());
                         }
                     }
 
@@ -162,6 +164,28 @@ public class LoginActivity extends BaseActivity {
                         hideLoading();
                     }
                 });
+    }
+
+    private void startActivityLoinOk(LoginData mData) {
+        //0未提交 1审核通过 2审核失败 3审核中
+        switch (mData.getAuditStatus()){
+            case "0":
+                baseStartActivity(CreateShopActivity.class,null);
+                finish();
+                break;
+            case "1":
+                SharedUtils.singleton().put(ConstValues.TOKENID,mData.getAccessToken());
+                SharedUtils.singleton().put(ConstValues.USERID,mData.getUserId());
+                ToastUtils.showShort("登录成功");
+                finish();
+                break;
+            case "2":
+
+                break;
+            case "3":
+
+                break;
+        }
     }
 
     private void smsLogin() {
@@ -182,10 +206,7 @@ public class LoginActivity extends BaseActivity {
                     public void onNext(Result<LoginData> result) {
                         hideLoading();
                         if(isResultOk(result)){
-                            SharedUtils.singleton().put(ConstValues.TOKENID,result.getData().getAccessToken());
-                            SharedUtils.singleton().put(ConstValues.USERID,result.getData().getUserId());
-                            ToastUtils.showShort("登录成功");
-                            finish();
+                            startActivityLoinOk(result.getData());
                         }
                     }
 

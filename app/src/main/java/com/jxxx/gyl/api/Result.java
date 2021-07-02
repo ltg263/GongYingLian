@@ -1,5 +1,7 @@
 package com.jxxx.gyl.api;
 
+import com.blankj.utilcode.util.ToastUtils;
+
 /**
  * 公共返回格式
  *
@@ -15,6 +17,9 @@ public class Result<T> {
     private T data;
 
     public int getCode() {
+        if(code!=200 || !isSuccess()){
+            ToastUtils.showLong(message);
+        }
         return code;
     }
 

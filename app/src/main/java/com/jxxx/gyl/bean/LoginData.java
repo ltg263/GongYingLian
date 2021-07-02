@@ -3,7 +3,7 @@ package com.jxxx.gyl.bean;
 public class LoginData {
     /**
      * accessToken : {"accessToken":"1256","issue":0,"tokenExpire":18000}
-     * auditStatus : 0
+     * auditStatus : 0未提交 1审核通过 2审核失败 3审核中
      * failureReason :
      * userId : 1
      */
