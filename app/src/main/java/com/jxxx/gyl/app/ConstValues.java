@@ -10,6 +10,7 @@ public class ConstValues {
      * 应用名称
      */
     public static String APPNAME_ENGLISH = "GongYingLian";
+    public static String CATEGORY = "";
 
     /**sharedpreference 判断是否已登录字段*/
     public static final String ISLOGIN = "islogin";

@@ -9,6 +9,7 @@ import com.jxxx.gyl.R;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.bean.HomeActivityData;
 import com.jxxx.gyl.utils.GlideImageLoader;
+import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.view.activity.ShopDetailsActivity;
 import com.jxxx.gyl.view.activity.mine.WebViewActivity;
 
@@ -22,20 +23,45 @@ public class HomeGoodsAdapter extends BaseQuickAdapter<HomeActivityData, BaseVie
 
     @Override
     protected void convert(BaseViewHolder helper, HomeActivityData item) {
-        ShopInfoData data = item.getData();
         if(item.getActivityType().equals("1")){
-            helper.setGone(R.id.rl1,false).setGone(R.id.rl_contact,true)
-                    .setText(R.id.tv_name,data.getSpuName());
-            if(data.getSkus()!=null && data.getSkus().size()>0){
-                GlideImageLoader.loadImageViewRadius(mContext,data.getSkus().get(0).getSkuImage(),30,helper.getView(R.id.iv_img));
-                helper.setText(R.id.tv_type,data.getSkus().get(0).getSkuName());
+            ShopInfoData data = item.getData();
+            helper.setGone(R.id.rl1,false).setGone(R.id.rl_contact,true);
+            if(data.getSkus()!=null && data.getSkus().size()>0) {
+                helper.setText(R.id.tv_name,data.getSpuName());
+                if(data.getSpuSupplyType().equals("1")){
+                    helper.setText(R.id.tv_spuSupplyType,"自营");
+                }else if(data.getSpuSupplyType().equals("2")){
+                    helper.setText(R.id.tv_spuSupplyType,"供应商");
+                }
                 helper.setText(R.id.tv_price,"无价格");
-//                if(data.getSkus().get(0).getLevelPrice()==null){
-//                    helper.setText(R.id.tv_price,data.getSkus().get(0).getLevelPrice().getSkuLevelPrice());
-//                }
+                if(data.getPriceInfo()!=null){
+                    helper.setText(R.id.tv_price,data.getPriceInfo().getPrice());
+                }
+                if(data.getSkus()!=null){
+                    String skuName = "";
+                    for(int i=0;i<data.getSkus().size();i++){
+                        if(i==0){
+                            skuName = data.getSkus().get(i).getSkuName();
+                        }else{
+                            skuName = skuName+"|"+data.getSkus().get(i).getSkuName();
+                        }
+                    }
+                    if(StringUtil.isBlank(skuName)){
+                        for(int i=0;i<data.getSkus().size();i++){
+                            if(i==0){
+                                skuName = data.getSkus().get(i).getSkuUnit();
+                            }else{
+                                skuName = skuName+"|"+data.getSkus().get(i).getSkuUnit();
+                            }
+                        }
+                    }
+                    helper.setText(R.id.tv_type,skuName);
+                }
             }
         }else if(item.getActivityType().equals("2")){
-            helper.setGone(R.id.rl1,true).setGone(R.id.rl_contact,false).setText(R.id.tv_1,item.getStartTime());
+            helper.setGone(R.id.rl1,true).setGone(R.id.rl_contact,false)
+                    .setText(R.id.tv_1,item.getContent())
+                    .setText(R.id.tv_2,item.getTitle());
             GlideImageLoader.loadImageViewRadius(mContext,item.getImageUrl(),30,helper.getView(R.id.siv_img));
         }
 
@@ -43,7 +69,7 @@ public class HomeGoodsAdapter extends BaseQuickAdapter<HomeActivityData, BaseVie
             @Override
             public void onClick(View view) {
                 Intent mIntent = new Intent(mContext, WebViewActivity.class);
-                mIntent.putExtra("type",item.getContent());
+                mIntent.putExtra("type",item.getRelateContent());
                 mContext.startActivity(mIntent);
             }
         });

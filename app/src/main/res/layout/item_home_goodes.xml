@@ -8,6 +8,7 @@
         android:id="@+id/rl1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:background="@drawable/circle_solid_red_15">
 
         <com.jxxx.gyl.utils.view.SquareImageView
@@ -61,8 +62,7 @@
         android:id="@+id/rl_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/circle_solid_fff_15"
-        android:visibility="gone">
+        android:background="@drawable/circle_solid_fff_15">
 
         <ImageView
             android:id="@+id/iv_img"
@@ -117,6 +117,7 @@
             android:layout_alignTop="@id/tv_price"
             android:layout_alignParentEnd="true" />
         <TextView
+            android:id="@+id/tv_spuSupplyType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_price"

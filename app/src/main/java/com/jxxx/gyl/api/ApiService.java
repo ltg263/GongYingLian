@@ -6,6 +6,7 @@ import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.base.HomeCategoryTypeData;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.base.ShopInfoListData;
+import com.jxxx.gyl.bean.CategoryDataList;
 import com.jxxx.gyl.bean.HomeActivityData;
 import com.jxxx.gyl.bean.HomeBannerData;
 import com.jxxx.gyl.bean.HomeCategoryData;
@@ -20,7 +21,9 @@ import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface ApiService {
 
@@ -86,11 +89,11 @@ public interface ApiService {
     Observable<Result<List<HomeCategoryData>>> homeListCategoryTop();
 
     /**
-     * 首页-活动列表
+     * 首页-活动分类列表
      * @return
      */
-    @GET(ConstValues.BASE_URL + "api/scmp-application-mall/activity/list")
-    Observable<Result<List<HomeActivityData>>> homeActivityList(@Query("category") String category);
+    @GET(ConstValues.BASE_URL + "api/scmp-application-mall/activity/listCategory")
+    Observable<Result<List<CategoryDataList>>> listCategory();
 
     /**
      * 分类页-商品列表
@@ -99,6 +102,12 @@ public interface ApiService {
     @GET(ConstValues.BASE_URL + "api/scmp-application-mall/product/listProductByCategory")
     Observable<Result<HomeCategoryTypeData>> listProductByCategory(@Query("categoryId") String categoryId);
 
+    /**
+     * 首页-活动列表
+     * @return
+     */
+    @GET(ConstValues.BASE_URL + "api/scmp-application-mall/activity/list/1")
+    Observable<Result<List<HomeActivityData>>> homeActivityList();
     /**
      * 商品-详情
      * @return

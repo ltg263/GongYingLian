@@ -1,28 +1,31 @@
 package com.jxxx.gyl.bean;
 
-public class HomeCategoryData {
-
+public class CategoryDataList {
     /**
      * id : 1
-     * parentId : 0
-     * cateName : 肉禽水产
-     * imageUrl : ""
-     * iconUrl : null
-     * sequence : 1
+     * title : 精选
+     * subtitle : 为您推荐
+     * imgUrl : null
+     * status : 1
+     * startTime : null
+     * endTime : null
+     * sequence : 0
      * extension : null
      * deleted : 0
      * createUser : 0
      * updateUser : 0
      * tenantId : 0
-     * updateTime : 2021-06-27 21:22:35
-     * createTime : 2021-06-26 15:57:02
+     * updateTime : 2021-07-01 21:53:49
+     * createTime : 2021-07-01 21:53:34
      */
 
     private String id;
-    private String parentId;
-    private String cateName;
-    private String imageUrl;
-    private String iconUrl;
+    private String title;
+    private String subtitle;
+    private String imgUrl;
+    private String status;
+    private String startTime;
+    private String endTime;
     private String sequence;
     private String extension;
     private String deleted;
@@ -40,36 +43,52 @@ public class HomeCategoryData {
         this.id = id;
     }
 
-    public String getParentId() {
-        return parentId;
+    public String getTitle() {
+        return title;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getCateName() {
-        return cateName;
+    public String getSubtitle() {
+        return subtitle;
     }
 
-    public void setCateName(String cateName) {
-        this.cateName = cateName;
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
-    public String getIconUrl() {
-        return iconUrl;
+    public String getStatus() {
+        return status;
     }
 
-    public void setIconUrl(String iconUrl) {
-        this.iconUrl = iconUrl;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public String getSequence() {

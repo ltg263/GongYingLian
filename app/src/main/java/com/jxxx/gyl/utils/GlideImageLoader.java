@@ -6,15 +6,18 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.app.MainApplication;
 import com.youth.banner.loader.ImageLoader;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+import static com.bumptech.glide.request.RequestOptions.sizeMultiplierOf;
 
 
 /**
@@ -34,7 +37,9 @@ public class GlideImageLoader extends ImageLoader {
          */
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         //Glide 加载图片简单用法
-        Glide.with(context).load(path).into(imageView);
+        Glide.with(context).load(path).apply(new RequestOptions()
+                .transforms(new FitCenter(), new RoundedCorners(15)
+                )).into(imageView);
 
     }
 
