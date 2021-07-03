@@ -28,6 +28,7 @@ import com.jxxx.gyl.utils.SharedUtils;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.ToastUtil;
 import com.jxxx.gyl.view.activity.CreateShopActivity;
+import com.jxxx.gyl.view.activity.CreateShopResultActivity;
 import com.jxxx.gyl.view.activity.mine.WebViewActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -167,6 +168,12 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void startActivityLoinOk(LoginData mData) {
+        if(mData.getAccessToken()!=null){
+            SharedUtils.singleton().put(ConstValues.TOKENID,mData.getAccessToken().getAccessToken());
+        }
+        if(StringUtil.isNotBlank(mData.getUserId())){
+            SharedUtils.singleton().put(ConstValues.USERID,mData.getUserId());
+        }
         //0未提交 1审核通过 2审核失败 3审核中
         switch (mData.getAuditStatus()){
             case "0":
@@ -174,16 +181,14 @@ public class LoginActivity extends BaseActivity {
                 finish();
                 break;
             case "1":
-                SharedUtils.singleton().put(ConstValues.TOKENID,mData.getAccessToken());
-                SharedUtils.singleton().put(ConstValues.USERID,mData.getUserId());
                 ToastUtils.showShort("登录成功");
                 finish();
                 break;
             case "2":
-
+                baseStartActivity(CreateShopResultActivity.class,mData.getFailureReason());
                 break;
             case "3":
-
+                baseStartActivity(CreateShopResultActivity.class,null);
                 break;
         }
     }

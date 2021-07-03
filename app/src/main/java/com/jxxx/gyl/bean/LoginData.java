@@ -12,6 +12,15 @@ public class LoginData {
     private String auditStatus;
     private String failureReason;
     private String userId;
+    private String auditRecordId;
+
+    public void setAuditRecordId(String auditRecordId) {
+        this.auditRecordId = auditRecordId;
+    }
+
+    public String getAuditRecordId() {
+        return auditRecordId;
+    }
 
     public AccessTokenBean getAccessToken() {
         return accessToken;

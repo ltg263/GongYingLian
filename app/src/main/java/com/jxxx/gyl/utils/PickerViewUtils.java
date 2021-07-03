@@ -1,5 +1,6 @@
 package com.jxxx.gyl.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.bean.CategoryTreeData;
 
@@ -19,37 +21,39 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import cn.addapp.pickers.entity.City;
+import cn.addapp.pickers.entity.County;
+import cn.addapp.pickers.entity.Province;
+
 public class PickerViewUtils {
 
     /**
-     * 自定义选择器
+     * 地址选择器
      * @param mContext
-     * @param title
      */
-    public static void selectorCustomSf(Context mContext, final List<String> listS,final List<String> listF, String title, final TextView tv1, final TextView tv2){
-        OptionsPickerView pvOptions = new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int option2, int options3 , View v) {
-                tv1.setText(listS.get(options1).replace("h",""));
-                tv2.setText(listF.get(option2).replace("min",""));
-            }
-        }) .setOptionsSelectChangeListener(new OnOptionsSelectChangeListener() {
-            @Override
-            public void onOptionsSelectChanged(int options1, int options2, int options3) {
+    public static void onAddressPicker(Activity mContext,TextView mTv) {
+        AddressPickTask task = new AddressPickTask(mContext);
+        task.setHideProvince(false);
+        task.setHideCounty(false);
+        task.setCallback(new AddressPickTask.Callback() {
 
+            @Override
+            public void onAddressInitFailed() {
+                ToastUtils.showShort("数据初始化失败");
             }
-        })
-                .setTitleText(title)
-                .setDividerColor(Color.BLACK)
-                .setSubmitColor(Color.BLACK)
-                .setCancelColor(Color.BLACK)
-                .setTextColorCenter(mContext.getResources().getColor(R.color.color_blue_theme)) //设置选中项文字颜色
-                .setContentTextSize(16)
-                .build();
 
-        pvOptions.setNPicker(listS,listF,null);//添加数据源
-        pvOptions.show();
+            @Override
+            public void onAddressPicked(Province province, City city, County county) {
+                if (county == null) {
+                    mTv.setText(province.getAreaName() + "," + city.getAreaName());
+                } else {
+                    mTv.setText(province.getAreaName() + "," + city.getAreaName() + "," + county.getAreaName());
+                }
+            }
+        });
+        task.execute("北京", "北京", "北京");
     }
+
 
 
     /**

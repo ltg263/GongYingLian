@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -16,12 +18,15 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.bean.CategoryTreeData;
+import com.jxxx.gyl.bean.LoginData;
 import com.jxxx.gyl.bean.LoginRequest;
 import com.jxxx.gyl.bean.PostAuditSubmitCommand;
 import com.jxxx.gyl.utils.AddressPickTask;
 import com.jxxx.gyl.utils.PickerViewUtils;
+import com.jxxx.gyl.utils.SharedUtils;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.ToastUtil;
 import com.jxxx.gyl.view.activity.login.LoginActivity;
@@ -61,6 +66,10 @@ public class CreateShopActivity extends BaseActivity {
     TextView mTvBusinessStatus;
     @BindView(R.id.banner_storefrontImageUrl)
     Banner mBannerStorefrontImageUrl;
+    @BindView(R.id.show_storefrontImageUrl)
+    ImageView mShowStorefrontImageUrl;
+    @BindView(R.id.rl_storefrontImageUrl)
+    RelativeLayout mRlStorefrontImageUrl;
     @BindView(R.id.et_invitationCode)
     EditText mEtInvitationCode;
     @BindView(R.id.tv_register)
@@ -70,6 +79,7 @@ public class CreateShopActivity extends BaseActivity {
 
     private List<CategoryTreeData.CategoryListBean> mCategoryList;
     private List<List<CategoryTreeData.CategoryListBean.ChildrenBean>> mCategoryListLists;
+    String businessCategoryId ;
 
     @Override
     public int intiLayout() {
@@ -86,16 +96,22 @@ public class CreateShopActivity extends BaseActivity {
         businessCategoryTree();
     }
 
-    @OnClick({R.id.tv_businessCategoryId, R.id.tv_storefrontAddress, R.id.tv_businessStatus, R.id.tv_register})
+    @OnClick({R.id.rl_storefrontImageUrl,R.id.iv_storefrontImageUrl,R.id.tv_businessCategoryId, R.id.tv_storefrontAddress, R.id.tv_businessStatus, R.id.tv_register})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.rl_storefrontImageUrl:
+
+                break;
+            case R.id.iv_storefrontImageUrl:
+
+                break;
             case R.id.tv_businessCategoryId:
-                if (mCategoryList != null && mCategoryList.size() > 0) {
+                if (pvOptions!=null && mCategoryList != null && mCategoryList.size() > 0) {
                     pvOptions.show();
                 }
                 break;
             case R.id.tv_storefrontAddress:
-                onAddressPicker();
+                PickerViewUtils.onAddressPicker(this,mTvStorefrontAddress);
                 break;
             case R.id.tv_businessStatus:
                 lists.clear();
@@ -107,29 +123,6 @@ public class CreateShopActivity extends BaseActivity {
                 postAuditSubmit();
                 break;
         }
-    }
-
-    public void onAddressPicker() {
-        AddressPickTask task = new AddressPickTask(this);
-        task.setHideProvince(false);
-        task.setHideCounty(false);
-        task.setCallback(new AddressPickTask.Callback() {
-
-            @Override
-            public void onAddressInitFailed() {
-                ToastUtils.showShort("数据初始化失败");
-            }
-
-            @Override
-            public void onAddressPicked(Province province, City city, County county) {
-                if (county == null) {
-                    mTvStorefrontAddress.setText(province.getAreaName() + "," + city.getAreaName());
-                } else {
-                    mTvStorefrontAddress.setText(province.getAreaName() + "," + city.getAreaName() + "," + county.getAreaName());
-                }
-            }
-        });
-        task.execute("北京", "北京", "北京");
     }
 
     private void businessCategoryTree() {
@@ -171,7 +164,6 @@ public class CreateShopActivity extends BaseActivity {
     private OptionsPickerView pvOptions;
 
     private void showPicker() {
-
         pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
@@ -180,11 +172,13 @@ public class CreateShopActivity extends BaseActivity {
                         && mCategoryListLists.get(options1).size()> options2
                         && mCategoryListLists.get(options1).get(options2)!=null
                         && StringUtil.isNotBlank(mCategoryListLists.get(options1).get(options2).getCategoryName())){
+                    businessCategoryId = mCategoryListLists.get(options1).get(options2).getId();
                     mTvBusinessCategoryId.setText(mCategoryList.get(options1).getCategoryName()+"-"+mCategoryListLists.get(options1).get(options2).getCategoryName());
                     return;
                 }
                 if(mCategoryList.get(options1)!=null && StringUtil.isNotBlank(mCategoryList.get(options1).getCategoryName())){
                     mTvBusinessCategoryId.setText(mCategoryList.get(options1).getCategoryName());
+                    businessCategoryId = mCategoryList.get(options1).getId();
                     return;
                 }
             }
@@ -207,30 +201,32 @@ public class CreateShopActivity extends BaseActivity {
     }
 
     private void postAuditSubmit() {
-//        String account = etAccount.getText().toString();
-//        String verify = etVerify.getText().toString();
-//        String pass = etPass.getText().toString();
-//        if (StringUtil.isBlank(account) || StringUtil.isBlank(verify)|| StringUtil.isBlank(pass)) {
-//            ToastUtil.showLongStrToast(this, "请输入完整信息");
-//            return;
-//        }
         PostAuditSubmitCommand bean = new PostAuditSubmitCommand();
+        bean.setBusinessCategoryId(businessCategoryId);
+        bean.setBusinessStatus(mTvBusinessStatus.getText().toString().equals("尚未营业")?"0":"1");
+        bean.setInvitationCode(mEtInvitationCode.getText().toString());
+        bean.setRealName(mEtRealName.getText().toString());
+        bean.setStorefrontAddress(mTvStorefrontAddress.getText().toString());
+        bean.setStorefrontDetailedAddress(mEtStorefrontDetailedAddress.getText().toString());
+        bean.setStorefrontImageUrl("https://exp-picture.cdn.bcebos.com/d4071b96b814f4d09fec8166cdfe474ec3832347.jpg?x-bce-process=image%2Fresize%2Cm_lfit%2Cw_500%2Climit_1%2Fquality%2Cq_80");
+        bean.setStorefrontName(mEtStorefrontName.getText().toString());
+        bean.setSubbranchName(mEtSubbranchName.getText().toString());
+        bean.setUserId(SharedUtils.getUserId());
         RetrofitUtil.getInstance().apiService()
                 .postAuditSubmit(bean)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Result>() {
+                .subscribe(new Observer<Result<LoginData>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(Result result) {
+                    public void onNext(Result<LoginData> result) {
                         hideLoading();
                         if (isResultOk(result)) {
-                            ToastUtils.showLong("注册成功");
-                            baseStartActivity(LoginActivity.class, null);
+                            startActivityLoinOk(result.getData());
                         }
                     }
 
@@ -244,5 +240,32 @@ public class CreateShopActivity extends BaseActivity {
                         hideLoading();
                     }
                 });
+    }
+
+
+    private void startActivityLoinOk(LoginData mData) {
+        if(mData.getAccessToken()!=null){
+            SharedUtils.singleton().put(ConstValues.TOKENID,mData.getAccessToken().getAccessToken());
+        }
+        if(StringUtil.isNotBlank(mData.getUserId())){
+            SharedUtils.singleton().put(ConstValues.USERID,mData.getUserId());
+        }
+        //0未提交 1审核通过 2审核失败 3审核中
+        switch (mData.getAuditStatus()){
+            case "0":
+                baseStartActivity(CreateShopActivity.class,null);
+                finish();
+                break;
+            case "1":
+                ToastUtils.showShort("登录成功");
+                finish();
+                break;
+            case "2":
+                baseStartActivity(CreateShopResultActivity.class,mData.getFailureReason());
+                break;
+            case "3":
+                baseStartActivity(CreateShopResultActivity.class,null);
+                break;
+        }
     }
 }

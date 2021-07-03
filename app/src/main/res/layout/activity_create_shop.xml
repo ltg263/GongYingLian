@@ -300,18 +300,52 @@
                     android:layout_height="185dp"
                     android:background="@color/white"
                     android:focusable="true"
-                    android:focusableInTouchMode="true" />
+                    android:focusableInTouchMode="true"
+                    android:visibility="gone" />
 
+                <ImageView
+                    android:id="@+id/show_storefrontImageUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="185dp"
+                    android:visibility="gone"
+                    android:scaleType="fitXY" />
 
-                <EditText
+                <RelativeLayout
+                    android:id="@+id/rl_storefrontImageUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="185dp"
+                    android:background="@drawable/circle_solid_666_15">
+
+                    <ImageView
+                        android:id="@+id/iv_storefrontImageUrl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="-15dp"
+                        android:scaleType="center"
+                        android:src="@mipmap/ic_paizhao" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_storefrontImageUrl"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text="拍摄店铺门面照片"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:background="@null"
-                    android:hint="请填写销售码(选填)"
                     android:paddingHorizontal="@dimen/dp_10"
-                    android:textColor="@color/color_333333"
+                    android:text="照片要求：上传清晰面门脸照片，需展示完整门偏门槛"
+                    android:textColor="@color/color_666666"
                     android:textCursorDrawable="@drawable/common_edit_input_line"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
             <LinearLayout
@@ -367,8 +401,8 @@
                 android:id="@+id/tv_register"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bnt_details_height"
-                android:layout_marginLeft="20dp"
                 android:layout_marginVertical="50dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/circle_solid_theme_25"
                 android:gravity="center"

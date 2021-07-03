@@ -98,8 +98,8 @@ public class SharedUtils {
 //		return singleton().get(ConstValues.TOKEN,"");
 		return "123456789";
 	}
-	public static int getUserId(){
-		return singleton().get(ConstValues.USERID,0);
+	public static String getUserId(){
+		return singleton().get(ConstValues.USERID,"");
 	}
 
 }
