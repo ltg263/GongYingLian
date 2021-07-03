@@ -7,12 +7,14 @@ import com.jxxx.gyl.base.HomeCategoryTypeData;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.base.ShopInfoListData;
 import com.jxxx.gyl.bean.CategoryDataList;
+import com.jxxx.gyl.bean.CategoryTreeData;
 import com.jxxx.gyl.bean.HomeActivityData;
 import com.jxxx.gyl.bean.HomeBannerData;
 import com.jxxx.gyl.bean.HomeCategoryData;
 import com.jxxx.gyl.bean.LoginData;
 import com.jxxx.gyl.bean.LoginRequest;
 import com.jxxx.gyl.bean.ParamData;
+import com.jxxx.gyl.bean.PostAuditSubmitCommand;
 import com.jxxx.gyl.bean.RechargeAllBean;
 
 import java.util.List;
@@ -128,6 +130,20 @@ public interface ApiService {
      */
     @GET(ConstValues.BASE_URL + "api/scmp-application-mall/product/listCategoryAll")
     Observable<Result<List<CommodityCategory>>> getCategoryListAll();
+
+    /**
+     * 注册-经营类目树
+     * @return
+     */
+    @GET(ConstValues.BASE_URL + "api/scmp-application-mall/content/businessCategoryTree")
+    Observable<Result<CategoryTreeData>> businessCategoryTree();
+
+    /**
+     * 审核页-提交接口
+     * @return
+     */
+    @POST(ConstValues.BASE_URL + "api/scmp-application-mall/audit/submit")
+    Observable<Result<LoginData>> postAuditSubmit(@Body PostAuditSubmitCommand mPostAuditSubmitCommand);
 
 
 

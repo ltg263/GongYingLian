@@ -78,7 +78,7 @@ dependencies {
     implementation 'com.blankj:utilcode:1.23.7'
     //图片选择
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.4'
-    implementation 'com.contrarywind:Android-PickerView:4.1.7'
+//    implementation 'com.contrarywind:Android-PickerView:4.1.7'
 
 //    implementation 'com.amap.api:navi-3dmap:5.0.0'
 //    implementation 'com.amap.api:location:5.3.1'
@@ -96,6 +96,7 @@ dependencies {
     implementation files('libs/umeng_social_net.jar')
     implementation files('libs/umeng_social_shareboard.jar')
     implementation files('libs/umeng_social_tool.jar')
+    implementation 'com.contrarywind:Android-PickerView:4.1.8'
 }
 //MD5:  6D:AF:EC:5F:C5:FC:39:0B:69:66:64:6F:E3:45:2D:B1
 //SHA1: 40:D2:74:26:83:C1:82:5B:DD:EC:53:9F:73:C8:71:B4:52:C1:51:9E

@@ -13,6 +13,7 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.bean.CategoryTreeData;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -79,6 +80,36 @@ public class PickerViewUtils {
                 .build();
 
         pvOptions.setPicker(list);//添加数据源
+        pvOptions.show();
+    }
+
+    /**
+     * 自定义选择器
+     * @param mContext
+     * @param title
+     * @param textView
+     */
+    public static void selectorCategoryList(Context mContext, List<String> list,  List<List<String>> lists,String title, final TextView textView){
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3 , View v) {
+//                textView.setText(lists.get(option2).getCategoryName());
+            }
+        }).setOptionsSelectChangeListener(new OnOptionsSelectChangeListener() {
+            @Override
+            public void onOptionsSelectChanged(int options1, int options2, int options3) {
+
+            }
+        })
+                .setTitleText(title)
+                .setDividerColor(Color.BLACK)
+                .setSubmitColor(Color.BLACK)
+                .setCancelColor(Color.BLACK)
+                .setTextColorCenter(mContext.getResources().getColor(R.color.color_blue_theme)) //设置选中项文字颜色
+                .setContentTextSize(16)
+                .build();
+
+        pvOptions.setPicker(list,lists);//添加数据源
         pvOptions.show();
     }
 

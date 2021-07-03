@@ -52,6 +52,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_storefrontName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -82,6 +83,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_subbranchName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -112,6 +114,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
+                        android:id="@+id/tv_businessCategoryId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -143,6 +146,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
+                        android:id="@+id/tv_storefrontAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -175,6 +179,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_storefrontDetailedAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -222,6 +227,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_realName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -252,6 +258,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
+                        android:id="@+id/tv_businessStatus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -288,7 +295,7 @@
 
 
                 <com.youth.banner.Banner
-                    android:id="@+id/home_banner"
+                    android:id="@+id/banner_storefrontImageUrl"
                     android:layout_width="match_parent"
                     android:layout_height="185dp"
                     android:background="@color/white"
@@ -342,6 +349,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_invitationCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -360,7 +368,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bnt_details_height"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginVertical="50dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/circle_solid_theme_25"
                 android:gravity="center"
