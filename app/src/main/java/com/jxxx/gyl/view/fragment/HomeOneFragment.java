@@ -198,8 +198,9 @@ public class HomeOneFragment extends BaseFragment {
     }
 
     private void homeActivityList(String category){
+        String url = "api/scmp-application-mall/activity/list/"+category;
         RetrofitUtil.getInstance().apiService()
-                .homeActivityList()
+                .homeActivityList(url)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Result<List<HomeActivityData>>>() {

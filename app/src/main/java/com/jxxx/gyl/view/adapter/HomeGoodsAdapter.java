@@ -28,6 +28,7 @@ public class HomeGoodsAdapter extends BaseQuickAdapter<HomeActivityData, BaseVie
             helper.setGone(R.id.rl1,false).setGone(R.id.rl_contact,true);
             if(data.getSkus()!=null && data.getSkus().size()>0) {
                 helper.setText(R.id.tv_name,data.getSpuName());
+                GlideImageLoader.loadImageViewRadius(mContext,data.getIconUrl(),helper.getView(R.id.iv_img));
                 if(data.getSpuSupplyType().equals("1")){
                     helper.setText(R.id.tv_spuSupplyType,"自营");
                 }else if(data.getSpuSupplyType().equals("2")){

@@ -108,8 +108,8 @@ public interface ApiService {
      * 首页-活动列表
      * @return
      */
-    @GET(ConstValues.BASE_URL + "api/scmp-application-mall/activity/list/1")
-    Observable<Result<List<HomeActivityData>>> homeActivityList();
+    @GET
+    Observable<Result<List<HomeActivityData>>> homeActivityList(@Url String a);
     /**
      * 商品-详情
      * @return

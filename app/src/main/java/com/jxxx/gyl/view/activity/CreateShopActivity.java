@@ -1,7 +1,6 @@
 package com.jxxx.gyl.view.activity;
 
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,26 +21,17 @@ import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.bean.CategoryTreeData;
 import com.jxxx.gyl.bean.LoginData;
-import com.jxxx.gyl.bean.LoginRequest;
 import com.jxxx.gyl.bean.PostAuditSubmitCommand;
-import com.jxxx.gyl.utils.AddressPickTask;
 import com.jxxx.gyl.utils.PickerViewUtils;
 import com.jxxx.gyl.utils.SharedUtils;
 import com.jxxx.gyl.utils.StringUtil;
-import com.jxxx.gyl.utils.ToastUtil;
-import com.jxxx.gyl.view.activity.login.LoginActivity;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.addapp.pickers.entity.City;
-import cn.addapp.pickers.entity.County;
-import cn.addapp.pickers.entity.Province;
-import cn.addapp.pickers.picker.AddressPicker;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
