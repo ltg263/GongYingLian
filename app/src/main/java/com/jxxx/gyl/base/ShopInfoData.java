@@ -76,8 +76,10 @@ public class ShopInfoData {
         this.spuDesc = spuDesc;
     }
 
-    public String getSpuImgs() {
-        return spuImgs;
+    public String[] getSpuImgs() {
+        return spuImgs.replace("[","")
+                .replace("]","")
+                .replace("\"","").split(",");
     }
 
     public void setSpuImgs(String spuImgs) {

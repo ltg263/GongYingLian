@@ -109,13 +109,13 @@ public interface ApiService {
      * @return
      */
     @GET
-    Observable<Result<List<HomeActivityData>>> homeActivityList(@Url String a);
+    Observable<Result<List<HomeActivityData>>> homeActivityList(@Url String url);
     /**
      * 商品-详情
      * @return
      */
-    @GET(ConstValues.BASE_URL + "api/scmp-application-mall/product/detail")
-    Observable<Result<ShopInfoListData>> productDetail(@Query("id") String id);
+    @GET
+    Observable<Result<ShopInfoListData>> productDetail(@Url String url);
 
     /**
      * 全局-商品搜索

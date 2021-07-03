@@ -11,15 +11,15 @@ public class ShopInfoListData {
      * spu : {}
      */
 
-    private SpuBean spu;
+    private ShopInfoData spu;
     private List<ShopInfoData> recommendList;
-    private List<RelatedListBean> relatedList;
+    private List<ShopInfoData> relatedList;
 
-    public SpuBean getSpu() {
+    public ShopInfoData getSpu() {
         return spu;
     }
 
-    public void setSpu(SpuBean spu) {
+    public void setSpu(ShopInfoData spu) {
         this.spu = spu;
     }
 
@@ -31,16 +31,11 @@ public class ShopInfoListData {
         this.recommendList = recommendList;
     }
 
-    public List<RelatedListBean> getRelatedList() {
+    public List<ShopInfoData> getRelatedList() {
         return relatedList;
     }
 
-    public void setRelatedList(List<RelatedListBean> relatedList) {
+    public void setRelatedList(List<ShopInfoData> relatedList) {
         this.relatedList = relatedList;
-    }
-
-    public static class SpuBean {
-    }
-    public static class RelatedListBean {
     }
 }

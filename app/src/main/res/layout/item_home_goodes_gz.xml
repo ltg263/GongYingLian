@@ -10,18 +10,18 @@
     android:padding="@dimen/dp_10">
 
     <TextView
-        android:id="@+id/tv_gz1"
+        android:id="@+id/tv_skuName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3公斤"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="@dimen/sp_16" />
 
     <TextView
-        android:id="@+id/tv_gz2"
+        android:id="@+id/tv_skuUnit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="￥3.0/公斤"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="@dimen/sp_14" />
 
