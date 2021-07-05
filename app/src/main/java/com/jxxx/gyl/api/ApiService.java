@@ -18,6 +18,7 @@ import com.jxxx.gyl.bean.ParamData;
 import com.jxxx.gyl.bean.PostAuditSubmitCommand;
 import com.jxxx.gyl.bean.RechargeAllBean;
 import com.jxxx.gyl.bean.ShoppingCartListBean;
+import com.jxxx.gyl.bean.UserInfoUpdate;
 
 import java.util.List;
 
@@ -186,6 +187,12 @@ public interface ApiService {
      */
     @POST("api/scmp-application-mall/order/preview")
     Observable<Result<ShoppingCartListBean>> orderPreview(@Body OrderInfoBean mOrderInfoBean);
+
+    /**
+     * 全局-当前用户信息接口
+     */
+    @POST("api/scmp-application-mall/customer/info")
+    Observable<Result<UserInfoUpdate>> customerInfo();
     /**
      * 设置默认地址
      *

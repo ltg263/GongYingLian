@@ -7,8 +7,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.api.RetrofitUtil;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseFragment;
+import com.jxxx.gyl.bean.RechargeAllBean;
+import com.jxxx.gyl.bean.UserInfoUpdate;
 import com.jxxx.gyl.view.activity.MineCouponListActivity;
 import com.jxxx.gyl.view.activity.MineInvoiceOrderActivity;
 import com.jxxx.gyl.view.activity.address.ActivityAddressList;
@@ -18,8 +24,14 @@ import com.jxxx.gyl.view.activity.mine.MineSetSmrzActivity;
 import com.jxxx.gyl.view.activity.mine.MineSettingActivity;
 import com.jxxx.gyl.view.activity.payActivity.ActivityPayHomeQb;
 
+import net.lucode.hackware.magicindicator.buildins.UIUtil;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class HomeFiveFragment extends BaseFragment {
 
@@ -65,7 +77,42 @@ public class HomeFiveFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if(!ConstValues.ISLOGIN){
+            mTvUserName.setText("请先登录");
+            mTvUserInfo.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     protected void initData() {
+        RetrofitUtil.getInstance().apiService()
+                .customerInfo().observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<UserInfoUpdate>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<UserInfoUpdate> result) {
+                        if(isResultOk(result)) {
+                            UserInfoUpdate.BaseInfoBean baseInfo = result.getData().getBaseInfo();
+                            mTvUserName.setText(baseInfo.getStorefrontName());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @OnClick({R.id.iv_set,R.id.iv_msg,R.id.rl_user_info, R.id.ll_top_1, R.id.ll_top_2, R.id.ll_top_3, R.id.ll_center_1,
