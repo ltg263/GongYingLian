@@ -5,10 +5,12 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.utils.GlideImageLoader;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.view.activity.ShopDetailsActivity;
+import com.jxxx.gyl.view.activity.login.LoginActivity;
 
 import java.util.List;
 
@@ -61,6 +63,15 @@ public class HomeGoodsTyAdapter extends BaseQuickAdapter<ShopInfoData, BaseViewH
                 helper.setGone(R.id.tv_add,false).setGone(R.id.iv_add,true);
             }
         }
+        helper.getView(R.id.iv_add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!ConstValues.ISLOGIN){
+                    LoginActivity.startActivityLogin(mContext);
+                    return;
+                }
+            }
+        });
         helper.getView(R.id.rl_contact).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

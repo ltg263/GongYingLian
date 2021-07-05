@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.utils.GlideImageLoader;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.view.PopupWindowSkus;
 import com.jxxx.gyl.view.activity.ShopDetailsActivity;
+import com.jxxx.gyl.view.activity.login.LoginActivity;
 
 import java.util.List;
 
@@ -75,6 +77,10 @@ public class HomeCategoryContentAdapter extends BaseQuickAdapter<ShopInfoData, B
         helper.getView(R.id.tv_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!ConstValues.ISLOGIN){
+                    LoginActivity.startActivityLogin(mContext);
+                    return;
+                }
                 if(mRvSkus.getVisibility()==View.VISIBLE){
                     mRvSkus.setVisibility(View.GONE);
                     helper.setVisible(R.id.tv_spuSupplyType,true);
@@ -89,7 +95,10 @@ public class HomeCategoryContentAdapter extends BaseQuickAdapter<ShopInfoData, B
         helper.getView(R.id.iv_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(!ConstValues.ISLOGIN){
+                    LoginActivity.startActivityLogin(mContext);
+                    return;
+                }
             }
         });
 

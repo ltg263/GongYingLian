@@ -6,11 +6,13 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.bean.HomeActivityData;
 import com.jxxx.gyl.utils.GlideImageLoader;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.view.activity.ShopDetailsActivity;
+import com.jxxx.gyl.view.activity.login.LoginActivity;
 import com.jxxx.gyl.view.activity.mine.WebViewActivity;
 
 import java.util.List;
@@ -72,6 +74,16 @@ public class HomeGoodsAdapter extends BaseQuickAdapter<HomeActivityData, BaseVie
                     .setText(R.id.tv_2, item.getTitle());
             GlideImageLoader.loadImageViewRadius(mContext, item.getImageUrl(), 30, helper.getView(R.id.siv_img));
         }
+
+        helper.getView(R.id.iv_add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!ConstValues.ISLOGIN){
+                    LoginActivity.startActivityLogin(mContext);
+                    return;
+                }
+            }
+        });
 
         helper.getView(R.id.rl1).setOnClickListener(new View.OnClickListener() {
             @Override
