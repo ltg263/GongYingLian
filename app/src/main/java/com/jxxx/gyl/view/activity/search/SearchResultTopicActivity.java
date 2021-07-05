@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.view.activity.ShopDetailsActivity;
@@ -53,7 +54,7 @@ public class SearchResultTopicActivity extends BaseActivity {
     @Override
     public void initView() {
         setToolbar(mMyToolbar, "搜索");
-        search = getIntent().getStringExtra("str");
+        search = getIntent().getStringExtra(ConstValues.BASE_STR);
         tvTopTitle.setText(search);
         mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setEnableRefresh(false);
