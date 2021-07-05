@@ -19,6 +19,7 @@ import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.bean.OrderInfoBean;
 import com.jxxx.gyl.bean.ShoppingCartListBean;
+import com.jxxx.gyl.view.activity.OrderAffirmActivity;
 import com.jxxx.gyl.view.activity.login.LoginActivity;
 import com.jxxx.gyl.view.adapter.HomeGoodsAdapter;
 import com.jxxx.gyl.view.adapter.ShopCarGoodsAdapter;
@@ -203,7 +204,7 @@ public class HomeThreeFragment extends BaseFragment {
                 });
     }
 
-    @OnClick({R.id.iv_all, R.id.tv_all,R.id.tv_login})
+    @OnClick({R.id.iv_all, R.id.tv_all,R.id.tv_login,R.id.tv_commit})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_all:
@@ -225,8 +226,12 @@ public class HomeThreeFragment extends BaseFragment {
                     LoginActivity.startActivityLogin(getActivity());
                     return;
                 }
-                ((MainActivity) getActivity()).startFragmentTwo();
+                ((MainActivity) getActivity()).startFragmentTwo("分类");
                 break;
+            case R.id.confirm:
+                baseStartActivity(OrderAffirmActivity.class, null);
+                break;
+
         }
     }
 }

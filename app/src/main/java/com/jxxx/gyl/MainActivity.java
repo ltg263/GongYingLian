@@ -17,6 +17,7 @@ import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.utils.StatusBarUtil;
+import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.view.fragment.HomeFiveFragment;
 import com.jxxx.gyl.view.fragment.HomeFourFragment;
 import com.jxxx.gyl.view.fragment.HomeOneFragment;
@@ -52,8 +53,10 @@ public class MainActivity extends BaseActivity{
 
     @Override
     public void initData() {
+        ConstValues.SHOW_MAIN_FRAGMENT = "";
     }
     private void initBottomBar() {
+
         openLocation();
         mHomeOneFragment = new HomeOneFragment();
         mHomeTwoFragment = new HomeTwoFragment();
@@ -121,8 +124,25 @@ public class MainActivity extends BaseActivity{
 //            ZsnaviManager.getInstance(getActivity()).startLocation();//开启定位，该定位只会回调一次定位信息，建议使用完后调用停止定位接口
         }
     }
-    public void startFragmentTwo(){
-        mBnvHomeNavigation.setSelectedItemId(R.id.menu_home_2);
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(StringUtil.isNotBlank(ConstValues.SHOW_MAIN_FRAGMENT)){
+            startFragmentTwo(ConstValues.SHOW_MAIN_FRAGMENT);
+        }
+    }
+
+    public void startFragmentTwo(String type){
+        switch (type){
+            case "购物车":
+                mBnvHomeNavigation.setSelectedItemId(R.id.menu_home_3);
+                break;
+            case "分类":
+                mBnvHomeNavigation.setSelectedItemId(R.id.menu_home_2);
+                break;
+        }
+        ConstValues.SHOW_MAIN_FRAGMENT = "";
 //        mHomeTwoFragment.setPos(pos);
     }
     public void updateUI(){

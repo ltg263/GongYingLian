@@ -6,6 +6,7 @@ package com.jxxx.gyl.app;
 
 public class ConstValues {
     public static final String BASE_STR = "base_put";
+    public static String SHOW_MAIN_FRAGMENT = "show_main_fragment";
     /**
      * 应用名称
      */

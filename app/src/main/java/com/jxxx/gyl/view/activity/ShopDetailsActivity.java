@@ -14,7 +14,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.jxxx.gyl.MainActivity;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.app.ConstValues;
@@ -25,6 +27,7 @@ import com.jxxx.gyl.utils.GlideImageLoader;
 import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.view.SquareRelativeLayout;
+import com.jxxx.gyl.view.activity.login.LoginActivity;
 import com.jxxx.gyl.view.adapter.HomeGoodsGzAdapter;
 import com.jxxx.gyl.view.adapter.HomeGoodsTyAdapter;
 import com.youth.banner.Banner;
@@ -83,6 +86,7 @@ public class ShopDetailsActivity extends BaseActivity {
     TextView mBtnLjgm;
     @BindView(R.id.ll_b)
     LinearLayout mLlB;
+    String skuId = "";
     private HomeGoodsGzAdapter mHomeGoodsGzAdapter;
 
     @Override
@@ -98,6 +102,7 @@ public class ShopDetailsActivity extends BaseActivity {
         mHomeGoodsGzAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                skuId = mHomeGoodsGzAdapter.getData().get(position).getId();
                 mHomeGoodsGzAdapter.setCurPos(position);
                 mHomeGoodsGzAdapter.notifyDataSetChanged();
             }
@@ -154,7 +159,7 @@ public class ShopDetailsActivity extends BaseActivity {
             mTvPrice.setText(data.getPriceInfo().getPrice());
         }
         tv_spuShortDesc.setText(data.getSpuParams());
-
+        skuId = data.getSkus().get(0).getId();
         mHomeGoodsGzAdapter.setNewData(data.getSkus());
     }
 
@@ -215,10 +220,21 @@ public class ShopDetailsActivity extends BaseActivity {
 
                 break;
             case R.id.btn_gwc:
-
+                ConstValues.SHOW_MAIN_FRAGMENT = "购物车";
+                baseStartActivity(MainActivity.class);
                 break;
             case R.id.btn_ljgm:
-                baseStartActivity(OrderAffirmActivity.class, null);
+                if(!ConstValues.ISLOGIN){
+                    LoginActivity.startActivityLogin(this);
+                    return;
+                }
+                HttpsUtils.userRechargeOrder(this, skuId,
+                        getIntent().getStringExtra(ConstValues.BASE_STR), new HttpsUtils.ShoppingCartInterface() {
+                    @Override
+                    public void isResult(Boolean isResult) {
+
+                    }
+                });
                 break;
         }
     }

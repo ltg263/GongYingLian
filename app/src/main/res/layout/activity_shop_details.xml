@@ -328,7 +328,7 @@
             android:layout_weight="1"
             android:background="@drawable/circle_solid_theme_25"
             android:gravity="center"
-            android:text="立即购买"
+            android:text="加入购物车"
             android:textColor="@color/white"
             android:textSize="@dimen/bnt_details_text_size" />
 
