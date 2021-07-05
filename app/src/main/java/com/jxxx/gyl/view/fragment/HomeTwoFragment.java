@@ -74,13 +74,6 @@ public class HomeTwoFragment extends BaseFragment {
         });
         mHomeCategoryContentAdapter = new HomeCategoryContentAdapter(null);
         rvContent.setAdapter(mHomeCategoryContentAdapter);
-        mHomeCategoryContentAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ShopDetailsActivity.startActivityIntent(getActivity(), mHomeCategoryContentAdapter.getData().get(position).getId());
-                listProductByCategory(mHomeCategoryContentAdapter.getData().get(position).getId());
-            }
-        });
     }
 
     @Override

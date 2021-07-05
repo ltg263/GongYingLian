@@ -114,6 +114,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
+            android:visibility="gone"
+            android:layout_alignTop="@id/tv_price"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:id="@+id/iv_add"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="5dp"
+            android:visibility="gone"
+            android:src="@mipmap/ic_add_goods"
+            android:padding="8dp"
+            android:layout_alignTop="@id/tv_price"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/tv_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="选规格"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:background="@drawable/circle_solid_theme_25"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="3dp"
+            android:textSize="@dimen/sp_12"
             android:layout_alignTop="@id/tv_price"
             android:layout_alignParentEnd="true" />
         <TextView

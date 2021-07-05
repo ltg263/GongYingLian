@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_contact"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
@@ -18,7 +20,7 @@
         android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginVertical="5dp"
         android:layout_toEndOf="@id/iv_img">
 
         <TextView
@@ -61,7 +63,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/tv_price"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_add"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignTop="@id/tv_price"
+            android:layout_alignParentEnd="true"
+            android:padding="8dp"
+            android:src="@mipmap/ic_add_goods"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_price"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/circle_solid_theme_25"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="3dp"
+            android:text="选规格"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12" />
 
         <TextView
             android:id="@+id/tv_spuSupplyType"
@@ -69,11 +97,20 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_price"
             android:layout_marginHorizontal="@dimen/dp_10"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:background="@drawable/circle_line_theme_2"
             android:padding="2dp"
             android:text="供应商"
-            android:textColor="@color/color_blue_theme" />
+            android:textColor="@color/color_blue_theme"
+            android:textSize="@dimen/sp_12" />
 
     </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_skus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 </RelativeLayout>

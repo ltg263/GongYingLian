@@ -52,6 +52,13 @@ public class HomeGoodsTyAdapter extends BaseQuickAdapter<ShopInfoData, BaseViewH
                     }
                 }
                 helper.setText(R.id.tv_type, skuName);
+//                helper.setGone(R.id.tv_add,false).setGone(R.id.iv_add,false);
+//                if(data.getSkus().size()>1){
+//                    helper.setGone(R.id.tv_add,true).setGone(R.id.iv_add,false);
+//                }else{
+//                    helper.setGone(R.id.tv_add,false).setGone(R.id.iv_add,true);
+//                }
+                helper.setGone(R.id.tv_add,false).setGone(R.id.iv_add,true);
             }
         }
         helper.getView(R.id.rl_contact).setOnClickListener(new View.OnClickListener() {
