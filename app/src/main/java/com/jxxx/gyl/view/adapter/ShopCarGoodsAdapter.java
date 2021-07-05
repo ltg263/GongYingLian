@@ -1,5 +1,7 @@
 package com.jxxx.gyl.view.adapter;
 
+import android.widget.ImageView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.MainActivity;
@@ -23,10 +25,12 @@ public class ShopCarGoodsAdapter extends BaseQuickAdapter<ShoppingCartListBean.I
         GlideImageLoader.loadImageViewRadius(mContext,item.getCartSpuDTO().getIconUrl(),30,helper.getView(R.id.iv_img));
         helper.setText(R.id.tv_name,item.getCartSpuDTO().getSpuName())
                 .setVisible(R.id.iv_add,false).setVisible(R.id.tv_add,false).setVisible(R.id.add,true)
-                .addOnClickListener(R.id.add)
+                .addOnClickListener(R.id.iv_select)
                 .setText(R.id.tv_type,item.getCartSpuDTO().getCartSkuDTO().getSkuName())
                 .setText(R.id.tv_price,item.getCartSpuDTO().getCartSkuDTO().getSkuPriceDTO().getSkuPrice());
         AddandView mAddandView = helper.getView(R.id.add);
+        ImageView mIvSelect = helper.getView(R.id.iv_select);
+        mIvSelect.setSelected(item.getChecked().equals("1")?true:false);
         mAddandView.setValue(Integer.valueOf(item.getCartSpuDTO().getCartSkuDTO().getSkuNum()));
         if(item.getCartSpuDTO().getSpuSupplyType().equals("1")){
             helper.setText(R.id.tv_spuSupplyType,"自营");

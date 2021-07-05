@@ -1,6 +1,7 @@
 package com.jxxx.gyl.view.fragment;
 
 
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import com.jxxx.gyl.view.activity.login.LoginActivity;
 import com.jxxx.gyl.view.adapter.HomeGoodsAdapter;
 import com.jxxx.gyl.view.adapter.ShopCarGoodsAdapter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,6 +47,8 @@ public class HomeThreeFragment extends BaseFragment {
     private HomeGoodsAdapter mHomeGoodsAdapter;
     private ShopCarGoodsAdapter mShopCarGoodsAdapter;
 
+    private List<Integer> checkedSkuIdList = new ArrayList<>();
+    private List<Integer> unCheckedSkuIdList = new ArrayList<>();
     @Override
     protected int setLayoutResourceID() {
         return R.layout.fragment_home_three;
@@ -54,6 +58,30 @@ public class HomeThreeFragment extends BaseFragment {
     protected void initView() {
         mShopCarGoodsAdapter = new ShopCarGoodsAdapter(null);
         mRvShopList.setAdapter(mShopCarGoodsAdapter);
+        mShopCarGoodsAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                ShoppingCartListBean.ItemListBean mItemListBean = mShopCarGoodsAdapter.getData().get(position);
+                checkedSkuIdList.clear();
+                unCheckedSkuIdList.clear();
+                for(int i=0;i<mShopCarGoodsAdapter.getData().size();i++){
+                    if(mShopCarGoodsAdapter.getData().get(i).getChecked().equals("1")){
+                        checkedSkuIdList.add(Integer.valueOf(mShopCarGoodsAdapter.getData().get(i).getCartSpuDTO().getCartSkuDTO().getId()));
+                    }
+                    if(mShopCarGoodsAdapter.getData().get(i).getChecked().equals("0")){
+                        unCheckedSkuIdList.add(Integer.valueOf(mShopCarGoodsAdapter.getData().get(i).getCartSpuDTO().getCartSkuDTO().getId()));
+                    }
+                }
+                if(mItemListBean.getChecked().equals("1")){
+                    checkedSkuIdList.remove(Integer.valueOf(mItemListBean.getCartSpuDTO().getCartSkuDTO().getId()));
+                    unCheckedSkuIdList.add(Integer.valueOf(mItemListBean.getCartSpuDTO().getCartSkuDTO().getId()));
+                }else{
+                    checkedSkuIdList.add(Integer.valueOf(mItemListBean.getCartSpuDTO().getCartSkuDTO().getId()));
+                    unCheckedSkuIdList.remove(Integer.valueOf(mItemListBean.getCartSpuDTO().getCartSkuDTO().getId()));
+                }
+                seleShop();
+            }
+        });
 
         mRvList.setHasFixedSize(true);
         mHomeGoodsAdapter = new HomeGoodsAdapter(null);
@@ -70,6 +98,42 @@ public class HomeThreeFragment extends BaseFragment {
                 ((MainActivity)getActivity()).startFragmentTwo();
             }
         });
+    }
+
+    private void seleShop() {
+        OrderInfoBean mOrderInfoBean = new OrderInfoBean();
+
+        mOrderInfoBean.setShopCartChecked(checkedSkuIdList.toArray(new Integer[checkedSkuIdList.size()])
+                ,unCheckedSkuIdList.toArray(new Integer[unCheckedSkuIdList.size()]));
+        Log.e("mOrderInfoBean","mOrderInfoBean"+mOrderInfoBean.toString());
+        RetrofitUtil.getInstance().apiService()
+                .shoppingChecked(mOrderInfoBean)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<ShoppingCartListBean>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<ShoppingCartListBean> result) {
+                        if(isResultOk(result)) {
+                            mRlNotShop.setVisibility(View.GONE);
+                            mRvShopList.setVisibility(View.VISIBLE);
+                            mShopCarGoodsAdapter.setNewData(result.getData().getItemList());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+
     }
 
 

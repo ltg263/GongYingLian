@@ -174,6 +174,12 @@ public interface ApiService {
      */
     @GET("api/scmp-application-mall/shoppingCart/list")
     Observable<Result<ShoppingCartListBean>> shoppingCartList();
+
+    /**
+     * 购物车-勾选商品
+     */
+    @POST("api/scmp-application-mall/shoppingCart/checked")
+    Observable<Result<ShoppingCartListBean>> shoppingChecked(@Body OrderInfoBean mOrderInfoBean);
     /**
      * 设置默认地址
      *

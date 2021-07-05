@@ -1,5 +1,9 @@
 package com.jxxx.gyl.bean;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+
 public class OrderInfoBean {
 
     /**
@@ -12,6 +16,16 @@ public class OrderInfoBean {
     private String skuId;
     private String spuId;
     private String num;
+    private Integer[] checkedSkuIdList;
+    private Integer[] unCheckedSkuIdList;
+
+    @Override
+    public String toString() {
+        return "OrderInfoBean{" +
+                "checkedSkuIdList=" + Arrays.toString(checkedSkuIdList) +
+                ", unCheckedSkuIdList=" + Arrays.toString(unCheckedSkuIdList) +
+                '}';
+    }
 
     public void setShopCartAdd(String addChannel, String skuId, String spuId) {
         this.addChannel = addChannel;
@@ -25,6 +39,10 @@ public class OrderInfoBean {
         this.spuId = spuId;
     }
 
+    public void setShopCartChecked(Integer[] checkedSkuIdList, Integer[] unCheckedSkuIdList) {
+        this.checkedSkuIdList = checkedSkuIdList;
+        this.unCheckedSkuIdList = unCheckedSkuIdList;
+    }
 
     public void setNum(String num) {
         this.num = num;
@@ -56,5 +74,21 @@ public class OrderInfoBean {
 
     public void setSpuId(String spuId) {
         this.spuId = spuId;
+    }
+
+    public Integer[] getCheckedSkuIdList() {
+        return checkedSkuIdList;
+    }
+
+    public void setCheckedSkuIdList(Integer[] checkedSkuIdList) {
+        this.checkedSkuIdList = checkedSkuIdList;
+    }
+
+    public Integer[] getUnCheckedSkuIdList() {
+        return unCheckedSkuIdList;
+    }
+
+    public void setUnCheckedSkuIdList(Integer[] unCheckedSkuIdList) {
+        this.unCheckedSkuIdList = unCheckedSkuIdList;
     }
 }
