@@ -13,9 +13,8 @@ public class ConstValues {
     public static String CATEGORY = "";
 
     /**sharedpreference 判断是否已登录字段*/
-    public static final String ISLOGIN = "islogin";
+    public static boolean ISLOGIN = false;
     public static final String USERID = "user_id";
-    public static final String TOKEN = "token";
     public static final String[] HOME_TYPE_NAME = {"分类0","分类1","分类2","分类3","分类4","分类5","分类6","分类7","分类8","分类9"};
     public static final String[] HOME_TYPE_NAME_TJ = {"精选","推荐促销","丰盛午餐","红叶上新"};
 

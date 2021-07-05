@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.app.ConstValues;
+import com.jxxx.gyl.utils.SharedUtils;
 import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.view.LoadingDialog;
@@ -55,6 +56,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
         //设置数据
         initData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(StringUtil.isNotBlank(SharedUtils.getToken())){
+            ConstValues.ISLOGIN = true;
+        }else{
+            ConstValues.ISLOGIN = false;
+        }
     }
 
     /**

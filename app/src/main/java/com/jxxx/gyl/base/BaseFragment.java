@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.app.ConstValues;
+import com.jxxx.gyl.utils.SharedUtils;
 import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.view.LoadingDialog;
@@ -65,7 +67,15 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void initData();
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(StringUtil.isNotBlank(SharedUtils.getToken())){
+            ConstValues.ISLOGIN = true;
+        }else{
+            ConstValues.ISLOGIN = false;
+        }
+    }
 
     @Override
     public void onDestroyView() {

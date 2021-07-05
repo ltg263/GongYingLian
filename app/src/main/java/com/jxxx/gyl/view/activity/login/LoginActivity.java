@@ -1,19 +1,14 @@
 package com.jxxx.gyl.view.activity.login;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.CountDownTimer;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 
-import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.HttpsUtils;
@@ -23,15 +18,12 @@ import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.bean.LoginData;
 import com.jxxx.gyl.bean.LoginRequest;
-import com.jxxx.gyl.bean.ParamData;
 import com.jxxx.gyl.utils.SharedUtils;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.ToastUtil;
 import com.jxxx.gyl.view.activity.CreateShopActivity;
 import com.jxxx.gyl.view.activity.CreateShopResultActivity;
 import com.jxxx.gyl.view.activity.mine.WebViewActivity;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -73,7 +65,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public int intiLayout() {
-        SharedUtils.singleton().put(ConstValues.TOKEN,"");
+        SharedUtils.singleton().put(ConstValues.TOKENID,"");
         SharedUtils.singleton().put(ConstValues.USERID,"");
         return R.layout.activity_login;
     }

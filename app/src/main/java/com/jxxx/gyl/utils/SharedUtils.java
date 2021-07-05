@@ -94,9 +94,8 @@ public class SharedUtils {
 		edit.commit();
 	}
 	public static String getToken(){
-		Log.w("token","--->>:"+singleton().get(ConstValues.TOKEN,""));
-//		return singleton().get(ConstValues.TOKEN,"");
-		return "123456789";
+		Log.w("token","--->>:"+singleton().get(ConstValues.TOKENID,""));
+		return singleton().get(ConstValues.TOKENID,"");
 	}
 	public static String getUserId(){
 		return singleton().get(ConstValues.USERID,"");

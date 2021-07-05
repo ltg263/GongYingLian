@@ -2,6 +2,7 @@ package com.jxxx.gyl.view.fragment;
 
 
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,6 +54,8 @@ public class HomeOneFragment extends BaseFragment {
     RecyclerView mRvListTypeTj;
     @BindView(R.id.rv_list)
     RecyclerView mRvList;
+    @BindView(R.id.rl_include_login)
+    RelativeLayout rl_include_login;
 
     private HomeTypeAdapter mHomeTypeAdapter;
     private HomeTypeTjAdapter mHomeTypeTjAdapter;
@@ -98,7 +101,14 @@ public class HomeOneFragment extends BaseFragment {
         homeActivityList("1");
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        rl_include_login.setVisibility(View.VISIBLE);
+        if(ConstValues.ISLOGIN){
+            rl_include_login.setVisibility(View.GONE);
+        }
+    }
 
     private void getHomeBanner(){
         RetrofitUtil.getInstance().apiService()

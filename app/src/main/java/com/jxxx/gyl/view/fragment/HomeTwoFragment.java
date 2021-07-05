@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.base.HomeCategoryTypeData;
@@ -38,6 +39,8 @@ public class HomeTwoFragment extends BaseFragment {
     RecyclerView rvCategoryChirld;
     @BindView(R.id.rv_content)
     RecyclerView rvContent;
+    @BindView(R.id.rl_include_login)
+    RelativeLayout rl_include_login;
     private HomeCategoryParentAdapter mHomeCategoryParentAdapter;
     private HomeCategoryChildAdapter mHomeCategoryChildAdapter;
     private HomeCategoryContentAdapter mHomeCategoryContentAdapter;
@@ -76,6 +79,14 @@ public class HomeTwoFragment extends BaseFragment {
         rvContent.setAdapter(mHomeCategoryContentAdapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        rl_include_login.setVisibility(View.VISIBLE);
+        if(ConstValues.ISLOGIN){
+            rl_include_login.setVisibility(View.GONE);
+        }
+    }
     @Override
     protected void initData() {
         RetrofitUtil.getInstance().apiService()
