@@ -47,6 +47,7 @@ public class ShopCarGoodsAdapter extends BaseQuickAdapter<ShoppingCartListBean.I
                         @Override
                         public void isResult(Boolean isResult) {
                             if(isResult){
+                                ((MainActivity)mContext).updateUI();
                                 mAddandView.add();
                             }
                         }
@@ -57,9 +58,7 @@ public class ShopCarGoodsAdapter extends BaseQuickAdapter<ShoppingCartListBean.I
                                 @Override
                                 public void isResult(Boolean isResult) {
                                     if(isResult){
-                                        if(vs==1){
-                                            ((MainActivity)mContext).updateUI();
-                                        }
+                                        ((MainActivity)mContext).updateUI();
                                         mAddandView.jian();
                                     }
                                 }
