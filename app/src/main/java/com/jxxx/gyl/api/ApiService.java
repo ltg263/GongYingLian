@@ -6,6 +6,7 @@ import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.base.HomeCategoryTypeData;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.base.ShopInfoListData;
+import com.jxxx.gyl.bean.AddressModel;
 import com.jxxx.gyl.bean.CategoryDataList;
 import com.jxxx.gyl.bean.CategoryTreeData;
 import com.jxxx.gyl.bean.HomeActivityData;
@@ -193,6 +194,30 @@ public interface ApiService {
      */
     @POST("api/scmp-application-mall/customer/info")
     Observable<Result<UserInfoUpdate>> customerInfo();
+
+    /**
+     * 收货地址页-收货地址列表接口
+     */
+    @POST("api/scmp-application-mall/shippingAddress/list")
+    Observable<Result<List<AddressModel>>> getUserAddress();
+
+    /**
+     * 收货地址页-删除收货地址接口
+     */
+    @POST("api/scmp-application-mall/shippingAddress/delete")
+    Observable<Result> getUserAddressDelete(@Body AddressModel mAddressModel);
+
+    /**
+     * 收货地址页-添加收货地址接口
+     */
+    @POST("api/scmp-application-mall/shippingAddress/create")
+    Observable<Result> getAddAddress(@Body AddressModel mAddressModel);
+
+    /**
+     * 收货地址页-添加收货地址接口
+     */
+    @POST("api/scmp-application-mall/shippingAddress/update")
+    Observable<Result> getUpdateAddress(@Body AddressModel mAddressModel);
     /**
      * 设置默认地址
      *

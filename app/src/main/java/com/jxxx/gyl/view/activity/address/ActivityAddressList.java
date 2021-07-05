@@ -13,9 +13,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseActivity;
+import com.jxxx.gyl.bean.AddressModel;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -24,6 +28,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 
 
 public class ActivityAddressList extends BaseActivity {
@@ -38,7 +47,7 @@ public class ActivityAddressList extends BaseActivity {
     @BindView(R.id.rv_list)
     RecyclerView rvList;
     AdapterListAddress mAdapterListAddress;
-    private List<AddressData> addressDataList = new ArrayList<>();
+    private List<AddressModel> addressDataList = new ArrayList<>();
 
     @Override
     public int intiLayout() {
@@ -131,41 +140,39 @@ public class ActivityAddressList extends BaseActivity {
     }
 
     private void getUserAddress() {
-//        RetrofitUtil.getInstance().apiService()
-//                .getUserAddress("1", "100")
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Observer<BaseResult<AddressModel>>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(BaseResult<AddressModel> result) {
-//                        if(result.getCode().equals("000000")){
-//                            if(result.getData()!=null){
-//                                addressDataList.clear();
-//                                if(result.getData().getList()!=null){
-//                                    lv_not.setVisibility(View.GONE);
-//                                    rvList.setVisibility(View.VISIBLE);
-//                                    addressDataList.addAll(result.getData().getList());
-//                                    mAddressAdapter.notifyDataSetChanged();
-//                                }
-//                            }
-//                        }
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//                    }
-//                });
+        RetrofitUtil.getInstance().apiService()
+                .getUserAddress()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<List<AddressModel>>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<List<AddressModel>> result) {
+                        if(isResultOk(result)){
+                            if(result.getData()!=null && result.getData().size()>0){
+                                addressDataList.clear();
+                                lv_not.setVisibility(View.GONE);
+                                rvList.setVisibility(View.VISIBLE);
+                                addressDataList.addAll(result.getData());
+                                mAdapterListAddress.notifyDataSetChanged();
+                            }
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
     }
 
     /**
@@ -206,35 +213,34 @@ public class ActivityAddressList extends BaseActivity {
      * 删除地址
      */
     private void getDeleteAddress(String id) {
-//        show(AddressActivity.this,"加载中");
-//        RetrofitUtil.getInstance().mApiService()
-//                .getDeleteAddress(id).observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Observer<BaseResult>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(BaseResult result) {
-//                        if(result.getCode().equals("000000")){
-//                            getUserAddress();
-//                        }else{
-//                            ToastUtils.showShort(result.getMesg());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-////                        dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-////                        dismiss();
-//                    }
-//                });
+        AddressModel model = new AddressModel();
+        model.setAddressId(id);
+        RetrofitUtil.getInstance().apiService()
+                .getUserAddressDelete(model).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        if(isResultOk(result)){
+                            getUserAddress();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+//                        dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+//                        dismiss();
+                    }
+                });
 //
     }
 

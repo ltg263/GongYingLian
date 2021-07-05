@@ -15,8 +15,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseActivity;
+import com.jxxx.gyl.bean.AddressModel;
 import com.jxxx.gyl.utils.AddressPickTask;
 import com.jxxx.gyl.utils.IntentUtils;
 import com.jxxx.gyl.utils.StringUtil;
@@ -29,6 +31,7 @@ import butterknife.OnClick;
 import cn.addapp.pickers.entity.City;
 import cn.addapp.pickers.entity.County;
 import cn.addapp.pickers.entity.Province;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -50,8 +53,7 @@ public class ActivityAddressEdit extends BaseActivity {
     EditText etDetailaddress;
     @BindView(R.id.iv_szmr)
     ImageView iv_szmr;
-    AddressData addressData;
-    private int placeId = 0;
+    AddressModel addressData;
     private int flag = 1;
 //    public static PoiInfo NEW_CURRENT_ADDRESS = null;
 
@@ -65,40 +67,15 @@ public class ActivityAddressEdit extends BaseActivity {
         if (getIntent().getBundleExtra("address") != null) {
             setToolbar(myToolbar, "修改地址");
             flag = 2;
-            addressData = (AddressData) getIntent().getBundleExtra("address").getSerializable("address");
-            etName.setText(addressData.getAcceptName());
-            etPhone.setText("" + addressData.getMobile());
-            Object[] str = null;
-            if(addressData.getLocation().contains(addressData.getRegions()+" ")){
-                str = StringUtil.deleteSubString(addressData.getLocation(), addressData.getRegions() + " ");
-            }
-            String newDz = "";
-            String xxdz = "";
-            if(str !=null && !TextUtils.isEmpty(str[0]+"")){
-                if((str[0]+"").contains("-")){
-                    newDz = str[0]+"".substring(0,(str[0]+"").indexOf("-"));
-                    xxdz = str[0]+"".substring(newDz.length()+1, (str[0]+"").length());
-                }else{
-                    newDz = str[0]+"";
-                }
-                tvAddressDw.setText(newDz);
-            }else{
-                if((addressData.getLocation()).contains("-")){
-                    newDz = addressData.getLocation().substring(0,addressData.getLocation().indexOf("-"));
-
-                    xxdz = addressData.getLocation().substring(newDz.length()+1, addressData.getLocation().length());
-                }else{
-                    newDz = addressData.getLocation();
-                }
-                tvAddressDw.setText(newDz);
-            }
-
-            tvAddressKtwz.setText(addressData.getPlace());
-            tvAddress.setText("" + addressData.getRegions());
-            etDetailaddress.setText(xxdz);
+            addressData = (AddressModel) getIntent().getBundleExtra("address").getSerializable("address");
+            etName.setText(addressData.getContact());
+            etPhone.setText("" + addressData.getPhone());
+            etDetailaddress.setText(addressData.getHouseNo());
+            tvAddress.setText("" + addressData.getAddress());
+            iv_szmr.setSelected(addressData.getDefaulted().equals("1")?true:false);
         } else {
             flag = 1;
-            addressData = new AddressData();
+            addressData = new AddressModel();
             setToolbar(myToolbar, "新增地址");
         }
     }
@@ -127,16 +104,16 @@ public class ActivityAddressEdit extends BaseActivity {
             public void onAddressPicked(Province province, City city, County county) {
                 if (county == null) {
                     tvAddress.setText(province.getAreaName() +","+ city.getAreaName());
-                    addressData.setRegions(province.getAreaName() +","+ city.getAreaName());
-                    addressData.setProvinceId(province.getAreaId());
-                    addressData.setCityId(city.getAreaId());
+//                    addressData.setLandmark(province.getAreaName() +","+ city.getAreaName());
+//                    addressData.setProvinceId(province.getAreaId());
+//                    addressData.setCityId(city.getAreaId());
 
                 } else {
                     tvAddress.setText(province.getAreaName() +","+ city.getAreaName() +","+ county.getAreaName());
-                    addressData.setRegions(province.getAreaName() +","+ city.getAreaName() +","+ county.getAreaName());
-                    addressData.setProvinceId(province.getAreaId());
-                    addressData.setCityId(city.getAreaId());
-                    addressData.setDistrictId(county.getAreaId());
+//                    addressData.setLandmark(province.getAreaName() +","+ city.getAreaName() +","+ county.getAreaName());
+//                    addressData.setProvinceId(province.getAreaId());
+//                    addressData.setCityId(city.getAreaId());
+//                    addressData.setDistrictId(county.getAreaId());
                 }
             }
         });
@@ -161,39 +138,11 @@ public class ActivityAddressEdit extends BaseActivity {
                 }
                 break;
             case R.id.btn_save:
-                String consigneeName = etName.getText().toString();
-                if (consigneeName == null) {
-                    ToastUtils.showShort( "请填写收货人姓名");
-                    return;
-                }
-                addressData.setAcceptName(consigneeName);
-                String ktwz = tvAddressKtwz.getText().toString();
-                if (ktwz == null || placeId == 0) {
-                    ToastUtils.showShort(  "请选择开通位置");
-                    return;
-                }
-                addressData.setPlaceId(placeId);
-                addressData.setPlace(ktwz);
-                String phone = etPhone.getText().toString();
-                if (phone == null) {
-                    ToastUtils.showShort(  "请填写收货人手机号");
-                    return;
-                }
-                if (phone.trim().length() < 11) {
-                    ToastUtils.showShort(  "请填写11位手机号");
-                    return;
-                }
-                addressData.setMobile(phone);
-                if (addressData.getRegions() == null) {
-                    ToastUtils.showShort( "请选择城市");
-                    return;
-                }
-                String address = tvAddressDw.getText().toString();
-                if (address == null) {
-                    ToastUtils.showShort( "请填写详细收货地址");
-                    return;
-                }
-                addressData.setLocation(address+"-"+etDetailaddress.getText().toString());
+                addressData.setContact(etName.getText().toString());
+                addressData.setPhone(etPhone.getText().toString());
+                addressData.setAddress(tvAddress.getText().toString());
+                addressData.setHouseNo(etDetailaddress.getText().toString());
+                addressData.setDefaulted(iv_szmr.isSelected()?"1":"0");
 //                show();
                 if(flag==1){
                     getAddAddress(addressData);
@@ -223,69 +172,69 @@ public class ActivityAddressEdit extends BaseActivity {
      *   "streetId": 0
      * }
      */
-    private void getAddAddress(AddressData addressData) {
+    private void getAddAddress(AddressModel addressData) {
         addressData.setId(null);
         Log.w("-->>","addressData："+addressData.toString());
-//        RetrofitUtil.getInstance().mApiService()
-//                .getAddAddress(addressData).observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Observer<BaseResult>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(BaseResult result) {
-//                        if(result.getCode().equals("000000")){
-//                            ToastUtils.showShort("添加成功");
-//                            finish();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-////                        dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-////                        dismiss();
-//                    }
-//                });
+        RetrofitUtil.getInstance().apiService()
+                .getAddAddress(addressData).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        if(isResultOk(result)){
+                            ToastUtils.showShort("添加成功");
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+//                        dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+//                        dismiss();
+                    }
+                });
 
     }
     /**
      * 更新地址
      */
-    private void getUpdateAddress(AddressData addressData) {
-//        RetrofitUtil.getInstance().apiService()
-//                .getUpdateAddress(addressData).observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Observer<BaseResult>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(BaseResult result) {
-//                        if(result.getCode().equals("000000")){
-//                            ToastUtils.showShort("修改成功");
-//                            finish();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-////                        dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-////                        dismiss();
-//                    }
-//                });
+    private void getUpdateAddress(AddressModel addressData) {
+        RetrofitUtil.getInstance().apiService()
+                .getUpdateAddress(addressData).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        if(isResultOk(result)){
+                            ToastUtils.showShort("修改成功");
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+//                        dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+//                        dismiss();
+                    }
+                });
     }
 
     @Override

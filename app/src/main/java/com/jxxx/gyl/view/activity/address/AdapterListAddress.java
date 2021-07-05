@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.bean.AddressModel;
 
 import java.util.List;
 
@@ -19,13 +20,13 @@ import java.util.List;
  * author : LiuJie
  * date   : 2020/5/2914:03
  */
-public class AdapterListAddress extends BaseQuickAdapter<AddressData, BaseViewHolder> {
-    public AdapterListAddress(@Nullable List<AddressData> data) {
+public class AdapterListAddress extends BaseQuickAdapter<AddressModel, BaseViewHolder> {
+    public AdapterListAddress(@Nullable List<AddressModel> data) {
         super(R.layout.item_address, data);
     }
 
     @Override
-    protected void convert(@NonNull BaseViewHolder helper, AddressData item) {
+    protected void convert(@NonNull BaseViewHolder helper, AddressModel item) {
         ImageView defaultIv = helper.getView(R.id.iv_default);
         LinearLayout defaultLl = helper.getView(R.id.ll_default);
         TextView nameTv = helper.getView(R.id.tv_name);
@@ -33,10 +34,10 @@ public class AdapterListAddress extends BaseQuickAdapter<AddressData, BaseViewHo
         TextView addressTv = helper.getView(R.id.tv_address);
         TextView editTv = helper.getView(R.id.tv_edit);
         TextView delTv = helper.getView(R.id.tv_del);
-        nameTv.setText(item.getAcceptName());
-        phoneTv.setText(item.getMobile());
-        addressTv.setText(item.getLocation());
-        if (item.isDefaultX()) {
+        nameTv.setText(item.getContact());
+        phoneTv.setText(item.getPhone());
+        addressTv.setText(item.getAddress()+"-"+item.getHouseNo());
+        if (item.getDefaulted().equals("1")) {
             defaultIv.setSelected(true);
         } else {
             defaultIv.setSelected(false);

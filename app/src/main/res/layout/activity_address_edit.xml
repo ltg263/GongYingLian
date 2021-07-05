@@ -120,6 +120,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:visibility="gone"
                 android:orientation="horizontal"
                 android:padding="15dp">
 
@@ -149,6 +150,7 @@
                 android:background="@color/color_bj_theme" />
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
