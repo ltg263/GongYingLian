@@ -218,6 +218,12 @@ public interface ApiService {
      */
     @POST("api/scmp-application-mall/shippingAddress/update")
     Observable<Result> getUpdateAddress(@Body AddressModel mAddressModel);
+
+    /**
+     * 收货地址页-添加收货地址接口
+     */
+    @POST("api/scmp-application-mall/shippingAddress/update")
+    Observable<Result> getSetDefault(@Query("ID") String is);
     /**
      * 设置默认地址
      *

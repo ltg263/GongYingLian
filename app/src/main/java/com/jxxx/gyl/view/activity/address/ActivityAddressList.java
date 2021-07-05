@@ -179,33 +179,33 @@ public class ActivityAddressList extends BaseActivity {
      * 设置默认地址
      */
     private void getSetDefault(String id) {
-//        show(AddressActivity.this,"加载中");
-//        RetrofitUtil.getInstance().apiService()
-//                .getSetDefault(id).observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Observer<BaseResult>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(BaseResult result) {
-//                        if(result.getCode().equals("000000")){
-//                            getUserAddress();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
+
+        RetrofitUtil.getInstance().apiService()
+                .getSetDefault(id).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        if(isResultOk(result)){
+                            getUserAddress();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
 //                        dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-////                        dismiss();
-//                    }
-//                });
+                    }
+
+                    @Override
+                    public void onComplete() {
+//                        dismiss();
+                    }
+                });
 
 
     }
