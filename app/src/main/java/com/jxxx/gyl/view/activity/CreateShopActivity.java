@@ -252,9 +252,11 @@ public class CreateShopActivity extends BaseActivity {
                 break;
             case "2":
                 baseStartActivity(CreateShopResultActivity.class,mData.getFailureReason());
+                finish();
                 break;
             case "3":
                 baseStartActivity(CreateShopResultActivity.class,null);
+                finish();
                 break;
         }
     }

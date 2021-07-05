@@ -1,6 +1,6 @@
 package com.jxxx.gyl.view.activity;
 
-import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -12,7 +12,6 @@ import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.utils.StringUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CreateShopResultActivity extends BaseActivity {
@@ -20,6 +19,8 @@ public class CreateShopResultActivity extends BaseActivity {
     Toolbar mMyToolbar;
     @BindView(R.id.tv_r)
     TextView mTvR;
+    @BindView(R.id.tv)
+    TextView tv;
     @BindView(R.id.btn)
     TextView mBtn;
     String str;
@@ -34,6 +35,7 @@ public class CreateShopResultActivity extends BaseActivity {
         str = getIntent().getStringExtra(ConstValues.BASE_STR);
         if(StringUtil.isNotBlank(str)){
             mTvR.setText(str);
+            tv.setVisibility(View.INVISIBLE);
             mBtn.setText("重新提交");
         }
     }
