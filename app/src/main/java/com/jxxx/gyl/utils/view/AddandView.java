@@ -98,33 +98,41 @@ public class AddandView extends FrameLayout implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.image1:
-                jian();
+//                jian();
+
+                if (mOnNumberChangedListener != null) {
+                    mOnNumberChangedListener.OnNumberChanged(vs, false);
+                }
                 break;
             case R.id.image2:
-                add();
+//                add();
+
+                if (mOnNumberChangedListener != null) {
+                    mOnNumberChangedListener.OnNumberChanged(vs, true);
+                }
                 break;
         }
     }
 
-    private void jian() {
+    public void jian() {
         if (vs > 0) {
             vs--;
             setShowValue(vs);
-            if (mOnNumberChangedListener != null) {
-                mOnNumberChangedListener.OnNumberChanged(vs, false);
-            }
+//            if (mOnNumberChangedListener != null) {
+//                mOnNumberChangedListener.OnNumberChanged(vs, false);
+//            }
         }
 
     }
 
-    private void add() {
+    public void add() {
 
         vs++;
         setValue(vs);
 
-        if (mOnNumberChangedListener != null) {
-            mOnNumberChangedListener.OnNumberChanged(vs, true);
-        }
+//        if (mOnNumberChangedListener != null) {
+//            mOnNumberChangedListener.OnNumberChanged(vs, true);
+//        }
     }
 
     public interface OnNumberChangedListener {

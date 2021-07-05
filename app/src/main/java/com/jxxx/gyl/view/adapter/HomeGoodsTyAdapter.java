@@ -5,6 +5,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.utils.GlideImageLoader;
@@ -62,16 +63,24 @@ public class HomeGoodsTyAdapter extends BaseQuickAdapter<ShopInfoData, BaseViewH
 //                }
                 helper.setGone(R.id.tv_add,false).setGone(R.id.iv_add,true);
             }
-        }
-        helper.getView(R.id.iv_add).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!ConstValues.ISLOGIN){
-                    LoginActivity.startActivityLogin(mContext);
-                    return;
+
+            helper.getView(R.id.iv_add).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(!ConstValues.ISLOGIN){
+                        LoginActivity.startActivityLogin(mContext);
+                        return;
+                    }
+
+                    HttpsUtils.userRechargeOrder(mContext, data.getSkus().get(0).getId(), data.getId(), new HttpsUtils.ShoppingCartInterface() {
+                        @Override
+                        public void isResult(Boolean isResult) {
+
+                        }
+                    });
                 }
-            }
-        });
+            });
+        }
         helper.getView(R.id.rl_contact).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

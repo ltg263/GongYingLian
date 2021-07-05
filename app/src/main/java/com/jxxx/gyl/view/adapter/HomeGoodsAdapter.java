@@ -6,6 +6,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.bean.HomeActivityData;
@@ -68,22 +69,27 @@ public class HomeGoodsAdapter extends BaseQuickAdapter<HomeActivityData, BaseVie
                     helper.setGone(R.id.tv_add, false).setGone(R.id.iv_add, true);
                 }
             }
+            helper.getView(R.id.iv_add).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(!ConstValues.ISLOGIN){
+                        LoginActivity.startActivityLogin(mContext);
+                        return;
+                    }
+                    HttpsUtils.userRechargeOrder(mContext, data.getSkus().get(0).getId(), data.getId(), new HttpsUtils.ShoppingCartInterface() {
+                        @Override
+                        public void isResult(Boolean isResult) {
+
+                        }
+                    });
+                }
+            });
         } else if (item.getActivityType().equals("2")) {
             helper.setGone(R.id.rl1, true).setGone(R.id.rl_contact, false)
                     .setText(R.id.tv_1, item.getContent())
                     .setText(R.id.tv_2, item.getTitle());
             GlideImageLoader.loadImageViewRadius(mContext, item.getImageUrl(), 30, helper.getView(R.id.siv_img));
         }
-
-        helper.getView(R.id.iv_add).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!ConstValues.ISLOGIN){
-                    LoginActivity.startActivityLogin(mContext);
-                    return;
-                }
-            }
-        });
 
         helper.getView(R.id.rl1).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,9 +13,11 @@ import com.jxxx.gyl.bean.HomeBannerData;
 import com.jxxx.gyl.bean.HomeCategoryData;
 import com.jxxx.gyl.bean.LoginData;
 import com.jxxx.gyl.bean.LoginRequest;
+import com.jxxx.gyl.bean.OrderInfoBean;
 import com.jxxx.gyl.bean.ParamData;
 import com.jxxx.gyl.bean.PostAuditSubmitCommand;
 import com.jxxx.gyl.bean.RechargeAllBean;
+import com.jxxx.gyl.bean.ShoppingCartListBean;
 
 import java.util.List;
 
@@ -152,6 +154,26 @@ public interface ApiService {
      */
     @POST("user/api/v1/user/order/recharge/create")
     Observable<Result<ParamData>> userRechargeOrder(@Query("rechargeId") String rechargeId);
+
+
+
+    /**
+     * 购物车-添加商品
+     */
+    @POST("api/scmp-application-mall/shoppingCart/add")
+    Observable<Result> userRechargeOrder(@Body OrderInfoBean mOrderInfoBean);
+
+    /**
+     * 购物车-减少商品
+     */
+    @POST("api/scmp-application-mall/shoppingCart/reduce")
+    Observable<Result> shoppingCartReduce(@Body OrderInfoBean mOrderInfoBean);
+
+    /**
+     * 购物车-用户购物车列表
+     */
+    @GET("api/scmp-application-mall/shoppingCart/list")
+    Observable<Result<ShoppingCartListBean>> shoppingCartList();
     /**
      * 设置默认地址
      *

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.utils.GlideImageLoader;
@@ -64,7 +65,38 @@ public class HomeCategoryContentAdapter extends BaseQuickAdapter<ShopInfoData, B
             }else{
                 helper.setGone(R.id.tv_add,false).setGone(R.id.iv_add,true);
             }
-            mRvSkus.setAdapter(new GoodsSkusAdapter(item.getSkus(),item.getSpuSupplyType()));
+            GoodsSkusAdapter mGoodsSkusAdapter = new GoodsSkusAdapter(item.getSkus(),item.getSpuSupplyType());
+            mRvSkus.setAdapter(mGoodsSkusAdapter);
+
+            mGoodsSkusAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+                @Override
+                public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                    HttpsUtils.userRechargeOrder(mContext, item.getSkus().get(position).getId(), item.getId(),
+                            new HttpsUtils.ShoppingCartInterface() {
+                        @Override
+                        public void isResult(Boolean isResult) {
+
+                        }
+                    });
+                }
+            });
+
+            helper.getView(R.id.iv_add).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(!ConstValues.ISLOGIN){
+                        LoginActivity.startActivityLogin(mContext);
+                        return;
+                    }
+                    HttpsUtils.userRechargeOrder(mContext, item.getSkus().get(0).getId(), item.getId(),
+                            new HttpsUtils.ShoppingCartInterface() {
+                        @Override
+                        public void isResult(Boolean isResult) {
+
+                        }
+                    });
+                }
+            });
         }
 
         helper.getView(R.id.rl_contact).setOnClickListener(new View.OnClickListener() {
@@ -89,16 +121,6 @@ public class HomeCategoryContentAdapter extends BaseQuickAdapter<ShopInfoData, B
                     helper.setVisible(R.id.tv_spuSupplyType,false);
                 }
 //                popupWindw(helper.getView(R.id.tv_add),item.getSkus(),item.getIconUrl());
-            }
-        });
-
-        helper.getView(R.id.iv_add).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!ConstValues.ISLOGIN){
-                    LoginActivity.startActivityLogin(mContext);
-                    return;
-                }
             }
         });
 
