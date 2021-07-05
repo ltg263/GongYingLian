@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.utils.StatusBarUtil;
@@ -120,7 +121,7 @@ public class MainActivity extends BaseActivity{
 //            ZsnaviManager.getInstance(getActivity()).startLocation();//开启定位，该定位只会回调一次定位信息，建议使用完后调用停止定位接口
         }
     }
-    public void startFragmentTwo(int pos){
+    public void startFragmentTwo(){
         mBnvHomeNavigation.setSelectedItemId(R.id.menu_home_2);
 //        mHomeTwoFragment.setPos(pos);
     }
