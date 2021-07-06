@@ -7,7 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseActivity;
+import com.jxxx.gyl.bean.CategoryTreeData;
+import com.jxxx.gyl.bean.CouponTemplateData;
+import com.jxxx.gyl.bean.OrderInfoBean;
 import com.jxxx.gyl.view.adapter.HomeOrderAdapter;
 import com.jxxx.gyl.view.adapter.OrderCouponAdapter;
 
@@ -15,6 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class OrderCouponListActivity extends BaseActivity {
 
@@ -33,23 +42,85 @@ public class OrderCouponListActivity extends BaseActivity {
     @Override
     public void initView() {
         setToolbar(mMyToolbar, "我的优惠券");
+
+        mOrderCouponAdapter = new OrderCouponAdapter(null);
+        mRvList.setAdapter(mOrderCouponAdapter);
+
+        mOrderCouponAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.tv_yhq_type_1:
+                        couponTemplateReceive(mOrderCouponAdapter.getData().get(position).getId());
+                        break;
+                }
+            }
+        });
+    }
+
+    private void couponTemplateReceive(String id) {
+        OrderInfoBean mOrderInfoBean = new OrderInfoBean();
+        mOrderInfoBean.setCouponTemplateId(id);
+        RetrofitUtil.getInstance().apiService()
+                .couponTemplateReceive(mOrderInfoBean)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        hideLoading();
+                        if (isResultOk(result)) {
+                            initData();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        hideLoading();
+                    }
+                });
     }
 
     @Override
     public void initData() {
-        List<String> list = new ArrayList<>();
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        mOrderCouponAdapter = new OrderCouponAdapter(list);
-        mRvList.setAdapter(mOrderCouponAdapter);
+        RetrofitUtil.getInstance().apiService()
+                .couponTemplateList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<List<CouponTemplateData>>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-        mOrderCouponAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-            }
-        });
+                    }
+
+                    @Override
+                    public void onNext(Result<List<CouponTemplateData>> result) {
+                        hideLoading();
+                        if (isResultOk(result)) {
+                            mOrderCouponAdapter.setNewData(result.getData());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        hideLoading();
+                    }
+                });
     }
+
 }

@@ -9,6 +9,7 @@ import com.jxxx.gyl.base.ShopInfoListData;
 import com.jxxx.gyl.bean.AddressModel;
 import com.jxxx.gyl.bean.CategoryDataList;
 import com.jxxx.gyl.bean.CategoryTreeData;
+import com.jxxx.gyl.bean.CouponTemplateData;
 import com.jxxx.gyl.bean.GlobalAdconfigBean;
 import com.jxxx.gyl.bean.HomeActivityData;
 import com.jxxx.gyl.bean.HomeBannerData;
@@ -135,6 +136,20 @@ public interface ApiService {
      */
     @GET(ConstValues.BASE_URL + "api/scmp-application-mall/product/listCategoryAll")
     Observable<Result<List<CommodityCategory>>> getCategoryListAll();
+
+    /**
+     * 领券中心-优惠券列表
+     * @return
+     */
+    @GET(ConstValues.BASE_URL + "api/scmp-application-mall/couponTemplate/list")
+    Observable<Result<List<CouponTemplateData>>> couponTemplateList();
+
+    /**
+     * 领券中心-领取优惠券
+     * @return
+     */
+    @POST(ConstValues.BASE_URL + "api/scmp-application-mall/couponTemplate/receive")
+    Observable<Result> couponTemplateReceive(@Body OrderInfoBean mOrderInfoBean);
 
     /**
      * 注册-经营类目树

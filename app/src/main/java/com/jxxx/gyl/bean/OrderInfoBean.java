@@ -19,6 +19,16 @@ public class OrderInfoBean {
     private Integer[] checkedSkuIdList;
     private Integer[] unCheckedSkuIdList;
 
+    private String couponTemplateId;
+
+    public void setCouponTemplateId(String couponTemplateId) {
+        this.couponTemplateId = couponTemplateId;
+    }
+
+    public String getCouponTemplateId() {
+        return couponTemplateId;
+    }
+
     @Override
     public String toString() {
         return "OrderInfoBean{" +
