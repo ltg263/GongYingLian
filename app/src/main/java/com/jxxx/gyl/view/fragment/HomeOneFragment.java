@@ -22,6 +22,7 @@ import com.jxxx.gyl.bean.HomeBannerData;
 import com.jxxx.gyl.bean.HomeCategoryData;
 import com.jxxx.gyl.bean.UserInfoUpdate;
 import com.jxxx.gyl.utils.GlideImageLoader;
+import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.view.activity.login.LoginActivity;
 import com.jxxx.gyl.view.activity.search.SearchGoodsActivity;
 import com.jxxx.gyl.view.adapter.HomeGoodsAdapter;
@@ -64,9 +65,19 @@ public class HomeOneFragment extends BaseFragment {
     private HomeGoodsAdapter mHomeGoodsAdapter;
     @Override
     protected int setLayoutResourceID() {
+        StatusBarUtil.setStatusBarMode(getActivity(), true, R.color.color_2E6DFB);
         return R.layout.fragment_home_one;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(hidden){
+            StatusBarUtil.setStatusBarMode(getActivity(), true, R.color.white);
+        }else {
+            StatusBarUtil.setStatusBarMode(getActivity(), true, R.color.color_2E6DFB);
+        }
+    }
 
     @Override
     protected void initView() {
