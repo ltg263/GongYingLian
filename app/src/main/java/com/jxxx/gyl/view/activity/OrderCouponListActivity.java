@@ -51,7 +51,11 @@ public class OrderCouponListActivity extends BaseActivity {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()){
                     case R.id.tv_yhq_type_1:
-                        couponTemplateReceive(mOrderCouponAdapter.getData().get(position).getId());
+                        if(mOrderCouponAdapter.getData().get(position).getIsDraw().equals("1")){
+                            couponTemplateReceive(mOrderCouponAdapter.getData().get(position).getId());
+                        }else{
+                            finish();
+                        }
                         break;
                 }
             }
