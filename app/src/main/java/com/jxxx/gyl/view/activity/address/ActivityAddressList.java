@@ -243,7 +243,6 @@ public class ActivityAddressList extends BaseActivity {
                         hideLoading();
                     }
                 });
-//
     }
 
 }
