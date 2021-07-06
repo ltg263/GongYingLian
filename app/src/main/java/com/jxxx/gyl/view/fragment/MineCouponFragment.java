@@ -6,14 +6,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseFragment;
+import com.jxxx.gyl.bean.CouponTemplateData;
 import com.jxxx.gyl.view.adapter.MineCouponListAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class MineCouponFragment extends BaseFragment {
     @BindView(R.id.my_toolbar)
@@ -29,17 +34,39 @@ public class MineCouponFragment extends BaseFragment {
     @Override
     protected void initView() {
         myToolbar.setVisibility(View.GONE);
+        mMineCouponListAdapter = new MineCouponListAdapter(null);
+        mRvList.setAdapter(mMineCouponListAdapter);
     }
 
     @Override
-    protected void initData() {
-        List<String> list = new ArrayList<>();
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        mMineCouponListAdapter = new MineCouponListAdapter(list);
-        mRvList.setAdapter(mMineCouponListAdapter);
+    protected void initData(){
+        RetrofitUtil.getInstance().apiService()
+                .couponTemplateList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<List<CouponTemplateData>>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(Result<List<CouponTemplateData>> result) {
+                        hideLoading();
+                        if (isResultOk(result)) {
+                            mMineCouponListAdapter.setNewData(result.getData());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        hideLoading();
+                    }
+                });
     }
 }

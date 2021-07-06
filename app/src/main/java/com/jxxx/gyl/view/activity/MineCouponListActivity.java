@@ -67,9 +67,9 @@ public class MineCouponListActivity extends BaseActivity {
     //1,待支付;2,待发货;3,待收货;4,待评价;5,已完成;6,已取消;7,已过期;8,已结束
     List<Fragment> fragments = new ArrayList<>();
     private List<Fragment> getFragments() {
-        fragments.add( new MineCouponFragment());
-        fragments.add( new MineCouponFragment());
-        fragments.add( new MineCouponFragment());
+        fragments.add(new MineCouponFragment());
+        fragments.add(new MineCouponFragment());
+        fragments.add(new MineCouponFragment());
         return fragments;
     }
     @Override
