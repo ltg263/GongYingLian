@@ -7,13 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
@@ -23,7 +21,6 @@ import com.jxxx.gyl.bean.AddressModel;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -32,7 +29,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
 
 
 public class ActivityAddressList extends BaseActivity {
@@ -47,7 +43,7 @@ public class ActivityAddressList extends BaseActivity {
     @BindView(R.id.rv_list)
     RecyclerView rvList;
     AdapterListAddress mAdapterListAddress;
-    private List<AddressModel> addressDataList = new ArrayList<>();
+//    private List<AddressModel> addressDataList = new ArrayList<>();
 
     @Override
     public int intiLayout() {
@@ -78,26 +74,27 @@ public class ActivityAddressList extends BaseActivity {
     private void initRv() {
         rvList.setLayoutManager(new LinearLayoutManager(ActivityAddressList.this));
         rvList.setHasFixedSize(true);
-        mAdapterListAddress = new AdapterListAddress(addressDataList);
+        mAdapterListAddress = new AdapterListAddress(null);
         rvList.setAdapter(mAdapterListAddress);
         mAdapterListAddress.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                AddressModel mAddressModel = mAdapterListAddress.getData().get(position);
                 Log.w("---,","source:"+source);
                 if (source == 0) {
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("address",addressDataList.get(position));
+                    bundle.putSerializable("address",mAddressModel);
                     ActivityAddressEdit.startActivity(view.getContext(),bundle);
                 } else {
                     if(type==1){
-                        EventBus.getDefault().post(addressDataList.get(position));
+                        EventBus.getDefault().post(mAddressModel);
                         finish();
                     }
                     if(type==2){
                         //Activity返回时传递数据，也是通过意图对象
                         Intent data = new Intent();
                         //把要传递的数据封装至意图对象中
-                        data.putExtra("address", addressDataList.get(position));
+                        data.putExtra("address", mAddressModel);
 
                         //当前Activity销毁时，data这个意图就会传递给启动当前Activity的那个Activity
                         setResult(1, data);
@@ -111,12 +108,14 @@ public class ActivityAddressList extends BaseActivity {
         mAdapterListAddress.setOnDeleteClickListener(new AdapterListAddress.OnDeleteClickLister() {
             @Override
             public void onDeleteClick(int position) {
-                getDeleteAddress(addressDataList.get(position).getId()+"");
+                AddressModel mAddressModel = mAdapterListAddress.getData().get(position);
+                getDeleteAddress(mAddressModel.getId());
             }
 
             @Override
             public void onDefaultClick(int position) {
-                getSetDefault(addressDataList.get(position).getId()+"");
+                AddressModel mAddressModel = mAdapterListAddress.getData().get(position);
+                getSetDefault(mAddressModel.getId());
             }
         });
 
@@ -154,11 +153,9 @@ public class ActivityAddressList extends BaseActivity {
                     public void onNext(Result<List<AddressModel>> result) {
                         if(isResultOk(result)){
                             if(result.getData()!=null && result.getData().size()>0){
-                                addressDataList.clear();
                                 lv_not.setVisibility(View.GONE);
                                 rvList.setVisibility(View.VISIBLE);
-                                addressDataList.addAll(result.getData());
-                                mAdapterListAddress.notifyDataSetChanged();
+                                mAdapterListAddress.setNewData(result.getData());
                             }
                         }
 
@@ -179,31 +176,34 @@ public class ActivityAddressList extends BaseActivity {
      * 设置默认地址
      */
     private void getSetDefault(String id) {
-
+        AddressModel mAddressModel = new AddressModel();
+        mAddressModel.setId(id);
+        showLoading();
         RetrofitUtil.getInstance().apiService()
-                .getSetDefault(id).observeOn(AndroidSchedulers.mainThread())
+                .getSetDefault(mAddressModel).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Result>() {
+                .subscribe(new Observer<Result<List<AddressModel>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(Result result) {
+                    public void onNext(Result<List<AddressModel>> result) {
+                        hideLoading();
                         if(isResultOk(result)){
-                            getUserAddress();
+                            mAdapterListAddress.setNewData(result.getData());
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-//                        dismiss();
+                        hideLoading();
                     }
 
                     @Override
                     public void onComplete() {
-//                        dismiss();
+                        hideLoading();
                     }
                 });
 
@@ -215,30 +215,32 @@ public class ActivityAddressList extends BaseActivity {
     private void getDeleteAddress(String id) {
         AddressModel model = new AddressModel();
         model.setAddressId(id);
+        showLoading();
         RetrofitUtil.getInstance().apiService()
                 .getUserAddressDelete(model).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Result>() {
+                .subscribe(new Observer<Result<List<AddressModel>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(Result result) {
+                    public void onNext(Result<List<AddressModel>> result) {
+                        hideLoading();
                         if(isResultOk(result)){
-                            getUserAddress();
+                            mAdapterListAddress.setNewData(result.getData());
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-//                        dismiss();
+                        hideLoading();
                     }
 
                     @Override
                     public void onComplete() {
-//                        dismiss();
+                        hideLoading();
                     }
                 });
 //

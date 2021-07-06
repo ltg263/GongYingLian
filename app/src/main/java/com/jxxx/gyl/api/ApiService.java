@@ -205,7 +205,7 @@ public interface ApiService {
      * 收货地址页-删除收货地址接口
      */
     @POST("api/scmp-application-mall/shippingAddress/delete")
-    Observable<Result> getUserAddressDelete(@Body AddressModel mAddressModel);
+    Observable<Result<List<AddressModel>>> getUserAddressDelete(@Body AddressModel mAddressModel);
 
     /**
      * 收货地址页-添加收货地址接口
@@ -222,8 +222,8 @@ public interface ApiService {
     /**
      * 收货地址页-添加收货地址接口
      */
-    @POST("api/scmp-application-mall/shippingAddress/update")
-    Observable<Result> getSetDefault(@Query("ID") String is);
+    @POST("api/scmp-application-mall/shippingAddress/defaulted")
+    Observable<Result<List<AddressModel>>> getSetDefault(@Body AddressModel mAddressModel);
     /**
      * 设置默认地址
      *
