@@ -45,9 +45,12 @@ public class ShopCarGoodsAdapter extends BaseQuickAdapter<ShoppingCartListBean.I
                     HttpsUtils.userRechargeOrder(mContext, item.getCartSpuDTO().getCartSkuDTO().getId(),
                             item.getCartSpuDTO().getId(), new HttpsUtils.ShoppingCartInterface() {
                         @Override
-                        public void isResult(Boolean isResult) {
+                        public void isResult(Boolean isResult,String num) {
                             if(isResult){
                                 ((MainActivity)mContext).updateUI();
+                                if(mContext instanceof MainActivity){
+                                    ((MainActivity)mContext).setShopCarNum(num);
+                                }
                                 mAddandView.add();
                             }
                         }
@@ -56,9 +59,12 @@ public class ShopCarGoodsAdapter extends BaseQuickAdapter<ShoppingCartListBean.I
                     HttpsUtils.shoppingCartReduce(mContext, item.getCartSpuDTO().getCartSkuDTO().getId()
                             , item.getCartSpuDTO().getId(), new HttpsUtils.ShoppingCartInterface() {
                                 @Override
-                                public void isResult(Boolean isResult) {
+                                public void isResult(Boolean isResult,String num) {
                                     if(isResult){
                                         ((MainActivity)mContext).updateUI();
+                                        if(mContext instanceof MainActivity){
+                                            ((MainActivity)mContext).setShopCarNum(num);
+                                        }
                                         mAddandView.jian();
                                     }
                                 }

@@ -231,7 +231,7 @@ public class ShopDetailsActivity extends BaseActivity {
                 HttpsUtils.userRechargeOrder(this, skuId,
                         getIntent().getStringExtra(ConstValues.BASE_STR), new HttpsUtils.ShoppingCartInterface() {
                     @Override
-                    public void isResult(Boolean isResult) {
+                    public void isResult(Boolean isResult,String num) {
 
                     }
                 });

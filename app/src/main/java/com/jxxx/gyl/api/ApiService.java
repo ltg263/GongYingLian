@@ -194,13 +194,13 @@ public interface ApiService {
      * 购物车-添加商品
      */
     @POST("api/scmp-application-mall/shoppingCart/add")
-    Observable<Result> userRechargeOrder(@Body OrderInfoBean mOrderInfoBean);
+    Observable<Result<ShoppingCartListBean>> userRechargeOrder(@Body OrderInfoBean mOrderInfoBean);
 
     /**
      * 购物车-减少商品
      */
     @POST("api/scmp-application-mall/shoppingCart/reduce")
-    Observable<Result> shoppingCartReduce(@Body OrderInfoBean mOrderInfoBean);
+    Observable<Result<ShoppingCartListBean>> shoppingCartReduce(@Body OrderInfoBean mOrderInfoBean);
 
     /**
      * 购物车-用户购物车列表

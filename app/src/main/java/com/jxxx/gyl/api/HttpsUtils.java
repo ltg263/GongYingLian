@@ -10,6 +10,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.bean.LoginRequest;
 import com.jxxx.gyl.bean.OrderInfoBean;
+import com.jxxx.gyl.bean.ShoppingCartListBean;
 import com.jxxx.gyl.bean.SubmitFilesBean;
 import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.ToastUtil;
@@ -156,22 +157,22 @@ public class HttpsUtils {
                 .userRechargeOrder(mOrderInfoBean)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Result>() {
+                .subscribe(new Observer<Result<ShoppingCartListBean>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(Result result) {
+                    public void onNext(Result<ShoppingCartListBean> result) {
                         if(result.getCode()==200) {
                             ToastUtils.showLong("已放入购物车");
                             if(mShoppingCartInterface!=null){
-                                mShoppingCartInterface.isResult(true);
+                                mShoppingCartInterface.isResult(true,getShopCarNum());
                             }
                         }else{
                             if(mShoppingCartInterface!=null){
-                                mShoppingCartInterface.isResult(false);
+                                mShoppingCartInterface.isResult(false,"");
                             }
                         }
                     }
@@ -179,7 +180,7 @@ public class HttpsUtils {
                     @Override
                     public void onError(Throwable e) {
                         if(mShoppingCartInterface!=null){
-                            mShoppingCartInterface.isResult(false);
+                            mShoppingCartInterface.isResult(false,"");
                         }
                     }
 
@@ -197,21 +198,21 @@ public class HttpsUtils {
                 .shoppingCartReduce(mOrderInfoBean)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Result>() {
+                .subscribe(new Observer<Result<ShoppingCartListBean>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(Result result) {
+                    public void onNext(Result<ShoppingCartListBean> result) {
                         if(result.getCode()==200) {
                             if(mShoppingCartInterface!=null){
-                                mShoppingCartInterface.isResult(true);
+                                mShoppingCartInterface.isResult(true,getShopCarNum());
                             }
                         }else{
                             if(mShoppingCartInterface!=null){
-                                mShoppingCartInterface.isResult(false);
+                                mShoppingCartInterface.isResult(false,"");
                             }
                         }
                     }
@@ -219,7 +220,7 @@ public class HttpsUtils {
                     @Override
                     public void onError(Throwable e) {
                         if(mShoppingCartInterface!=null){
-                            mShoppingCartInterface.isResult(false);
+                            mShoppingCartInterface.isResult(false,"");
                         }
                     }
 
@@ -229,11 +230,14 @@ public class HttpsUtils {
                 });
     }
 
+    public static String getShopCarNum(){
+        return "10";
+    }
 
     public interface ShoppingCartInterface {
         /**
          * 确定
          */
-        public void isResult(Boolean isResult);
+        public void isResult(Boolean isResult,String num);
     }
 }

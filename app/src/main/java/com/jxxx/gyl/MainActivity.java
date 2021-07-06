@@ -3,6 +3,9 @@ package com.jxxx.gyl;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -10,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
@@ -41,6 +46,7 @@ public class MainActivity extends BaseActivity{
     private HomeThreeFragment mHomeThreeFragment;
     private HomeFourFragment mHomeFourFragment;
     private HomeFiveFragment mHomeFiveFragment;
+    TextView tvNum;
     @Override
     public int intiLayout() {
         return R.layout.activity_main;
@@ -49,6 +55,18 @@ public class MainActivity extends BaseActivity{
     @Override
     public void initView() {
         initBottomBar();
+        //获取整个的NavigationView
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) mBnvHomeNavigation.getChildAt(0);
+        //这里就是获取所添加的每一个Tab(或者叫menu)，
+        View tab = menuView.getChildAt(2);
+        BottomNavigationItemView itemView = (BottomNavigationItemView) tab;
+        //加载我们的角标View，新创建的一个布局
+        View badge = LayoutInflater.from(this).inflate(R.layout.shop_car_num, menuView, false);
+        //添加到Tab上
+        itemView.addView(badge);
+        tvNum = badge.findViewById(R.id.tv_num);
+        //无消息时可以将它隐藏即可
+        tvNum.setVisibility(View.GONE);
     }
 
     @Override
@@ -147,5 +165,12 @@ public class MainActivity extends BaseActivity{
     }
     public void updateUI(){
         mHomeThreeFragment.initData();
+    }
+
+    int a = 1;
+    public void setShopCarNum(String num){
+        tvNum.setVisibility(View.VISIBLE);
+        a++;
+        tvNum.setText(a+"");
     }
 }

@@ -5,9 +5,11 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.jxxx.gyl.MainActivity;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.app.ConstValues;
+import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.bean.HomeActivityData;
 import com.jxxx.gyl.utils.GlideImageLoader;
@@ -78,8 +80,10 @@ public class HomeGoodsAdapter extends BaseQuickAdapter<HomeActivityData, BaseVie
                     }
                     HttpsUtils.userRechargeOrder(mContext, data.getSkus().get(0).getId(), data.getId(), new HttpsUtils.ShoppingCartInterface() {
                         @Override
-                        public void isResult(Boolean isResult) {
-
+                        public void isResult(Boolean isResult,String num) {
+                            if(mContext instanceof MainActivity){
+                                ((MainActivity)mContext).setShopCarNum(num);
+                            }
                         }
                     });
                 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jxxx.gyl.utils.view.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/circle_solid_red_dot"
+        android:gravity="center"
+        android:text="00"
+        android:textColor="@color/white"
+        android:textSize="9sp" />
+</com.jxxx.gyl.utils.view.SquareRelativeLayout>

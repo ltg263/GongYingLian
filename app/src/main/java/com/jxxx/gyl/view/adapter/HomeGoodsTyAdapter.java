@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.jxxx.gyl.MainActivity;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.app.ConstValues;
@@ -74,8 +75,10 @@ public class HomeGoodsTyAdapter extends BaseQuickAdapter<ShopInfoData, BaseViewH
 
                     HttpsUtils.userRechargeOrder(mContext, data.getSkus().get(0).getId(), data.getId(), new HttpsUtils.ShoppingCartInterface() {
                         @Override
-                        public void isResult(Boolean isResult) {
-
+                        public void isResult(Boolean isResult,String num) {
+                            if(mContext instanceof MainActivity){
+                                ((MainActivity)mContext).setShopCarNum(num);
+                            }
                         }
                     });
                 }
