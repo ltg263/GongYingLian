@@ -46,7 +46,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.jxxx.gyl.view.SplashScreenActivity"
+            android:name=".view.activity.CreateShopActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -78,7 +78,7 @@
         <activity android:name="com.jxxx.gyl.view.activity.MineCouponListActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.MineInvoiceOrderActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.MineInvoiceActivity" />
-        <activity android:name="com.jxxx.gyl.view.activity.CreateShopActivity" />
+<!--        <activity android:name="com.jxxx.gyl.view.activity.CreateShopActivity" />-->
         <activity android:name="com.jxxx.gyl.view.activity.payActivity.ActivityPayChongZhi" />
         <activity android:name="com.jxxx.gyl.view.activity.OrderCouponListActivity" />
         <activity android:name="com.jxxx.gyl.view.activity.mine.MineInfoActivity" />

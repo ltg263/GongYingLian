@@ -1,6 +1,8 @@
 package com.jxxx.gyl.view.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,8 +15,10 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.app.ConstValues;
@@ -22,9 +26,14 @@ import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.bean.CategoryTreeData;
 import com.jxxx.gyl.bean.LoginData;
 import com.jxxx.gyl.bean.PostAuditSubmitCommand;
+import com.jxxx.gyl.utils.GlideImageLoader;
 import com.jxxx.gyl.utils.PickerViewUtils;
+import com.jxxx.gyl.utils.PictureSelectorUtils;
 import com.jxxx.gyl.utils.SharedUtils;
 import com.jxxx.gyl.utils.StringUtil;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -86,14 +95,12 @@ public class CreateShopActivity extends BaseActivity {
         businessCategoryTree();
     }
 
-    @OnClick({R.id.rl_storefrontImageUrl,R.id.iv_storefrontImageUrl,R.id.tv_businessCategoryId, R.id.tv_storefrontAddress, R.id.tv_businessStatus, R.id.tv_register})
+    @OnClick({R.id.rl_storefrontImageUrl,R.id.show_storefrontImageUrl,R.id.tv_businessCategoryId, R.id.tv_storefrontAddress, R.id.tv_businessStatus, R.id.tv_register})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_storefrontImageUrl:
-
-                break;
-            case R.id.iv_storefrontImageUrl:
-
+            case R.id.show_storefrontImageUrl:
+                PictureSelectorUtils.selectImage(CreateShopActivity.this,1);
                 break;
             case R.id.tv_businessCategoryId:
                 if (pvOptions!=null && mCategoryList != null && mCategoryList.size() > 0) {
@@ -115,6 +122,35 @@ public class CreateShopActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                    if(selectList!=null){
+                        mRlStorefrontImageUrl.setVisibility(View.GONE);
+                        mShowStorefrontImageUrl.setVisibility(View.VISIBLE);
+                        GlideImageLoader.loadImageViewRadius(CreateShopActivity.this,
+                                selectList.get(0).getCompressPath(),15,mShowStorefrontImageUrl);
+                        HttpsUtils.uploadFiles(selectList.get(0).getCompressPath(), new HttpsUtils.UploadFileInterface() {
+                            @Override
+                            public void succeed(String path) {
+
+                            }
+
+                            @Override
+                            public void failure() {
+
+                            }
+                        });
+                    }
+                    break;
+                default:
+            }
+        }
+    }
     private void businessCategoryTree() {
         RetrofitUtil.getInstance().apiService()
                 .businessCategoryTree()
