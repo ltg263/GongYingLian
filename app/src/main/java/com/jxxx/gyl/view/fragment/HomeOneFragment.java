@@ -7,20 +7,16 @@ import android.widget.RelativeLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.jxxx.gyl.MainActivity;
 import com.jxxx.gyl.R;
-import com.jxxx.gyl.api.ApiService;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseFragment;
-import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.bean.CategoryDataList;
 import com.jxxx.gyl.bean.GlobalAdconfigBean;
 import com.jxxx.gyl.bean.HomeActivityData;
 import com.jxxx.gyl.bean.HomeBannerData;
 import com.jxxx.gyl.bean.HomeCategoryData;
-import com.jxxx.gyl.bean.UserInfoUpdate;
 import com.jxxx.gyl.utils.GlideImageLoader;
 import com.jxxx.gyl.utils.StatusBarUtil;
 import com.jxxx.gyl.view.activity.login.LoginActivity;
@@ -34,7 +30,6 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
