@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- 按压状态 -->
-    <item android:drawable="@drawable/group_1014" android:state_checked="true" />
+    <item android:drawable="@drawable/home_tab_selector4_yes" android:state_checked="true" />
 
     <!-- 默认状态 -->
-    <item android:drawable="@drawable/group_1018" />
+    <item android:drawable="@drawable/home_tab_selector4_no" />
 
 </selector>
