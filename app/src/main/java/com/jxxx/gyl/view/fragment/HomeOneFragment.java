@@ -16,9 +16,11 @@ import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.bean.CategoryDataList;
+import com.jxxx.gyl.bean.GlobalAdconfigBean;
 import com.jxxx.gyl.bean.HomeActivityData;
 import com.jxxx.gyl.bean.HomeBannerData;
 import com.jxxx.gyl.bean.HomeCategoryData;
+import com.jxxx.gyl.bean.UserInfoUpdate;
 import com.jxxx.gyl.utils.GlideImageLoader;
 import com.jxxx.gyl.view.activity.login.LoginActivity;
 import com.jxxx.gyl.view.activity.search.SearchGoodsActivity;
@@ -97,8 +99,46 @@ public class HomeOneFragment extends BaseFragment {
     protected void initData() {
         getHomeBanner();
         homeListCategoryTop();
+        globalAdConfig();
         listCategory();
         homeActivityList("1");
+    }
+
+    private void globalAdConfig() {
+
+        RetrofitUtil.getInstance().apiService()
+                .globalAdConfig()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<GlobalAdconfigBean>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<GlobalAdconfigBean> result) {
+                        if(isResultOk(result)) {
+                            GlobalAdconfigBean.IndexPageBean indexPage = result.getData().getIndexPage();
+                            if(indexPage.getStatus().equals("1")){
+                                mHomeBannerGg.setVisibility(View.VISIBLE);
+                                ArrayList<String> list_path = new ArrayList<>();
+                                list_path.add(result.getData().getIndexPage().getImageUrl());
+                                bannerConfig(mHomeBannerGg,list_path);
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
@@ -126,7 +166,11 @@ public class HomeOneFragment extends BaseFragment {
                         hideLoading();
                         if(isResultOk(result)){
                             if(result.getData()!=null){
-                                bannerConfig(mHomeBanner,result.getData());
+                                ArrayList<String> list_path = new ArrayList<>();
+                                for (int i = 0; i < result.getData().size(); i++) {
+                                    list_path.add(result.getData().get(i).getImgUrl());
+                                }
+                                bannerConfig(mHomeBanner,list_path);
                             }
                         };
                     }
@@ -174,6 +218,7 @@ public class HomeOneFragment extends BaseFragment {
                     }
                 });
     }
+
     private void listCategory() {
         RetrofitUtil.getInstance().apiService()
                 .listCategory()
@@ -256,12 +301,8 @@ public class HomeOneFragment extends BaseFragment {
         }
     }
 
-    private void bannerConfig(Banner mBanner,List<HomeBannerData> list) {
+    private void bannerConfig(Banner mBanner,List<String> list_path) {
 
-        ArrayList<String> list_path = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            list_path.add(list.get(i).getImgUrl());
-        }
         //设置内置样式，共有六种可以点入方法内逐一体验使用。
         mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器，图片加载器在下方

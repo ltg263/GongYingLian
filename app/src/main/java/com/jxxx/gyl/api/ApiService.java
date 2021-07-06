@@ -9,6 +9,7 @@ import com.jxxx.gyl.base.ShopInfoListData;
 import com.jxxx.gyl.bean.AddressModel;
 import com.jxxx.gyl.bean.CategoryDataList;
 import com.jxxx.gyl.bean.CategoryTreeData;
+import com.jxxx.gyl.bean.GlobalAdconfigBean;
 import com.jxxx.gyl.bean.HomeActivityData;
 import com.jxxx.gyl.bean.HomeBannerData;
 import com.jxxx.gyl.bean.HomeCategoryData;
@@ -194,6 +195,12 @@ public interface ApiService {
      */
     @POST("api/scmp-application-mall/customer/info")
     Observable<Result<UserInfoUpdate>> customerInfo();
+
+    /**
+     * 全局-当前用户信息接口
+     */
+    @GET("api/scmp-application-mall/global/adConfig")
+    Observable<Result<GlobalAdconfigBean>> globalAdConfig();
 
     /**
      * 收货地址页-收货地址列表接口
