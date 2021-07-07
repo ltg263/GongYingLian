@@ -1,5 +1,6 @@
 package com.jxxx.gyl.view.adapter;
 
+import android.text.Html;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -35,7 +36,8 @@ public class HomeGoodsTyAdapter extends BaseQuickAdapter<ShopInfoData, BaseViewH
             }
             helper.setText(R.id.tv_price, "无价格");
             if (data.getPriceInfo() != null) {
-                helper.setText(R.id.tv_price, data.getPriceInfo().getPrice());
+                String str = "￥<big><big>"+data.getPriceInfo().getPrice()+"</big></big></font>" +"/"+data.getPriceInfo().getUnit();
+                helper.setText(R.id.tv_price,Html.fromHtml(str));
             }
             if (data.getSkus() != null) {
                 String skuName = "";

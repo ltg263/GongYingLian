@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -156,7 +157,8 @@ public class ShopDetailsActivity extends BaseActivity {
         mTvName.setText(data.getSpuName());
         mTvPrice.setText("无价格");
         if (data.getPriceInfo() != null) {
-            mTvPrice.setText(data.getPriceInfo().getPrice());
+            String str = "￥<big><big>"+data.getPriceInfo().getPrice()+"</big></big></font>" +"/"+data.getPriceInfo().getUnit();
+            mTvPrice.setText(Html.fromHtml(str));
         }
         tv_spuShortDesc.setText(data.getSpuParams());
         skuId = data.getSkus().get(0).getId();

@@ -1,5 +1,6 @@
 package com.jxxx.gyl.view.adapter;
 
+import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -40,7 +41,8 @@ public class HomeCategoryContentAdapter extends BaseQuickAdapter<ShopInfoData, B
         }
         helper.setText(R.id.tv_price,"无价格");
         if(item.getPriceInfo()!=null){
-            helper.setText(R.id.tv_price,item.getPriceInfo().getPrice());
+            String str = "￥<big><big>"+item.getPriceInfo().getPrice()+"</big></big></font>" +"/"+item.getPriceInfo().getUnit();
+            helper.setText(R.id.tv_price, Html.fromHtml(str));
         }
         if(item.getSkus()!=null){
             String skuName = "";

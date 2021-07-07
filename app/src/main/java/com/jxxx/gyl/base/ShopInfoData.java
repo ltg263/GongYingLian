@@ -153,9 +153,19 @@ public class ShopInfoData {
     public static class PriceInfoBean {
         /**
          * price : 0
+         * unit : 斤
          */
 
         private String price;
+        private String unit;
+
+        public void setUnit(String unit) {
+            this.unit = unit;
+        }
+
+        public String getUnit() {
+            return unit;
+        }
 
         public String getPrice() {
             return price;
