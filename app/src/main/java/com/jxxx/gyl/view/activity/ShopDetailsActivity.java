@@ -157,7 +157,7 @@ public class ShopDetailsActivity extends BaseActivity {
         mTvName.setText(data.getSpuName());
         mTvPrice.setText("无价格");
         if (data.getPriceInfo() != null) {
-            String str = "￥<big><big>"+data.getPriceInfo().getPrice()+"</big></big></font>" +"/"+data.getPriceInfo().getUnit();
+            String str = "￥<big><big>"+data.getPriceInfo().getPrice()+"</big></big></font>" +data.getPriceInfo().getUnit();
             mTvPrice.setText(Html.fromHtml(str));
         }
         tv_spuShortDesc.setText(data.getSpuParams());

@@ -36,7 +36,7 @@ public class HomeGoodsTyAdapter extends BaseQuickAdapter<ShopInfoData, BaseViewH
             }
             helper.setText(R.id.tv_price, "无价格");
             if (data.getPriceInfo() != null) {
-                String str = "￥<big><big>"+data.getPriceInfo().getPrice()+"</big></big></font>" +"/"+data.getPriceInfo().getUnit();
+                String str = "￥<big><big>"+data.getPriceInfo().getPrice()+"</big></big></font>" +data.getPriceInfo().getUnit();
                 helper.setText(R.id.tv_price,Html.fromHtml(str));
             }
             if (data.getSkus() != null) {

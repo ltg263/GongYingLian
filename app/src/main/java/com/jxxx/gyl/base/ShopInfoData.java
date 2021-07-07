@@ -164,7 +164,7 @@ public class ShopInfoData {
         }
 
         public String getUnit() {
-            return unit;
+            return "";
         }
 
         public String getPrice() {
