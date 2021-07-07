@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.app.ConstValues;
@@ -149,6 +150,17 @@ public class MainActivity extends BaseActivity{
         if(StringUtil.isNotBlank(ConstValues.SHOW_MAIN_FRAGMENT)){
             startFragmentTwo(ConstValues.SHOW_MAIN_FRAGMENT);
         }
+        if(ConstValues.ISLOGIN){
+            HttpsUtils.getShopCarNum(new HttpsUtils.ShoppingCartInterface() {
+                @Override
+                public void isResult(Boolean isResult, String num) {
+                    setShopCarNum(num);
+                }
+            });
+        }else {
+            tvNum.setText("");
+            tvNum.setVisibility(View.GONE);
+        }
     }
 
     public void startFragmentTwo(String type){
@@ -167,10 +179,11 @@ public class MainActivity extends BaseActivity{
         mHomeThreeFragment.initData();
     }
 
-    int a = 1;
     public void setShopCarNum(String num){
         tvNum.setVisibility(View.VISIBLE);
-        a++;
-        tvNum.setText(a+"");
+        tvNum.setText(num);
+        if(num.equals("0")){
+            tvNum.setVisibility(View.GONE);
+        }
     }
 }

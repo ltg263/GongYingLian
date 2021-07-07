@@ -1,5 +1,7 @@
 package com.jxxx.gyl.base;
 
+import com.jxxx.gyl.utils.StringUtil;
+
 import java.util.List;
 
 public class ShopInfoData {
@@ -164,6 +166,9 @@ public class ShopInfoData {
         }
 
         public String getUnit() {
+            if(StringUtil.isNotBlank(unit)){
+                return "/"+unit;
+            }
             return "";
         }
 

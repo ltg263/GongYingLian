@@ -1,5 +1,6 @@
 package com.jxxx.gyl.view.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -32,7 +33,7 @@ public class MineCouponFragment extends BaseFragment {
     MineCouponListAdapter mMineCouponListAdapter;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
-
+    String status;
     @Override
     protected int setLayoutResourceID() {
         return R.layout.activity_refresh_list;
@@ -40,6 +41,10 @@ public class MineCouponFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            status = bundle.getString("status");
+        }
         myToolbar.setVisibility(View.GONE);
         mMineCouponListAdapter = new MineCouponListAdapter(null);
         mRvList.setAdapter(mMineCouponListAdapter);
@@ -55,7 +60,7 @@ public class MineCouponFragment extends BaseFragment {
     @Override
     protected void initData() {
         RetrofitUtil.getInstance().apiService()
-                .couponTemplateList()
+                .userCouponList(status)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Result<List<CouponTemplateData>>>() {

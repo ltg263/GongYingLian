@@ -2,6 +2,7 @@ package com.jxxx.gyl.api;
 
 import android.content.Context;
 import android.os.CountDownTimer;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -168,7 +169,7 @@ public class HttpsUtils {
                         if(result.getCode()==200) {
                             ToastUtils.showLong("已放入购物车");
                             if(mShoppingCartInterface!=null){
-                                mShoppingCartInterface.isResult(true,getShopCarNum());
+                                getShopCarNum(mShoppingCartInterface);
                             }
                         }else{
                             if(mShoppingCartInterface!=null){
@@ -208,7 +209,7 @@ public class HttpsUtils {
                     public void onNext(Result<ShoppingCartListBean> result) {
                         if(result.getCode()==200) {
                             if(mShoppingCartInterface!=null){
-                                mShoppingCartInterface.isResult(true,getShopCarNum());
+                                getShopCarNum(mShoppingCartInterface);
                             }
                         }else{
                             if(mShoppingCartInterface!=null){
@@ -230,8 +231,32 @@ public class HttpsUtils {
                 });
     }
 
-    public static String getShopCarNum(){
-        return "10";
+    public static void getShopCarNum(ShoppingCartInterface mShoppingCartInterface){
+        RetrofitUtil.getInstance().apiService()
+                .shoppingCartCount()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<String>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<String> result) {
+                        if(result.getCode()==200) {
+                            mShoppingCartInterface.isResult(true,result.getData());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
     }
 
     public interface ShoppingCartInterface {

@@ -144,15 +144,9 @@ public class HomeThreeFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        initData();
         mTvLogin.setText("去购买");
-        if (!ConstValues.ISLOGIN) {
-            mRlNotShop.setVisibility(View.VISIBLE);
-            mLl1.setVisibility(View.VISIBLE);
-            mRvShopList.setVisibility(View.GONE);
-            mTvLogin.setText("去登录");
-        } else {
-            initData();
-        }
+        initData();
     }
 
     @Override
@@ -165,6 +159,13 @@ public class HomeThreeFragment extends BaseFragment {
 
     @Override
     public void initData() {
+        if(!ConstValues.ISLOGIN){
+            mRlNotShop.setVisibility(View.VISIBLE);
+            mLl1.setVisibility(View.GONE);
+            mRvShopList.setVisibility(View.GONE);
+            mTvLogin.setText("去登录");
+            return;
+        }
         RetrofitUtil.getInstance().apiService()
                 .shoppingCartList()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -190,6 +191,11 @@ public class HomeThreeFragment extends BaseFragment {
                                     }
                                 }
                                 mTvPrice.setText(result.getData().getTotalAmount());
+                            }else{
+                                mRlNotShop.setVisibility(View.VISIBLE);
+                                mLl1.setVisibility(View.GONE);
+                                mRvShopList.setVisibility(View.GONE);
+                                mTvLogin.setText("去购买");
                             }
                         }
                     }

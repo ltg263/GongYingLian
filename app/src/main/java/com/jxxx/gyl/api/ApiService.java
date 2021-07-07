@@ -153,6 +153,13 @@ public interface ApiService {
     Observable<Result<List<CommodityCategory>>> getCategoryListAll();
 
     /**
+     * 我的-优惠券列表
+     * @return
+     */
+    @GET(ConstValues.BASE_URL + "/api/scmp-application-mall/userCoupon/list/{status}")
+    Observable<Result<List<CouponTemplateData>>> userCouponList(@Path("status") String status);
+
+    /**
      * 领券中心-优惠券列表
      * @return
      */
@@ -207,6 +214,12 @@ public interface ApiService {
      */
     @GET("api/scmp-application-mall/shoppingCart/list")
     Observable<Result<ShoppingCartListBean>> shoppingCartList();
+
+    /**
+     * 购物车-用户购物车商品数量
+     */
+    @GET("api/scmp-application-mall/shoppingCart/count")
+    Observable<Result<String>> shoppingCartCount();
 
     /**
      * 购物车-勾选商品
