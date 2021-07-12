@@ -70,6 +70,7 @@ public class HomeOneFragment extends BaseFragment {
         if(hidden){
             StatusBarUtil.setStatusBarMode(getActivity(), true, R.color.white);
         }else {
+            initData();
             StatusBarUtil.setStatusBarMode(getActivity(), true, R.color.color_2E6DFB);
         }
     }
@@ -154,6 +155,7 @@ public class HomeOneFragment extends BaseFragment {
         if(ConstValues.ISLOGIN){
             rl_include_login.setVisibility(View.GONE);
         }
+        initData();
     }
 
     private void getHomeBanner(){

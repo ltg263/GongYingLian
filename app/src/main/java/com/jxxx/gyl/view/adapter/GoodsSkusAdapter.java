@@ -17,7 +17,7 @@ public class GoodsSkusAdapter extends BaseQuickAdapter<ShopInfoData.SkusBean, Ba
     @Override
     protected void convert(BaseViewHolder helper, ShopInfoData.SkusBean data) {
 //        GlideImageLoader.loadImageViewRadius(mContext,iconUrl,30,helper.getView(R.id.iv_img));
-        helper.setText(R.id.tv_type,data.getSkuName()).setText(R.id.tv_price,data.getSkuUnit())
+        helper.setText(R.id.tv_type,data.getSkuName()).setText(R.id.tv_price,"￥"+data.getPriceInfo().getPrice()+data.getPriceInfo().getUnit())
         .addOnClickListener(R.id.iv_add);
         helper.getView(R.id.rl_contact).setOnClickListener(new View.OnClickListener() {
             @Override

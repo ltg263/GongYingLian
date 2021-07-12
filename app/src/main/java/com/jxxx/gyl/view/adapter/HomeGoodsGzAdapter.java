@@ -21,7 +21,10 @@ public class HomeGoodsGzAdapter extends BaseQuickAdapter<ShopInfoData.SkusBean, 
 
     @Override
     protected void convert(BaseViewHolder helper, ShopInfoData.SkusBean item) {
-        helper.setText(R.id.tv_skuName,item.getSkuName()).setText(R.id.tv_skuUnit,"￥"+item.getSkuUnit());
+        helper.setText(R.id.tv_skuName,item.getSkuName()).setText(R.id.tv_skuUnit,"无价格");
+        if(item.getPriceInfo()!=null){
+            helper.setText(R.id.tv_skuUnit,"￥"+item.getPriceInfo().getPrice()+item.getSkuUnit());
+        }
         helper.setBackgroundRes(R.id.ll,R.drawable.circle_solid_f4f4f4_5)
                 .setTextColor(R.id.tv_skuName,mContext.getResources().getColor(R.color.color_333333))
                 .setTextColor(R.id.tv_skuUnit,mContext.getResources().getColor(R.color.color_666666));

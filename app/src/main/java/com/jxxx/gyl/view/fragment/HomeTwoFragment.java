@@ -80,12 +80,21 @@ public class HomeTwoFragment extends BaseFragment {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            initData();
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         rl_include_login.setVisibility(View.VISIBLE);
         if(ConstValues.ISLOGIN){
             rl_include_login.setVisibility(View.GONE);
         }
+        initData();
     }
     @Override
     protected void initData() {
