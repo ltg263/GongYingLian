@@ -17,8 +17,10 @@ import com.jxxx.gyl.bean.HomeCategoryData;
 import com.jxxx.gyl.bean.LoginData;
 import com.jxxx.gyl.bean.LoginRequest;
 import com.jxxx.gyl.bean.OrderInfoBean;
+import com.jxxx.gyl.bean.OrderPreviewBean;
 import com.jxxx.gyl.bean.ParamData;
 import com.jxxx.gyl.bean.PostAuditSubmitCommand;
+import com.jxxx.gyl.bean.PostOrderSubmit;
 import com.jxxx.gyl.bean.RechargeAllBean;
 import com.jxxx.gyl.bean.ShoppingCartListBean;
 import com.jxxx.gyl.bean.SubmitFilesBean;
@@ -274,6 +276,18 @@ public interface ApiService {
      */
     @POST("api/scmp-application-mall/shippingAddress/defaulted")
     Observable<Result<List<AddressModel>>> getSetDefault(@Body AddressModel mAddressModel);
+
+    /**
+     * 订单确认页-提交订单
+     */
+    @POST("scmp-application-mall/order/submit")
+    Observable<Result<List<AddressModel>>> postOrderSubmit(@Body PostOrderSubmit mPostOrderSubmit);
+
+    /**
+     * 订单确认页-订单预览
+     */
+    @GET("api/scmp-application-mall/order/preview")
+    Observable<Result<OrderPreviewBean>> getOrderPreview();
     /**
      * 设置默认地址
      *

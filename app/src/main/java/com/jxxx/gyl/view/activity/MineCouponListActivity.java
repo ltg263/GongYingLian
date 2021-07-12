@@ -1,6 +1,8 @@
 package com.jxxx.gyl.view.activity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -28,6 +30,8 @@ public class MineCouponListActivity extends BaseActivity {
     MagicIndicator mMagicIndicator;
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
+    @BindView(R.id.bnt)
+    TextView bnt;
 
     private final String[] CHANNELS = new String[]{"未使用", "已使用", "已过期"};
     private List<String> mDataList = Arrays.asList(CHANNELS);
@@ -41,6 +45,12 @@ public class MineCouponListActivity extends BaseActivity {
         setToolbar(mMyToolbar, "我的优惠券");
         MagicIndicatorUtils.initMagicIndicator_1(this, mDataList, mMagicIndicator, mViewPager);
         initVP();
+        bnt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                baseStartActivity(OrderCouponListActivity.class,null);
+            }
+        });
     }
     private void initVP() {
         getFragments();

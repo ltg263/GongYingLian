@@ -33,6 +33,7 @@ public class OrderCouponListActivity extends BaseActivity {
     RecyclerView mRvList;
 
     private OrderCouponAdapter mOrderCouponAdapter;
+    private List<CouponTemplateData> recommendCoupon;
 
     @Override
     public int intiLayout() {
@@ -45,6 +46,7 @@ public class OrderCouponListActivity extends BaseActivity {
 
         mOrderCouponAdapter = new OrderCouponAdapter(null);
         mRvList.setAdapter(mOrderCouponAdapter);
+        recommendCoupon = getIntent().getParcelableArrayListExtra("recommendCoupon");
 
         mOrderCouponAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
@@ -97,6 +99,10 @@ public class OrderCouponListActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        if(recommendCoupon!=null){
+            mOrderCouponAdapter.setNewData(recommendCoupon);
+            return;
+        }
         RetrofitUtil.getInstance().apiService()
                 .couponTemplateList()
                 .observeOn(AndroidSchedulers.mainThread())

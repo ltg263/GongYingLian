@@ -23,7 +23,7 @@ public class MineInvoiceOrderAdapter extends BaseQuickAdapter<String, BaseViewHo
         list.add("http://img.netbian.com/file/2021/0527/1f20f9804cb7390efc842f02f4765901.jpg");
         list.add("http://img.netbian.com/file/2021/0527/1f20f9804cb7390efc842f02f4765901.jpg");
         list.add("http://img.netbian.com/file/2021/0527/1f20f9804cb7390efc842f02f4765901.jpg");
-        rvShopList.setAdapter(new ShopImageAdapter(list));
+        rvShopList.setAdapter(new ShopImageAdapter(null));
     }
 
 }

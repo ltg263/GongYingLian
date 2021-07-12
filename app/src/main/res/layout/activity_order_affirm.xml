@@ -33,16 +33,17 @@
                     android:id="@+id/tv_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="地址"
+                    android:text="请选择收件信息"
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp_14" />
 
                 <TextView
+                    android:id="@+id/tv_contact_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_address"
                     android:layout_marginTop="5dp"
-                    android:text="姓名电话"
+                    android:text=""
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp_14" />
 
@@ -78,6 +79,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
+                        android:id="@+id/tv_deliveryTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableEnd="@mipmap/ic_right_gray"
@@ -109,6 +111,7 @@
                         app:spanCount="4" />
 
                     <TextView
+                        android:id="@+id/tv_totalItemNum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -143,6 +146,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
+                        android:id="@+id/tv_totalAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_10"
@@ -222,6 +226,7 @@
                     android:background="@color/color_bj_theme" />
 
                 <TextView
+                    android:id="@+id/tv_payableAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
@@ -346,6 +351,7 @@
                     android:textSize="@dimen/sp_12" />
 
                 <TextView
+                    android:id="@+id/tv_payAmount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

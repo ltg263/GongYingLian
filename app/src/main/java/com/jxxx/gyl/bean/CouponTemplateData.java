@@ -1,6 +1,9 @@
 package com.jxxx.gyl.bean;
 
-public class CouponTemplateData {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CouponTemplateData implements Parcelable {
 
     /**
      * couponType : 1
@@ -26,7 +29,6 @@ public class CouponTemplateData {
      * title : 满58减18
      * useSuperimposedType : 0
      */
-
     private String couponType;
     private String couponValue;
     private String description;
@@ -40,7 +42,7 @@ public class CouponTemplateData {
     private String receiveWay;
     private String releaseQuantity;
     private String residueQuantity;
-    private double residueRatio;
+    private String residueRatio;
     private String returnQualification;
     private String spuIds;
     private String spuRange;
@@ -49,6 +51,24 @@ public class CouponTemplateData {
     private String thresholdAmount;
     private String title;
     private String useSuperimposedType;
+    private String userId;
+    private String statusInfo;
+
+    public void setStatusInfo(String statusInfo) {
+        this.statusInfo = statusInfo;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getStatusInfo() {
+        return statusInfo;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
 
     public String getCouponType() {
         return couponType;
@@ -154,11 +174,11 @@ public class CouponTemplateData {
         this.residueQuantity = residueQuantity;
     }
 
-    public double getResidueRatio() {
+    public String getResidueRatio() {
         return residueRatio;
     }
 
-    public void setResidueRatio(double residueRatio) {
+    public void setResidueRatio(String residueRatio) {
         this.residueRatio = residueRatio;
     }
 
@@ -225,4 +245,106 @@ public class CouponTemplateData {
     public void setUseSuperimposedType(String useSuperimposedType) {
         this.useSuperimposedType = useSuperimposedType;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.couponType);
+        dest.writeString(this.couponValue);
+        dest.writeString(this.description);
+        dest.writeString(this.effectiveTime);
+        dest.writeString(this.id);
+        dest.writeString(this.invalidTime);
+        dest.writeString(this.isDraw);
+        dest.writeString(this.name);
+        dest.writeString(this.receiveEndTime);
+        dest.writeString(this.receiveStartTime);
+        dest.writeString(this.receiveWay);
+        dest.writeString(this.releaseQuantity);
+        dest.writeString(this.residueQuantity);
+        dest.writeString(this.residueRatio);
+        dest.writeString(this.returnQualification);
+        dest.writeString(this.spuIds);
+        dest.writeString(this.spuRange);
+        dest.writeString(this.status);
+        dest.writeString(this.tag);
+        dest.writeString(this.thresholdAmount);
+        dest.writeString(this.title);
+        dest.writeString(this.useSuperimposedType);
+        dest.writeString(this.userId);
+        dest.writeString(this.statusInfo);
+    }
+
+    public void readFromParcel(Parcel source) {
+        this.couponType = source.readString();
+        this.couponValue = source.readString();
+        this.description = source.readString();
+        this.effectiveTime = source.readString();
+        this.id = source.readString();
+        this.invalidTime = source.readString();
+        this.isDraw = source.readString();
+        this.name = source.readString();
+        this.receiveEndTime = source.readString();
+        this.receiveStartTime = source.readString();
+        this.receiveWay = source.readString();
+        this.releaseQuantity = source.readString();
+        this.residueQuantity = source.readString();
+        this.residueRatio = source.readString();
+        this.returnQualification = source.readString();
+        this.spuIds = source.readString();
+        this.spuRange = source.readString();
+        this.status = source.readString();
+        this.tag = source.readString();
+        this.thresholdAmount = source.readString();
+        this.title = source.readString();
+        this.useSuperimposedType = source.readString();
+        this.userId = source.readString();
+        this.statusInfo = source.readString();
+    }
+
+    public CouponTemplateData() {
+    }
+
+    protected CouponTemplateData(Parcel in) {
+        this.couponType = in.readString();
+        this.couponValue = in.readString();
+        this.description = in.readString();
+        this.effectiveTime = in.readString();
+        this.id = in.readString();
+        this.invalidTime = in.readString();
+        this.isDraw = in.readString();
+        this.name = in.readString();
+        this.receiveEndTime = in.readString();
+        this.receiveStartTime = in.readString();
+        this.receiveWay = in.readString();
+        this.releaseQuantity = in.readString();
+        this.residueQuantity = in.readString();
+        this.residueRatio = in.readString();
+        this.returnQualification = in.readString();
+        this.spuIds = in.readString();
+        this.spuRange = in.readString();
+        this.status = in.readString();
+        this.tag = in.readString();
+        this.thresholdAmount = in.readString();
+        this.title = in.readString();
+        this.useSuperimposedType = in.readString();
+        this.userId = in.readString();
+        this.statusInfo = in.readString();
+    }
+
+    public static final Parcelable.Creator<CouponTemplateData> CREATOR = new Parcelable.Creator<CouponTemplateData>() {
+        @Override
+        public CouponTemplateData createFromParcel(Parcel source) {
+            return new CouponTemplateData(source);
+        }
+
+        @Override
+        public CouponTemplateData[] newArray(int size) {
+            return new CouponTemplateData[size];
+        }
+    };
 }
