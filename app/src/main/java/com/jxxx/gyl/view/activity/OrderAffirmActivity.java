@@ -1,7 +1,9 @@
 package com.jxxx.gyl.view.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -63,6 +65,7 @@ public class OrderAffirmActivity extends BaseActivity {
     private OrderPreviewBean mData;
     private List<CouponTemplateData> recommendCoupon;
     OrderPreviewBean.PreviewOrderDTOBean previewOrderDTO;
+    public String userCouponId,userCouponAmount,shippingAddressId,shippingAddressNameP,shippingAddress;
     @Override
     public int intiLayout() {
         return R.layout.activity_order_affirm;
@@ -102,10 +105,13 @@ public class OrderAffirmActivity extends BaseActivity {
                             if(defaultShippingAddress!=null){
                                 tv_address.setText(defaultShippingAddress.getAddress());
                                 tv_contact_phone.setText(defaultShippingAddress.getContact()+"      "+defaultShippingAddress.getPhone());
+                                shippingAddressId = defaultShippingAddress.getId();
                             }
                             recommendCoupon = mData.getUserCouponList();
                             if(mData.getRecommendCoupon()!=null){
                                 tv_coupon.setText("-"+mData.getRecommendCoupon().getCouponValue());
+                                userCouponId = mData.getRecommendCoupon().getId();
+                                userCouponAmount = mData.getRecommendCoupon().getCouponValue();
                             }
                         }
                     }
@@ -120,6 +126,13 @@ public class OrderAffirmActivity extends BaseActivity {
                 });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tv_address.setText(shippingAddress);
+        tv_contact_phone.setText(shippingAddressNameP);
+    }
+
     @OnClick({R.id.rl_address, R.id.tv_invoice,R.id.tv_coupon,R.id.bnt,R.id.tv_totalItemNum})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -132,8 +145,9 @@ public class OrderAffirmActivity extends BaseActivity {
             case R.id.tv_coupon:
                 if(recommendCoupon!=null && recommendCoupon.size()>0){
                     Intent mIntent = new Intent(this,OrderCouponListActivity.class);
+                    Log.w("recommendCoupon","recommendCoupon"+(ArrayList<? extends Parcelable>) recommendCoupon);
                     mIntent.putParcelableArrayListExtra("recommendCoupon", (ArrayList<? extends Parcelable>) recommendCoupon);
-                    baseStartActivity(OrderCouponListActivity.class,null);
+                    startActivityForResult(mIntent, 21);
                     return;
                 }
                 ToastUtils.showLong("暂无可用优惠券");
@@ -161,16 +175,19 @@ public class OrderAffirmActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 20) {
-            if (resultCode == 1) {
-//                addressData = (AddressData) data.getSerializableExtra("address");
-//                if (addressData == null) {
-//                    tvAddress.setText("请选择收货地址");
-//                } else {
-//                    mTvAddressNameAndName.setText(addressData.getAcceptName()+"   "+addressData.getMobile());
-//                    tvAddress.setVisibility(View.VISIBLE);
-//                    tvAddress.setText(addressData.getRegions() + addressData.getLocation());
-//                }
+        if(resultCode == 1){
+            if (requestCode == 20) {
+                shippingAddressId = data.getStringExtra("shippingAddressId");
+                shippingAddress = data.getStringExtra("shippingAddress");
+                shippingAddressNameP = data.getStringExtra("shippingAddressNameP");
+                tv_address.setText(shippingAddress);
+                tv_contact_phone.setText(shippingAddressNameP);
+            }
+            if (requestCode == 21) {
+                userCouponAmount = data.getStringExtra("userCouponAmount");
+                userCouponId = data.getStringExtra("userCouponId");
+                tv_coupon.setText("-"+userCouponAmount);
+//                tv_payAmount.setText(previewOrderDTO.getPayAmount());
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.jxxx.gyl.view.activity;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.widget.Toolbar;
@@ -35,6 +37,7 @@ public class OrderCouponListActivity extends BaseActivity {
     private OrderCouponAdapter mOrderCouponAdapter;
     private List<CouponTemplateData> recommendCoupon;
 
+
     @Override
     public int intiLayout() {
         return R.layout.activity_refresh_list;
@@ -53,6 +56,17 @@ public class OrderCouponListActivity extends BaseActivity {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()){
                     case R.id.tv_yhq_type_1:
+                        if(recommendCoupon!=null){
+                            Intent data = new Intent();
+                            //把要传递的数据封装至意图对象中
+                            data.putExtra("userCouponId",  recommendCoupon.get(position).getId());
+                            data.putExtra("userCouponAmount", recommendCoupon.get(position).getCouponValue());
+                            //当前Activity销毁时，data这个意图就会传递给启动当前Activity的那个Activity
+                            setResult(1, data);
+                            //销毁当前Activity
+                            finish();
+                            return;
+                        }
                         if(mOrderCouponAdapter.getData().get(position).getIsDraw().equals("0")){
                             couponTemplateReceive(mOrderCouponAdapter.getData().get(position).getId());
                         }else{

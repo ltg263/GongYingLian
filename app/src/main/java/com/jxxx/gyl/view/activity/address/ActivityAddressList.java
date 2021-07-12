@@ -43,7 +43,6 @@ public class ActivityAddressList extends BaseActivity {
     @BindView(R.id.rv_list)
     RecyclerView rvList;
     AdapterListAddress mAdapterListAddress;
-//    private List<AddressModel> addressDataList = new ArrayList<>();
 
     @Override
     public int intiLayout() {
@@ -80,10 +79,11 @@ public class ActivityAddressList extends BaseActivity {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 AddressModel mAddressModel = mAdapterListAddress.getData().get(position);
-                Log.w("---,","source:"+source);
                 if (source == 0) {
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("address",mAddressModel);
+                    bundle.putSerializable("shippingAddressId",mAddressModel.getId());
+                    bundle.putSerializable("shippingAddressNameP",mAddressModel.getContact()+"      "+mAddressModel.getPhone());
+                    bundle.putSerializable("shippingAddress",mAddressModel.getAddress());
                     ActivityAddressEdit.startActivity(view.getContext(),bundle);
                 } else {
                     if(type==1){

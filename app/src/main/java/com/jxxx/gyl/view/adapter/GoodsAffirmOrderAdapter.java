@@ -19,7 +19,7 @@ public class GoodsAffirmOrderAdapter extends BaseQuickAdapter<OrderPreviewBean.P
         GlideImageLoader.loadImageViewRadius(mContext,mData.getIconUrl(),30,helper.getView(R.id.iv_img));
         helper.setText(R.id.tv_type,mData.getSpuName())
                 .setText(R.id.tv_price,"￥"+mData.getPreviewOrderSkuDTO().getSkuPriceDTO().getSkuPrice()+mData.getPreviewOrderSkuDTO().getSkuPriceDTO().getUnit())
-        .addOnClickListener(R.id.iv_add);
+        .addOnClickListener(R.id.iv_add).setText(R.id.tv_num,"×"+mData.getPreviewOrderSkuDTO().getSkuNum());
         helper.getView(R.id.rl_contact).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
