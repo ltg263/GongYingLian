@@ -6,7 +6,7 @@ public class ShoppingCartListBean {
 
     /**
      * totalAmount : 33.9
-     * itemList : [{"id":5,"cartSpuDTO":{"id":"1","spuName":"牛筒骨  解冻品","spuSupplyType":2,"suppliersName":"三都港","iconUrl":"https://tse1-mm.cn.bing.net/th/id/OIP-C.NmdXHefRPYfMk61ACChXCgHaE7?w=259&h=180&c=7&o=5&pid=1.7","cartSkuDTO":{"id":"1","spuId":"1","skuName":"3斤","skuUnit":"10/斤","skuNum":1,"skuPriceDTO":{"skuPrice":10.5}}},"checked":1,"currentStatus":1,"groupKey":"三都港","tips":"","extension":""},{"id":6,"cartSpuDTO":{"id":"3","spuName":"毛肚","spuSupplyType":2,"suppliersName":"三都港","iconUrl":"https://tse1-mm.cn.bing.net/th/id/OIP-C.NmdXHefRPYfMk61ACChXCgHaE7?w=259&h=180&c=7&o=5&pid=1.7","cartSkuDTO":{"id":"6","spuId":"3","skuName":"500g","skuUnit":"10/300g","skuNum":1,"skuPriceDTO":{"skuPrice":1}}},"checked":1,"currentStatus":1,"groupKey":"三都港","tips":"","extension":""},{"id":7,"cartSpuDTO":{"id":"2","spuName":"牛百叶 水发","spuSupplyType":1,"suppliersName":"三都港","iconUrl":"https://tse1-mm.cn.bing.net/th/id/OIP-C.NmdXHefRPYfMk61ACChXCgHaE7?w=259&h=180&c=7&o=5&pid=1.7","cartSkuDTO":{"id":"3","spuId":"2","skuName":"小袋","skuUnit":"10/件","skuNum":2,"skuPriceDTO":{"skuPrice":11.2}}},"checked":1,"currentStatus":1,"groupKey":"三都港","tips":"","extension":""}]
+     * itemList : [{"id":5,"cartSpuDTO":{"id":"1","spuName":"牛筒骨  解冻品","spuSupplyType":2,"supplierName":"三都港","iconUrl":"https://tse1-mm.cn.bing.net/th/id/OIP-C.NmdXHefRPYfMk61ACChXCgHaE7?w=259&h=180&c=7&o=5&pid=1.7","cartSkuDTO":{"id":"1","spuId":"1","skuName":"3斤","skuUnit":"10/斤","skuNum":1,"skuPriceDTO":{"skuPrice":10.5}}},"checked":1,"currentStatus":1,"groupKey":"三都港","tips":"","extension":""},{"id":6,"cartSpuDTO":{"id":"3","spuName":"毛肚","spuSupplyType":2,"supplierName":"三都港","iconUrl":"https://tse1-mm.cn.bing.net/th/id/OIP-C.NmdXHefRPYfMk61ACChXCgHaE7?w=259&h=180&c=7&o=5&pid=1.7","cartSkuDTO":{"id":"6","spuId":"3","skuName":"500g","skuUnit":"10/300g","skuNum":1,"skuPriceDTO":{"skuPrice":1}}},"checked":1,"currentStatus":1,"groupKey":"三都港","tips":"","extension":""},{"id":7,"cartSpuDTO":{"id":"2","spuName":"牛百叶 水发","spuSupplyType":1,"supplierName":"三都港","iconUrl":"https://tse1-mm.cn.bing.net/th/id/OIP-C.NmdXHefRPYfMk61ACChXCgHaE7?w=259&h=180&c=7&o=5&pid=1.7","cartSkuDTO":{"id":"3","spuId":"2","skuName":"小袋","skuUnit":"10/件","skuNum":2,"skuPriceDTO":{"skuPrice":11.2}}},"checked":1,"currentStatus":1,"groupKey":"三都港","tips":"","extension":""}]
      */
 
     private String totalAmount;
@@ -31,7 +31,7 @@ public class ShoppingCartListBean {
     public static class ItemListBean {
         /**
          * id : 5
-         * cartSpuDTO : {"id":"1","spuName":"牛筒骨  解冻品","spuSupplyType":2,"suppliersName":"三都港","iconUrl":"https://tse1-mm.cn.bing.net/th/id/OIP-C.NmdXHefRPYfMk61ACChXCgHaE7?w=259&h=180&c=7&o=5&pid=1.7","cartSkuDTO":{"id":"1","spuId":"1","skuName":"3斤","skuUnit":"10/斤","skuNum":1,"skuPriceDTO":{"skuPrice":10.5}}}
+         * cartSpuDTO : {"id":"1","spuName":"牛筒骨  解冻品","spuSupplyType":2,"supplierName":"三都港","iconUrl":"https://tse1-mm.cn.bing.net/th/id/OIP-C.NmdXHefRPYfMk61ACChXCgHaE7?w=259&h=180&c=7&o=5&pid=1.7","cartSkuDTO":{"id":"1","spuId":"1","skuName":"3斤","skuUnit":"10/斤","skuNum":1,"skuPriceDTO":{"skuPrice":10.5}}}
          * checked : 1
          * currentStatus : 1
          * groupKey : 三都港
@@ -108,7 +108,7 @@ public class ShoppingCartListBean {
              * id : 1
              * spuName : 牛筒骨  解冻品
              * spuSupplyType : 2
-             * suppliersName : 三都港
+             * supplierName : 三都港
              * iconUrl : https://tse1-mm.cn.bing.net/th/id/OIP-C.NmdXHefRPYfMk61ACChXCgHaE7?w=259&h=180&c=7&o=5&pid=1.7
              * cartSkuDTO : {"id":"1","spuId":"1","skuName":"3斤","skuUnit":"10/斤","skuNum":1,"skuPriceDTO":{"skuPrice":10.5}}
              */
@@ -116,7 +116,7 @@ public class ShoppingCartListBean {
             private String id;
             private String spuName;
             private String spuSupplyType;
-            private String suppliersName;
+            private String supplierName;
             private String iconUrl;
             private CartSkuDTOBean cartSkuDTO;
 
@@ -144,12 +144,12 @@ public class ShoppingCartListBean {
                 this.spuSupplyType = spuSupplyType;
             }
 
-            public String getSuppliersName() {
-                return suppliersName;
+            public String getSupplierName() {
+                return supplierName;
             }
 
-            public void setSuppliersName(String suppliersName) {
-                this.suppliersName = suppliersName;
+            public void setSupplierName(String supplierName) {
+                this.supplierName = supplierName;
             }
 
             public String getIconUrl() {

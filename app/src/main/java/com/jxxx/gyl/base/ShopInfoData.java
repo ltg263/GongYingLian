@@ -19,8 +19,8 @@ public class ShopInfoData {
      * spuSaleNum : 0
      * spuShortDesc : 
      * spuSupplyType : 0
-     * suppliersId : 
-     * suppliersName : 
+     * supplierId :
+     * supplierName :
      */
 
     private String iconUrl;
@@ -34,8 +34,8 @@ public class ShopInfoData {
     private String spuSaleNum;
     private String spuShortDesc;
     private String spuSupplyType;
-    private String suppliersId;
-    private String suppliersName;
+    private String supplierId;
+    private String supplierName;
     private List<SkusBean> skus;
 
     public String getIconUrl() {
@@ -128,20 +128,20 @@ public class ShopInfoData {
         this.spuSupplyType = spuSupplyType;
     }
 
-    public String getSuppliersId() {
-        return suppliersId;
+    public String getSupplierId() {
+        return supplierId;
     }
 
-    public void setSuppliersId(String suppliersId) {
-        this.suppliersId = suppliersId;
+    public void setSupplierId(String supplierId) {
+        this.supplierId = supplierId;
     }
 
-    public String getSuppliersName() {
-        return suppliersName;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setSuppliersName(String suppliersName) {
-        this.suppliersName = suppliersName;
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 
     public List<SkusBean> getSkus() {

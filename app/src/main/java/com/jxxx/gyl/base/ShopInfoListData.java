@@ -6,7 +6,7 @@ import java.util.List;
 public class ShopInfoListData {
 
     /**
-     * recommendList : [{"iconUrl":"","id":"","offSaleTime":"","skus":[{"id":"","levelPrice":{"level":"","skuId":0,"skuLevelPrice":0},"skuImage":"","skuName":"","skuSaleNum":0,"skuUnit":"","spuId":"","stockNum":0}],"spuDesc":"","spuImgs":"","spuName":"","spuParams":"","spuPrice":0,"spuSaleNum":0,"spuSelfSupply":false,"spuShortDesc":"","suppliersId":"","suppliersName":""}]
+     * recommendList : [{"iconUrl":"","id":"","offSaleTime":"","skus":[{"id":"","levelPrice":{"level":"","skuId":0,"skuLevelPrice":0},"skuImage":"","skuName":"","skuSaleNum":0,"skuUnit":"","spuId":"","stockNum":0}],"spuDesc":"","spuImgs":"","spuName":"","spuParams":"","spuPrice":0,"spuSaleNum":0,"spuSelfSupply":false,"spuShortDesc":"","supplierId":"","supplierName":""}]
      * relatedList : [{}]
      * spu : {}
      */
