@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.base.ShopInfoData;
+import com.jxxx.gyl.bean.OrderPreviewBean;
+import com.jxxx.gyl.view.adapter.GoodsAffirmOrderAdapter;
 import com.jxxx.gyl.view.adapter.GoodsSkusAdapter;
 
 import java.util.List;
@@ -22,11 +24,11 @@ import java.util.List;
 
 public class PopupWindowSkus extends PopupWindow {
 
-    private final GoodsSkusAdapter mHomeGoodsSkusAdapter;
+    private final GoodsAffirmOrderAdapter mGoodsAffirmOrderAdapter;
     Context mContext;
 
     @SuppressLint("ClickableViewAccessibility")
-    public PopupWindowSkus(Context context, List<ShopInfoData.SkusBean> mSkusBean,String iconUrl, GiveDialogInterface dialogInterface) {
+    public PopupWindowSkus(Context context, List<OrderPreviewBean.PreviewOrderDTOBean.OrderDetailListBean> mSkusBean,  GiveDialogInterface dialogInterface) {
         super(context);
         this.mContext = context;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -48,12 +50,12 @@ public class PopupWindowSkus extends PopupWindow {
         this.setBackgroundDrawable(dw);
         //mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
         RecyclerView mRvList = view.findViewById(R.id.rv_list);
-        mHomeGoodsSkusAdapter = new GoodsSkusAdapter(mSkusBean,iconUrl);
+        mGoodsAffirmOrderAdapter = new GoodsAffirmOrderAdapter(mSkusBean);
         mRvList.setLayoutManager(new LinearLayoutManager(context));
         mRvList.setHasFixedSize(true);
-        mRvList.setAdapter(mHomeGoodsSkusAdapter);
+        mRvList.setAdapter(mGoodsAffirmOrderAdapter);
 
-        mHomeGoodsSkusAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        mGoodsAffirmOrderAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 dismiss();
@@ -75,7 +77,7 @@ public class PopupWindowSkus extends PopupWindow {
         /**
          * 确定
          */
-        void btnConfirm(ShopInfoData.SkusBean bean);
+        void btnConfirm(OrderPreviewBean.PreviewOrderDTOBean.OrderDetailListBean bean);
     }
 
 

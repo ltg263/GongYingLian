@@ -2,7 +2,9 @@ package com.jxxx.gyl.view.activity;
 
 import android.content.Intent;
 import android.os.Parcelable;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,9 +16,11 @@ import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseActivity;
+import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.bean.AddressModel;
 import com.jxxx.gyl.bean.CouponTemplateData;
 import com.jxxx.gyl.bean.OrderPreviewBean;
+import com.jxxx.gyl.utils.view.PopupWindowSkus;
 import com.jxxx.gyl.view.activity.address.ActivityAddressList;
 import com.jxxx.gyl.view.adapter.ShopImageAdapter;
 
@@ -58,7 +62,7 @@ public class OrderAffirmActivity extends BaseActivity {
     TextView tv_contact_phone;
     private OrderPreviewBean mData;
     private List<CouponTemplateData> recommendCoupon;
-
+    OrderPreviewBean.PreviewOrderDTOBean previewOrderDTO;
     @Override
     public int intiLayout() {
         return R.layout.activity_order_affirm;
@@ -87,7 +91,7 @@ public class OrderAffirmActivity extends BaseActivity {
                     public void onNext(Result<OrderPreviewBean> result) {
                         if(isResultOk(result)) {
                             mData = result.getData();
-                            OrderPreviewBean.PreviewOrderDTOBean previewOrderDTO = mData.getPreviewOrderDTO();
+                            previewOrderDTO = mData.getPreviewOrderDTO();
                             tv_totalItemNum.setText("共"+previewOrderDTO.getTotalItemNum()+"件");
                             mShopImageAdapter.setNewData(previewOrderDTO.getOrderDetailList());
                             tv_deliveryTime.setText(previewOrderDTO.getDeliveryTime());
@@ -116,7 +120,7 @@ public class OrderAffirmActivity extends BaseActivity {
                 });
     }
 
-    @OnClick({R.id.rl_address, R.id.tv_invoice,R.id.tv_coupon,R.id.bnt})
+    @OnClick({R.id.rl_address, R.id.tv_invoice,R.id.tv_coupon,R.id.bnt,R.id.tv_totalItemNum})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_address:
@@ -134,12 +138,26 @@ public class OrderAffirmActivity extends BaseActivity {
                 }
                 ToastUtils.showLong("暂无可用优惠券");
                 break;
+            case R.id.tv_totalItemNum:
+                popupWindw();
+                break;
             case R.id.bnt:
                 baseStartActivity(OrderPayActivity.class,null);
                 break;
         }
     }
+    PopupWindowSkus window;
 
+    private void popupWindw() {
+        window = new PopupWindowSkus(this, previewOrderDTO.getOrderDetailList(), new PopupWindowSkus.GiveDialogInterface() {
+            @Override
+            public void btnConfirm(OrderPreviewBean.PreviewOrderDTOBean.OrderDetailListBean bean) {
+            }
+        });
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        window.setOutsideTouchable(true);
+        window.showAtLocation(tv_totalItemNum, Gravity.BOTTOM, 0, 0);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -155,6 +173,5 @@ public class OrderAffirmActivity extends BaseActivity {
 //                }
             }
         }
-
     }
 }

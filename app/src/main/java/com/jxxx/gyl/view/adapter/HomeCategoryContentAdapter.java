@@ -137,14 +137,14 @@ public class HomeCategoryContentAdapter extends BaseQuickAdapter<ShopInfoData, B
     PopupWindowSkus window;
 
     private void popupWindw(View view,List<ShopInfoData.SkusBean> skus,String iconUrl) {
-        window = new PopupWindowSkus(mContext, skus, iconUrl,new PopupWindowSkus.GiveDialogInterface() {
-            @Override
-            public void btnConfirm(ShopInfoData.SkusBean bean) {
-            }
-        });
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        window.setOutsideTouchable(true);
-        window.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+//        window = new PopupWindowSkus(mContext, skus, iconUrl,new PopupWindowSkus.GiveDialogInterface() {
+//            @Override
+//            public void btnConfirm(ShopInfoData.SkusBean bean) {
+//            }
+//        });
+//        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//        window.setOutsideTouchable(true);
+//        window.showAtLocation(view, Gravity.BOTTOM, 0, 0);
     }
 
 }
