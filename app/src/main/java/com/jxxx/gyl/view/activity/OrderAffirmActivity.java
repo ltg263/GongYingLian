@@ -52,6 +52,8 @@ public class OrderAffirmActivity extends BaseActivity {
     TextView tv_deliveryTime;
     @BindView(R.id.tv_totalAmount)
     TextView tv_totalAmount;
+    @BindView(R.id.tv_freightAmount)
+    TextView tv_freightAmount;
     @BindView(R.id.tv_payableAmount)
     TextView tv_payableAmount;
     @BindView(R.id.tv_payAmount)
@@ -99,6 +101,7 @@ public class OrderAffirmActivity extends BaseActivity {
                             mShopImageAdapter.setNewData(previewOrderDTO.getOrderDetailList());
                             tv_deliveryTime.setText(previewOrderDTO.getDeliveryTime());
                             tv_totalAmount.setText("￥"+previewOrderDTO.getTotalAmount());
+                            tv_freightAmount.setText("￥"+previewOrderDTO.getFreightAmount());
                             tv_payableAmount.setText("商品合计：￥"+previewOrderDTO.getPayableAmount());
                             tv_payAmount.setText(previewOrderDTO.getPayAmount());
                             OrderPreviewBean.DefaultShippingAddressBean defaultShippingAddress = mData.getDefaultShippingAddress();
@@ -187,7 +190,8 @@ public class OrderAffirmActivity extends BaseActivity {
                 userCouponAmount = data.getStringExtra("userCouponAmount");
                 userCouponId = data.getStringExtra("userCouponId");
                 tv_coupon.setText("-"+userCouponAmount);
-//                tv_payAmount.setText(previewOrderDTO.getPayAmount());
+                double payAmount = Double.valueOf(previewOrderDTO.getPayableAmount())-Double.valueOf(userCouponAmount);
+                tv_payAmount.setText(String.valueOf(payAmount));
             }
         }
     }
