@@ -9,10 +9,23 @@
 
     <include layout="@layout/include_toolbar" />
 
+
+    <TextView
+        android:id="@+id/tv_not_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/ic_cart_not"
+        android:drawablePadding="15dp"
+        android:gravity="center"
+        android:paddingVertical="50dp"
+        android:text="暂无数据"
+        android:textColor="@color/color_999999" />
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:srlAccentColor="#00000000"
         app:srlEnablePreviewInEditMode="true"
         app:srlPrimaryColor="#00000000"

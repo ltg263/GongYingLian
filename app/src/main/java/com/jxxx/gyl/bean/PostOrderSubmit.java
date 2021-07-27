@@ -1,6 +1,8 @@
 package com.jxxx.gyl.bean;
 
-public class PostOrderSubmit {
+import java.io.Serializable;
+
+public class PostOrderSubmit implements Serializable {
 
     /**
      * dedicatedReceiptInfo : {"account":"1","address":"1","bank":"1","bankPhone":"1","contact":"1","detailsAddress":"1","phone":"1","ratepayerNo":"1","receiptTitle":"1","region":"1"}
@@ -21,6 +23,20 @@ public class PostOrderSubmit {
     private String shippingAddressId;
     private String userCouponId;
     private String userRemark;
+
+    @Override
+    public String toString() {
+        return "PostOrderSubmit{" +
+                "dedicatedReceiptInfo=" + dedicatedReceiptInfo +
+                ", generalReceiptInfo=" + generalReceiptInfo +
+                ", innerOrderNo='" + innerOrderNo + '\'' +
+                ", payChannel='" + payChannel + '\'' +
+                ", receiptType='" + receiptType + '\'' +
+                ", shippingAddressId='" + shippingAddressId + '\'' +
+                ", userCouponId='" + userCouponId + '\'' +
+                ", userRemark='" + userRemark + '\'' +
+                '}';
+    }
 
     public DedicatedReceiptInfoBean getDedicatedReceiptInfo() {
         return dedicatedReceiptInfo;
@@ -86,7 +102,7 @@ public class PostOrderSubmit {
         this.userRemark = userRemark;
     }
 
-    public static class DedicatedReceiptInfoBean {
+    public static class DedicatedReceiptInfoBean implements Serializable{
         /**
          * account : 1
          * address : 1

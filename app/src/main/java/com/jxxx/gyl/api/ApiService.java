@@ -16,8 +16,10 @@ import com.jxxx.gyl.bean.HomeBannerData;
 import com.jxxx.gyl.bean.HomeCategoryData;
 import com.jxxx.gyl.bean.LoginData;
 import com.jxxx.gyl.bean.LoginRequest;
+import com.jxxx.gyl.bean.OrderHistoryBean;
 import com.jxxx.gyl.bean.OrderInfoBean;
 import com.jxxx.gyl.bean.OrderPreviewBean;
+import com.jxxx.gyl.bean.OrderSubmitData;
 import com.jxxx.gyl.bean.ParamData;
 import com.jxxx.gyl.bean.PostAuditSubmitCommand;
 import com.jxxx.gyl.bean.PostOrderSubmit;
@@ -280,14 +282,20 @@ public interface ApiService {
     /**
      * 订单确认页-提交订单
      */
-    @POST("scmp-application-mall/order/submit")
-    Observable<Result<List<AddressModel>>> postOrderSubmit(@Body PostOrderSubmit mPostOrderSubmit);
+    @POST("api/scmp-application-mall/order/submit")
+    Observable<Result<OrderSubmitData>> postOrderSubmit(@Body PostOrderSubmit mPostOrderSubmit);
 
     /**
      * 订单确认页-订单预览
      */
     @GET("api/scmp-application-mall/order/preview")
     Observable<Result<OrderPreviewBean>> getOrderPreview();
+
+    /**
+     * 订单列表页-订单历史
+     */
+    @GET("api/scmp-application-mall/order/history")
+    Observable<Result<OrderHistoryBean>> getOrderHistoryList();
     /**
      * 设置默认地址
      *

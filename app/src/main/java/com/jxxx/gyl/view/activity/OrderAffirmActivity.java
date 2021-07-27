@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
@@ -22,6 +23,8 @@ import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.bean.AddressModel;
 import com.jxxx.gyl.bean.CouponTemplateData;
 import com.jxxx.gyl.bean.OrderPreviewBean;
+import com.jxxx.gyl.bean.PostOrderSubmit;
+import com.jxxx.gyl.utils.PickerViewUtils;
 import com.jxxx.gyl.utils.view.PopupWindowSkus;
 import com.jxxx.gyl.view.activity.address.ActivityAddressList;
 import com.jxxx.gyl.view.adapter.ShopImageAdapter;
@@ -64,6 +67,10 @@ public class OrderAffirmActivity extends BaseActivity {
     TextView tv_coupon;
     @BindView(R.id.tv_contact_phone)
     TextView tv_contact_phone;
+    @BindView(R.id.tv_userRemark)
+    TextView tv_userRemark;
+    @BindView(R.id.tv_payChannel)
+    TextView tv_payChannel;
     private OrderPreviewBean mData;
     private List<CouponTemplateData> recommendCoupon;
     OrderPreviewBean.PreviewOrderDTOBean previewOrderDTO;
@@ -76,6 +83,7 @@ public class OrderAffirmActivity extends BaseActivity {
     @Override
     public void initView() {
         setToolbar(mMyToolbar, "确认订单");
+        tv_payChannel.setText("微信支付");
         mShopImageAdapter = new ShopImageAdapter(null);
         mRvShopList.setAdapter(mShopImageAdapter);
     }
@@ -136,7 +144,7 @@ public class OrderAffirmActivity extends BaseActivity {
         tv_contact_phone.setText(shippingAddressNameP);
     }
 
-    @OnClick({R.id.rl_address, R.id.tv_invoice,R.id.tv_coupon,R.id.bnt,R.id.tv_totalItemNum})
+    @OnClick({R.id.rl_address, R.id.tv_invoice,R.id.tv_coupon,R.id.bnt,R.id.tv_totalItemNum,R.id.tv_payChannel})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_address:
@@ -155,11 +163,41 @@ public class OrderAffirmActivity extends BaseActivity {
                 }
                 ToastUtils.showLong("暂无可用优惠券");
                 break;
+            case R.id.tv_payChannel:
+                List<String> listPay = new ArrayList<>();
+                listPay.add("微信支付");
+                listPay.add("支付宝支付");
+                listPay.add("钱包支付");
+                PickerViewUtils.selectorCustom(this, listPay,
+                        "选择支付方式", new PickerViewUtils.ConditionInterfacd() {
+                    @Override
+                    public void setIndex(int pos) {
+                        tv_payChannel.setText(listPay.get(pos));
+                    }
+                });
+                break;
             case R.id.tv_totalItemNum:
                 popupWindw();
                 break;
             case R.id.bnt:
-                baseStartActivity(OrderPayActivity.class,null);
+                PostOrderSubmit mPostOrderSubmit = new PostOrderSubmit();
+                mPostOrderSubmit.setReceiptType("0");
+                mPostOrderSubmit.setInnerOrderNo(previewOrderDTO.getInnerOrderNo());
+                if(tv_payChannel.getText().toString().equals("微信支付")){
+                    mPostOrderSubmit.setPayChannel("WECHAT");
+                }else if(tv_payChannel.getText().toString().equals("支付宝支付")){
+                    mPostOrderSubmit.setPayChannel("ALIPAY");
+                }else if(tv_payChannel.getText().toString().equals("钱包支付")){
+                    mPostOrderSubmit.setPayChannel("CREDIT");
+                }//	支付方式:WECHAT、ALIPAY、CREDIT,示例值(WECHAT)
+                mPostOrderSubmit.setShippingAddressId(shippingAddressId);
+                mPostOrderSubmit.setUserCouponId(userCouponId);
+                mPostOrderSubmit.setUserRemark(tv_userRemark.getText().toString());
+                mPostOrderSubmit.setDedicatedReceiptInfo(new PostOrderSubmit.DedicatedReceiptInfoBean());
+                mPostOrderSubmit.setGeneralReceiptInfo(new PostOrderSubmit.DedicatedReceiptInfoBean());
+                Intent mIntent = new Intent(this,OrderPayActivity.class);
+                mIntent.putExtra("mPostOrderSubmit",mPostOrderSubmit);
+                startActivity(mIntent);
                 break;
         }
     }

@@ -10,21 +10,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseFragment;
+import com.jxxx.gyl.bean.OrderHistoryBean;
 import com.jxxx.gyl.view.activity.OrderApplyAfterActivity;
 import com.jxxx.gyl.view.activity.OrderDetailsActivity;
 import com.jxxx.gyl.view.adapter.HomeOrderAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class HomeOrderListFragment extends BaseFragment {
     @BindView(R.id.my_toolbar)
     Toolbar myToolbar;
     @BindView(R.id.rv_list)
     RecyclerView mRvList;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout mRefreshLayout;
+    @BindView(R.id.tv_not_data)
+    TextView tv_not_data;
 
     private HomeOrderAdapter mHomeOrderAdapter;
     @Override
@@ -105,6 +117,39 @@ public class HomeOrderListFragment extends BaseFragment {
     }
     @Override
     protected void initData() {
+        RetrofitUtil.getInstance().apiService()
+                .getOrderHistoryList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<OrderHistoryBean>>() {
 
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<OrderHistoryBean> result) {
+                        if(isResultOk(result)) {
+                            OrderHistoryBean mData = result.getData();
+                            if(mData.getTotal()==0){
+                                tv_not_data.setVisibility(View.VISIBLE);
+                                mRefreshLayout.setVisibility(View.GONE);
+                                return;
+                            }
+                            tv_not_data.setVisibility(View.GONE);
+                            mRefreshLayout.setVisibility(View.VISIBLE);
+                            List<OrderHistoryBean.RecordsBean> records = result.getData().getRecords();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
     }
 }
