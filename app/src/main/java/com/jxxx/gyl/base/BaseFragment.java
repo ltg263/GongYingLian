@@ -99,7 +99,7 @@ public abstract class BaseFragment extends Fragment {
     protected void baseStartActivity(Class<?> cls,String str){
         Intent mIntent = new Intent(getActivity(),cls);
         if(StringUtil.isNotBlank(str)){
-            mIntent.putExtra("str",str);
+            mIntent.putExtra(ConstValues.APPNAME_ENGLISH,str);
         }
         startActivity(mIntent);
 

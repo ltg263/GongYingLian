@@ -103,6 +103,22 @@ public class PostOrderSubmit implements Serializable {
     }
 
     public static class DedicatedReceiptInfoBean implements Serializable{
+        @Override
+        public String toString() {
+            return "DedicatedReceiptInfoBean{" +
+                    "account='" + account + '\'' +
+                    ", address='" + address + '\'' +
+                    ", bank='" + bank + '\'' +
+                    ", bankPhone='" + bankPhone + '\'' +
+                    ", contact='" + contact + '\'' +
+                    ", detailsAddress='" + detailsAddress + '\'' +
+                    ", phone='" + phone + '\'' +
+                    ", ratepayerNo='" + ratepayerNo + '\'' +
+                    ", receiptTitle='" + receiptTitle + '\'' +
+                    ", region='" + region + '\'' +
+                    '}';
+        }
+
         /**
          * account : 1
          * address : 1

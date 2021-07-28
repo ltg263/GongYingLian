@@ -14,7 +14,16 @@ public class OrderSubmitData {
     private String failureReason;
     private String innerOrderNo;
     private String submitStatus;
+    private String payAmount;
     private List<StockLessListBean> stockLessList;
+
+    public void setPayAmount(String payAmount) {
+        this.payAmount = payAmount;
+    }
+
+    public String getPayAmount() {
+        return payAmount;
+    }
 
     public String getFailureReason() {
         return failureReason;

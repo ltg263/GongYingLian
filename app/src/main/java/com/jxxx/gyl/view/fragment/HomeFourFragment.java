@@ -1,6 +1,9 @@
 package com.jxxx.gyl.view.fragment;
 
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -68,7 +71,33 @@ public class HomeFourFragment extends BaseFragment {
     List<Fragment> fragments = new ArrayList<>();
     private List<Fragment> getFragments() {
         for(int i = 0;i<mDataList.size();i++){
-            fragments.add(new HomeOrderListFragment());
+            Bundle mBundle1 = new Bundle();
+            String orderStatusString = null;
+            switch (i){
+                case 0:
+                    orderStatusString = null;
+                    break;
+                case 1:
+                    orderStatusString = "UNPAID";
+                    break;
+                case 2:
+                    orderStatusString = "UN_DELIVERY";
+                    break;
+                case 3:
+                    orderStatusString = "UN_RECEIVE";
+                    break;
+                case 4:
+                    orderStatusString = "FINISHED";
+                    break;
+                case 5:
+                    orderStatusString = "CANCELLED";
+                    break;
+            }
+            mBundle1.putString("orderStatusString",orderStatusString);
+            HomeOrderListFragment mHomeOrderListFragment = new HomeOrderListFragment();
+            mHomeOrderListFragment.setArguments(mBundle1);
+            fragments.add(mHomeOrderListFragment);
+
         }
         return fragments;
     }

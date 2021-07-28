@@ -17,6 +17,7 @@ import com.jxxx.gyl.bean.HomeCategoryData;
 import com.jxxx.gyl.bean.LoginData;
 import com.jxxx.gyl.bean.LoginRequest;
 import com.jxxx.gyl.bean.OrderHistoryBean;
+import com.jxxx.gyl.bean.OrderHistoryDetailBean;
 import com.jxxx.gyl.bean.OrderInfoBean;
 import com.jxxx.gyl.bean.OrderPreviewBean;
 import com.jxxx.gyl.bean.OrderSubmitData;
@@ -295,7 +296,14 @@ public interface ApiService {
      * 订单列表页-订单历史
      */
     @GET("api/scmp-application-mall/order/history")
-    Observable<Result<OrderHistoryBean>> getOrderHistoryList();
+    Observable<Result<OrderHistoryBean>> getOrderHistoryList(@Query("orderStatusString") String orderStatusString,
+                                                             @Query("current") int current,@Query("size") int size);
+
+    /**
+     * 订单列表页-订单历史
+     */
+    @GET("api/scmp-application-mall/order/detail/{innerOrderNo}")
+    Observable<Result<OrderHistoryDetailBean>> getOrderHistoryDetail(@Path("innerOrderNo") String innerOrderNo);
     /**
      * 设置默认地址
      *

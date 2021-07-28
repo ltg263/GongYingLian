@@ -1,10 +1,13 @@
 package com.jxxx.gyl.view.activity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
@@ -12,6 +15,7 @@ import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.bean.OrderSubmitData;
 import com.jxxx.gyl.bean.PostOrderSubmit;
 import com.jxxx.gyl.bean.ShoppingCartListBean;
+import com.jxxx.gyl.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -29,6 +33,8 @@ public class OrderPayActivity extends BaseActivity {
     ImageView mIvSelectZfb;
     @BindView(R.id.iv_select_yhk)
     ImageView mIvSelectYhk;
+    @BindView(R.id.tv_skuPrice)
+    TextView tv_skuPrice;
     PostOrderSubmit mPostOrderSubmit;
     @Override
     public int intiLayout() {
@@ -43,6 +49,7 @@ public class OrderPayActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        Log.w("mPostOrderSubmit","mPostOrderSubmit:"+mPostOrderSubmit.toString());
         RetrofitUtil.getInstance().apiService()
                 .postOrderSubmit(mPostOrderSubmit)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -57,6 +64,9 @@ public class OrderPayActivity extends BaseActivity {
                     public void onNext(Result<OrderSubmitData> result) {
                         if (isResultOk(result)) {
                             result.getData();
+                            tv_skuPrice.setText("￥"+result.getData().getPayAmount());
+                            ToastUtils.showLong(result.getData().getSubmitStatus().equals("1")?"创建成功":"创建失败");
+
                         }
                     }
 

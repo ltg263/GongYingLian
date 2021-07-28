@@ -42,7 +42,7 @@ public class MineHtListActivity extends BaseActivity {
         list.add("");
         list.add("");
         list.add("");
-        mMineListHtAdapter = new HomeOrderAdapter(list);
+        mMineListHtAdapter = new HomeOrderAdapter(null);
         mRvList.setAdapter(mMineListHtAdapter);
 
         mMineListHtAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
