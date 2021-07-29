@@ -21,14 +21,10 @@ import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.bean.ChannelsListBean;
 import com.jxxx.gyl.bean.OrderSubmitData;
 import com.jxxx.gyl.bean.PostOrderSubmit;
-import com.jxxx.gyl.bean.ShoppingCartListBean;
-import com.jxxx.gyl.utils.PickerViewUtils;
-import com.jxxx.gyl.utils.ToastUtil;
 import com.jxxx.gyl.utils.alipay.PaymentContract;
 import com.jxxx.gyl.utils.alipay.PaymentParameterBean;
 import com.jxxx.gyl.utils.alipay.PaymentPresenter;
 import com.jxxx.gyl.view.adapter.PayChannelsAdapter;
-import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
@@ -165,7 +161,6 @@ public class OrderPayActivity extends BaseActivity implements PaymentContract.Vi
                 mIvSelectYhk.setSelected(true);
                 break;
             case R.id.btn:
-//                baseStartActivity(OrderPayOkActivity.class,null);
                 if(mPostOrderSubmit==null){
                     appPayZfb(getIntent().getStringExtra("payNo"));
                     return;
@@ -174,15 +169,15 @@ public class OrderPayActivity extends BaseActivity implements PaymentContract.Vi
                 HttpsUtils.payCreate(mPayCreate, new HttpsUtils.ShoppingCartInterface() {
                     @Override
                     public void isResult(Boolean isResult, String num) {
-                        appPayZfb(num);
+                        HttpsUtils.shouldOverrideUrlLoading(OrderPayActivity.this,num);
+//                        appPayZfb(num);
                     }
                 });
                 break;
         }
     }
 
-
-//    private void weCahtPay(PayOrderResponse.DataBean.PayStrBean payStr){
+    //    private void weCahtPay(PayOrderResponse.DataBean.PayStrBean payStr){
 //        PayReq req = new PayReq();
 //        req.appId = payStr.getAppid();
 //        req.partnerId = payStr.getPartnerid();

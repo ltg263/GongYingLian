@@ -1,6 +1,5 @@
 package com.jxxx.gyl.api;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,8 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.View;
-import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -21,7 +18,6 @@ import com.jxxx.gyl.bean.LoginRequest;
 import com.jxxx.gyl.bean.OrderInfoBean;
 import com.jxxx.gyl.bean.PayDataBean;
 import com.jxxx.gyl.bean.PostOrderSubmit;
-import com.jxxx.gyl.bean.RechargeAllBean;
 import com.jxxx.gyl.bean.ShoppingCartListBean;
 import com.jxxx.gyl.bean.SubmitFilesBean;
 import com.jxxx.gyl.utils.StringUtil;
@@ -333,7 +329,7 @@ public class HttpsUtils {
                     @Override
                     public void onNext(Result<PayDataBean> result) {
                         if(result.getCode()==200) {
-                            mShoppingCartInterface.isResult(null,result.getData().getPayOrderNo());
+                            mShoppingCartInterface.isResult(null,result.getData().getPayData());
                         }else{
                         }
                     }
@@ -383,9 +379,11 @@ public class HttpsUtils {
                 });
 //
     }
-    public boolean shouldOverrideUrlLoading(Context mContext ,final WebView view, String url) {
+    public static void shouldOverrideUrlLoading(Context mContext , String url) {
         // 获取上下文, H5PayDemoActivity 为当前页面
-        // ------ 对 alipays:相关的 scheme 处理 -------
+        String alipayUrl = "alipays://platformapi/startapp?appId=2021002156632327"
+                + "&page=pages/index/index&payData="+url;//启动参数
+        mContext.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(alipayUrl)));
         if(url.startsWith("alipays:") || url.startsWith("alipay")) {
             try {
                 mContext.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(url)));
@@ -395,20 +393,12 @@ public class HttpsUtils {
                         .setPositiveButton("立即安装", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Uri alipayUrl = Uri.parse("https://d.alipay.com");
+                                Uri alipayUrl = Uri.parse("https://m.taobao.com");
                                 mContext.startActivity(new Intent("android.intent.action.VIEW", alipayUrl));
                             }
                         }).setNegativeButton("取消", null).show();
             }
-            return true;
         }
-        // ------- 处理结束 -------
-        if (!(url.startsWith("http") || url.startsWith("https"))) {
-            return true;
-        }
-        view.loadUrl(url);
-        return true;
     }
-
 
 }
