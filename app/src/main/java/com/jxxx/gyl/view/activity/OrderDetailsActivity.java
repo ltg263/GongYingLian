@@ -18,7 +18,6 @@ import com.jxxx.gyl.utils.OrderListBntUtils;
 import com.jxxx.gyl.view.adapter.OrderShopAdapter;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
