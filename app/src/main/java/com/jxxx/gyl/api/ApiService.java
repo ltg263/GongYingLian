@@ -9,6 +9,7 @@ import com.jxxx.gyl.base.ShopInfoListData;
 import com.jxxx.gyl.bean.AddressModel;
 import com.jxxx.gyl.bean.CategoryDataList;
 import com.jxxx.gyl.bean.CategoryTreeData;
+import com.jxxx.gyl.bean.ChannelsListBean;
 import com.jxxx.gyl.bean.CouponTemplateData;
 import com.jxxx.gyl.bean.GlobalAdconfigBean;
 import com.jxxx.gyl.bean.HomeActivityData;
@@ -22,6 +23,7 @@ import com.jxxx.gyl.bean.OrderInfoBean;
 import com.jxxx.gyl.bean.OrderPreviewBean;
 import com.jxxx.gyl.bean.OrderSubmitData;
 import com.jxxx.gyl.bean.ParamData;
+import com.jxxx.gyl.bean.PayDataBean;
 import com.jxxx.gyl.bean.PostAuditSubmitCommand;
 import com.jxxx.gyl.bean.PostOrderSubmit;
 import com.jxxx.gyl.bean.RechargeAllBean;
@@ -312,5 +314,26 @@ public interface ApiService {
 
     @GET("backstage/api/v1/wallet/recharge/all")
     Observable<Result<RechargeAllBean>> backstageRechargeAll();
+
+    /**
+     * 支付页-支付方式列表
+     * @return
+     */
+    @GET("api/scmp-application-mall/pay/channels")
+    Observable<Result<List<ChannelsListBean>>> payChannelsList(@Query("orderType") String orderType);
+
+    /**
+     * 支付页-预支付
+     * @return
+     */
+    @POST("api/scmp-application-mall/pay/create")
+    Observable<Result<PayDataBean>> payCreate(@Body PostOrderSubmit.PayCreate mPayCreate);
+
+    /**
+     * 支付页-查询支付结果
+     * @return
+     */
+    @POST("api/scmp-application-mall/pay/query")
+    Observable<Result<PayDataBean>> payQuery(@Query("innerOrderNo") String innerOrderNo,@Query("orderType") String orderType);
 
 }

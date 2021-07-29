@@ -1,16 +1,27 @@
 package com.jxxx.gyl.api;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.bean.ChannelsListBean;
 import com.jxxx.gyl.bean.LoginRequest;
 import com.jxxx.gyl.bean.OrderInfoBean;
+import com.jxxx.gyl.bean.PayDataBean;
+import com.jxxx.gyl.bean.PostOrderSubmit;
+import com.jxxx.gyl.bean.RechargeAllBean;
 import com.jxxx.gyl.bean.ShoppingCartListBean;
 import com.jxxx.gyl.bean.SubmitFilesBean;
 import com.jxxx.gyl.utils.StringUtil;
@@ -20,6 +31,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observer;
@@ -265,4 +277,138 @@ public class HttpsUtils {
          */
         public void isResult(Boolean isResult,String num);
     }
+
+    public static void payChannelsList(String orderType,PayChannelsInterface mPayChannelsInterface){
+        RetrofitUtil.getInstance().apiService()
+                .payChannelsList(orderType)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<List<ChannelsListBean>>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<List<ChannelsListBean>> result) {
+                        if(result.getCode()==200) {
+                            mPayChannelsInterface.getPayChannelsResult(result.getData());
+                        }else{
+                            ToastUtils.showShort(result.getError());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+//                        dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+//                        dismiss();
+                    }
+                });
+//
+    }
+
+    public interface PayChannelsInterface {
+        /**
+         * 确定
+         */
+        public void getPayChannelsResult(List<ChannelsListBean> result);
+    }
+
+    public static void payCreate(PostOrderSubmit.PayCreate mPayCreate,ShoppingCartInterface mShoppingCartInterface){
+        Log.w("mPayCreate","mPayCreate:"+mPayCreate.toString());
+        RetrofitUtil.getInstance().apiService()
+                .payCreate(mPayCreate)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<PayDataBean>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<PayDataBean> result) {
+                        if(result.getCode()==200) {
+                            mShoppingCartInterface.isResult(null,result.getData().getPayOrderNo());
+                        }else{
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+//                        dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+//                        dismiss();
+                    }
+                });
+//
+    }
+
+
+    public static void payQuery(String innerOrderNo,ShoppingCartInterface mShoppingCartInterface){
+        RetrofitUtil.getInstance().apiService()
+                .payQuery(innerOrderNo,"PURCHASE")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<PayDataBean>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<PayDataBean> result) {
+                        if(result.getCode()==200) {
+                            mShoppingCartInterface.isResult(null,result.getData().getStatus());
+                        }else{
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+//                        dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+//                        dismiss();
+                    }
+                });
+//
+    }
+    public boolean shouldOverrideUrlLoading(Context mContext ,final WebView view, String url) {
+        // 获取上下文, H5PayDemoActivity 为当前页面
+        // ------ 对 alipays:相关的 scheme 处理 -------
+        if(url.startsWith("alipays:") || url.startsWith("alipay")) {
+            try {
+                mContext.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(url)));
+            } catch (Exception e) {
+                new AlertDialog.Builder(mContext)
+                        .setMessage("未检测到支付宝客户端，请安装后重试。")
+                        .setPositiveButton("立即安装", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Uri alipayUrl = Uri.parse("https://d.alipay.com");
+                                mContext.startActivity(new Intent("android.intent.action.VIEW", alipayUrl));
+                            }
+                        }).setNegativeButton("取消", null).show();
+            }
+            return true;
+        }
+        // ------- 处理结束 -------
+        if (!(url.startsWith("http") || url.startsWith("https"))) {
+            return true;
+        }
+        view.loadUrl(url);
+        return true;
+    }
+
+
 }

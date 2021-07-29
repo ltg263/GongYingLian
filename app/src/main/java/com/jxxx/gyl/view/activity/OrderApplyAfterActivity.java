@@ -51,7 +51,7 @@ public class OrderApplyAfterActivity extends BaseActivity {
         list.add("买多了，买错了2");
         list.add("买多了，买错了3");
         list.add("买多了，买错了4");
-        mOrderShopAdapter = new OrderShopAdapter(list.subList(0,2));
+        mOrderShopAdapter = new OrderShopAdapter(null);
         mRvShopList.setAdapter(mOrderShopAdapter);
 
         mOrderAfterSmAdapter = new OrderAfterSmAdapter(list);

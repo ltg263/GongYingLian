@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_bj_theme"
@@ -10,7 +11,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="支付剩余时间 00:00:00"
         android:textColor="@color/color_333333"
@@ -43,12 +44,20 @@
             android:textColor="@color/color_333333"
             android:textSize="@dimen/sp_16" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/dp_10">
+            android:padding="@dimen/dp_10"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"
@@ -73,14 +82,16 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.8dp"
-            android:background="@color/color_bj_theme" />
+            android:background="@color/color_bj_theme"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/dp_10">
+            android:padding="@dimen/dp_10"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"
@@ -105,14 +116,16 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.8dp"
-            android:background="@color/color_bj_theme" />
+            android:background="@color/color_bj_theme"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/dp_10">
+            android:padding="@dimen/dp_10"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"

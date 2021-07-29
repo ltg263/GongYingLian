@@ -12,12 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.bean.OrderHistoryBean;
+import com.jxxx.gyl.bean.OrderHistoryDetailBean;
+import com.jxxx.gyl.bean.PostOrderSubmit;
+import com.jxxx.gyl.utils.OrderListBntUtils;
 import com.jxxx.gyl.view.activity.OrderApplyAfterActivity;
 import com.jxxx.gyl.view.activity.OrderDetailsActivity;
+import com.jxxx.gyl.view.activity.OrderPayActivity;
 import com.jxxx.gyl.view.adapter.HomeOrderAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -45,6 +50,7 @@ public class HomeOrderListFragment extends BaseFragment {
     int current = 1;
     String orderStatusString;
     private HomeOrderAdapter mHomeOrderAdapter;
+
     @Override
     protected int setLayoutResourceID() {
         return R.layout.activity_refresh_list;
@@ -75,7 +81,8 @@ public class HomeOrderListFragment extends BaseFragment {
                     case R.id.bnt_1:
                     case R.id.bnt_2:
                     case R.id.bnt_3:
-                        startOrderType(((TextView)view).getText().toString());
+                        OrderListBntUtils.startOrderType(mContext,((TextView)view).getText().toString(),
+                                mHomeOrderAdapter.getData().get(position));
                         break;
                 }
             }
@@ -104,32 +111,6 @@ public class HomeOrderListFragment extends BaseFragment {
             initData();
         }
     }
-
-    private void startOrderType(String strOrderType) {
-        Log.w("startOrderType","strOrderType:"+strOrderType);
-        switch (strOrderType){
-            case "去支付":
-
-                break;
-            case "确认收货":
-
-                break;
-            case "取消订单":
-
-                break;
-            case "申请售后":
-                baseStartActivity(OrderApplyAfterActivity.class,null);
-
-                break;
-            case "再来一单":
-
-                break;
-            case "删除订单":
-
-                break;
-        }
-    }
-
     private View getTopView(){
         View view = View.inflate(getActivity(), R.layout.item_home_order, null);
         view.findViewById(R.id.ll).setVisibility(View.VISIBLE);
@@ -166,7 +147,7 @@ public class HomeOrderListFragment extends BaseFragment {
                             }
                             tv_not_data.setVisibility(View.GONE);
                             mRefreshLayout.setVisibility(View.VISIBLE);
-                            List<OrderHistoryBean.RecordsBean> records = result.getData().getRecords();
+                            List<OrderHistoryDetailBean> records = result.getData().getRecords();
                             if(current == 1){
                                 mHomeOrderAdapter.setNewData(records);
                             }else{

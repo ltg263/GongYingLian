@@ -223,4 +223,61 @@ public class PostOrderSubmit implements Serializable {
             this.region = region;
         }
     }
+
+    public static class PayCreate{
+
+        @Override
+        public String toString() {
+            return "PayCreate{" +
+                    "innerOrderNo='" + innerOrderNo + '\'' +
+                    ", orderAmount='" + orderAmount + '\'' +
+                    ", orderType='" + orderType + '\'' +
+                    ", payChannel='" + payChannel + '\'' +
+                    '}';
+        }
+
+        /**
+         * innerOrderNo : OR1212212122
+         * orderAmount : 100.01
+         * orderType : PURCHASE
+         * payChannel : WECHAT
+         */
+
+        private String innerOrderNo;
+        private String orderAmount;
+        private String orderType;
+        private String payChannel;
+
+        public String getInnerOrderNo() {
+            return innerOrderNo;
+        }
+
+        public void setInnerOrderNo(String innerOrderNo) {
+            this.innerOrderNo = innerOrderNo;
+        }
+
+        public String getOrderAmount() {
+            return orderAmount;
+        }
+
+        public void setOrderAmount(String orderAmount) {
+            this.orderAmount = orderAmount;
+        }
+
+        public String getOrderType() {
+            return orderType;
+        }
+
+        public void setOrderType(String orderType) {
+            this.orderType = orderType;
+        }
+
+        public String getPayChannel() {
+            return payChannel;
+        }
+
+        public void setPayChannel(String payChannel) {
+            this.payChannel = payChannel;
+        }
+    }
 }

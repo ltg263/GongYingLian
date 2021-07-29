@@ -16,11 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.bean.AddressModel;
+import com.jxxx.gyl.bean.ChannelsListBean;
 import com.jxxx.gyl.bean.CouponTemplateData;
 import com.jxxx.gyl.bean.OrderPreviewBean;
 import com.jxxx.gyl.bean.PostOrderSubmit;
@@ -83,9 +85,9 @@ public class OrderAffirmActivity extends BaseActivity {
     @Override
     public void initView() {
         setToolbar(mMyToolbar, "确认订单");
-        tv_payChannel.setText("微信支付");
         mShopImageAdapter = new ShopImageAdapter(null);
         mRvShopList.setAdapter(mShopImageAdapter);
+        tv_payChannel.setText(payChannel);
     }
 
     @Override
@@ -114,7 +116,7 @@ public class OrderAffirmActivity extends BaseActivity {
                             tv_payAmount.setText(previewOrderDTO.getPayAmount());
                             OrderPreviewBean.DefaultShippingAddressBean defaultShippingAddress = mData.getDefaultShippingAddress();
                             if(defaultShippingAddress!=null){
-                                tv_address.setText(defaultShippingAddress.getAddress());
+                                tv_address.setText(defaultShippingAddress.getAddress()+"-"+defaultShippingAddress.getHouseNo());
                                 tv_contact_phone.setText(defaultShippingAddress.getContact()+"      "+defaultShippingAddress.getPhone());
                                 shippingAddressId = defaultShippingAddress.getId();
                             }
@@ -135,6 +137,17 @@ public class OrderAffirmActivity extends BaseActivity {
                     public void onComplete() {
                     }
                 });
+        HttpsUtils.payChannelsList("PURCHASE", new HttpsUtils.PayChannelsInterface() {
+            @Override
+            public void getPayChannelsResult(List<ChannelsListBean> result) {
+                OrderAffirmActivity.this.result = result;
+               for(int i=0;i<result.size();i++){
+                   listPay.add(result.get(i).getChannelName());
+                   tv_payChannel.setText(result.get(0).getChannelName());
+                   payChannel = result.get(0).getChannelCode();
+               }
+            }
+        });
     }
 
     @Override
@@ -143,7 +156,9 @@ public class OrderAffirmActivity extends BaseActivity {
         tv_address.setText(shippingAddress);
         tv_contact_phone.setText(shippingAddressNameP);
     }
-
+    List<ChannelsListBean> result;
+    String payChannel = "无";
+    List<String> listPay = new ArrayList<>();
     @OnClick({R.id.rl_address, R.id.tv_invoice,R.id.tv_coupon,R.id.bnt,R.id.tv_totalItemNum,R.id.tv_payChannel})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -164,15 +179,32 @@ public class OrderAffirmActivity extends BaseActivity {
                 ToastUtils.showLong("暂无可用优惠券");
                 break;
             case R.id.tv_payChannel:
-                List<String> listPay = new ArrayList<>();
-                listPay.add("微信支付");
-                listPay.add("支付宝支付");
-                listPay.add("钱包支付");
+                if(listPay.size()==0){
+                    HttpsUtils.payChannelsList("PURCHASE", new HttpsUtils.PayChannelsInterface() {
+                        @Override
+                        public void getPayChannelsResult(List<ChannelsListBean> result) {
+                            OrderAffirmActivity.this.result = result;
+                            for(int i=0;i<result.size();i++){
+                                listPay.add(result.get(i).getChannelName());
+                            }
+                            PickerViewUtils.selectorCustom(OrderAffirmActivity.this, listPay,
+                                    "选择支付方式", new PickerViewUtils.ConditionInterfacd() {
+                                        @Override
+                                        public void setIndex(int pos) {
+                                            tv_payChannel.setText(listPay.get(pos));
+                                            payChannel = result.get(pos).getChannelCode();
+                                        }
+                                    });
+                        }
+                    });
+                    return;
+                }
                 PickerViewUtils.selectorCustom(this, listPay,
                         "选择支付方式", new PickerViewUtils.ConditionInterfacd() {
                     @Override
                     public void setIndex(int pos) {
                         tv_payChannel.setText(listPay.get(pos));
+                        payChannel = result.get(pos).getChannelCode();
                     }
                 });
                 break;
@@ -181,23 +213,19 @@ public class OrderAffirmActivity extends BaseActivity {
                 break;
             case R.id.bnt:
                 PostOrderSubmit mPostOrderSubmit = new PostOrderSubmit();
+                if(payChannel.equals("无")){
+                    ToastUtils.showLong("请选择支付方式");
+                    return;
+                }
                 mPostOrderSubmit.setReceiptType("0");
                 mPostOrderSubmit.setInnerOrderNo(previewOrderDTO.getInnerOrderNo());
-                if(tv_payChannel.getText().toString().equals("微信支付")){
-                    mPostOrderSubmit.setPayChannel("WECHAT");
-                }else if(tv_payChannel.getText().toString().equals("支付宝支付")){
-                    mPostOrderSubmit.setPayChannel("ALIPAY");
-                }else if(tv_payChannel.getText().toString().equals("钱包支付")){
-                    mPostOrderSubmit.setPayChannel("CREDIT");
-                }//	支付方式:WECHAT、ALIPAY、CREDIT,示例值(WECHAT)
+                mPostOrderSubmit.setPayChannel(payChannel);
                 mPostOrderSubmit.setShippingAddressId(shippingAddressId);
                 mPostOrderSubmit.setUserCouponId(userCouponId);
                 mPostOrderSubmit.setUserRemark(tv_userRemark.getText().toString());
                 mPostOrderSubmit.setDedicatedReceiptInfo(new PostOrderSubmit.DedicatedReceiptInfoBean());
                 mPostOrderSubmit.setGeneralReceiptInfo(new PostOrderSubmit.DedicatedReceiptInfoBean());
-                Intent mIntent = new Intent(this,OrderPayActivity.class);
-                mIntent.putExtra("mPostOrderSubmit",mPostOrderSubmit);
-                startActivity(mIntent);
+                OrderPayActivity.startActivityPay(this,mPostOrderSubmit);
                 break;
         }
     }

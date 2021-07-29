@@ -96,7 +96,7 @@ public class ActivityAddressList extends BaseActivity {
                         //把要传递的数据封装至意图对象中
                         data.putExtra("shippingAddressId", mAddressModel.getId());
                         data.putExtra("shippingAddressNameP", mAddressModel.getContact()+"      "+mAddressModel.getPhone());
-                        data.putExtra("shippingAddress", mAddressModel.getAddress());
+                        data.putExtra("shippingAddress", mAddressModel.getAddress()+""+mAddressModel.getHouseNo());
 
                         //当前Activity销毁时，data这个意图就会传递给启动当前Activity的那个Activity
                         setResult(1, data);

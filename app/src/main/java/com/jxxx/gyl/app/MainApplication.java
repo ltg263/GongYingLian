@@ -55,6 +55,10 @@ public class MainApplication extends Application {
         }
     }
 
+
+    public String getWxId(){
+        return "WX_ID";
+    }
     /**
      * 退出应用程序
      */

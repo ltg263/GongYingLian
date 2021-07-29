@@ -54,6 +54,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.14.1'
     implementation 'com.squareup.okhttp3:okhttp:3.14.9'
 
@@ -69,6 +71,7 @@ dependencies {
 
     implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
     implementation files('libs/fastjson-1.2.62.jar')
+    implementation (name: 'alipaysdk-15.8.03.210428205839', ext: 'aar')
 
     //下拉刷新上拉加载
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
@@ -96,6 +99,7 @@ dependencies {
     implementation files('libs/umeng_social_net.jar')
     implementation files('libs/umeng_social_shareboard.jar')
     implementation files('libs/umeng_social_tool.jar')
+    implementation files('libs/wechat-sdk-android-without-mta-5.4.3.jar')
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
 }
 //MD5:  6D:AF:EC:5F:C5:FC:39:0B:69:66:64:6F:E3:45:2D:B1

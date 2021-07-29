@@ -6,18 +6,19 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.bean.OrderHistoryBean;
+import com.jxxx.gyl.bean.OrderHistoryDetailBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeOrderAdapter extends BaseQuickAdapter<OrderHistoryBean.RecordsBean, BaseViewHolder> {
+public class HomeOrderAdapter extends BaseQuickAdapter<OrderHistoryDetailBean, BaseViewHolder> {
 
-    public HomeOrderAdapter(List<OrderHistoryBean.RecordsBean> data) {
+    public HomeOrderAdapter(List<OrderHistoryDetailBean> data) {
         super(R.layout.item_home_order, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, OrderHistoryBean.RecordsBean item) {
+    protected void convert(BaseViewHolder helper, OrderHistoryDetailBean item) {
 //                NONE,           //无状态
 //                INIT,           //初始化
 //                UNPAID,         //待支付
