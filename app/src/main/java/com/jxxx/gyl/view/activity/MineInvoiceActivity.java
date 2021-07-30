@@ -35,7 +35,7 @@ public class MineInvoiceActivity extends BaseActivity {
 
     private final String[] CHANNELS = new String[]{"电子普通发票", "专用发票"};
     private List<String> mDataList = Arrays.asList(CHANNELS);
-    String[] innerOrderNos = new String[1];
+    String[] innerOrderNos;
     String type;
     @Override
     public int intiLayout() {
@@ -49,11 +49,9 @@ public class MineInvoiceActivity extends BaseActivity {
         initVP();
     }
     private void initVP() {
-        String innerOrderNo = getIntent().getStringExtra(ConstValues.BASE_STR);
         type = getIntent().getStringExtra("type");
-        if(StringUtil.isNotBlank(innerOrderNo)){
-//            innerOrderNos = "[\""+innerOrderNo+"\"]";
-            innerOrderNos[0] = innerOrderNo;
+        if(StringUtil.isBlank(type)){
+            innerOrderNos = getIntent().getStringArrayExtra("innerOrderNos");
         }
         getFragments();
         mViewPager.setOffscreenPageLimit(CHANNELS.length);
@@ -82,8 +80,8 @@ public class MineInvoiceActivity extends BaseActivity {
     private List<Fragment> getFragments() {
         Log.w("innerOrderNos","innerOrderNos"+innerOrderNos);
         Bundle mBundle = new Bundle();
-        mBundle.putStringArray(ConstValues.BASE_STR,innerOrderNos);
         mBundle.putString("type",type);
+        mBundle.putStringArray("innerOrderNos",innerOrderNos);
         mBundle.putString("receiptAmount", getIntent().getStringExtra("receiptAmount"));
         mBundle.putString("receiptContent", getIntent().getStringExtra("receiptContent"));
 

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.jxxx.gyl.MainActivity;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
@@ -67,7 +68,7 @@ public class MineInvoice1Fragment extends BaseFragment {
         Bundle bundle = getArguments();
         Log.w("bundle","bundle"+bundle);
         if(bundle!=null){
-            innerOrderNos = bundle.getStringArray(ConstValues.BASE_STR);
+            innerOrderNos = bundle.getStringArray("innerOrderNos");
             typeS = bundle.getString("type");
             mTvReceiptAmount.setText(bundle.getString("receiptAmount"));
             mTvReceiptContent.setText(bundle.getString("receiptContent"));
@@ -114,7 +115,7 @@ public class MineInvoice1Fragment extends BaseFragment {
             ToastUtils.showLong("信息填写不完整");
             return;
         }
-        if(typeS.equals("OrderAffirmActivity")){
+        if(StringUtil.isNotBlank(typeS) && typeS.equals("OrderAffirmActivity")){
             DedicatedReceiptInfoBean mDedicatedReceiptInfoBean = new DedicatedReceiptInfoBean(account,address,bank,email,phone,ratepayerNo,receiptAmount,
                     receiptContent,receiptTitle,type);
             //Activity返回时传递数据，也是通过意图对象
@@ -147,7 +148,8 @@ public class MineInvoice1Fragment extends BaseFragment {
                     @Override
                     public void onNext(Result result) {
                         if(result.getCode()==200) {
-
+                            ToastUtils.showShort("提交成功");
+                            baseStartActivity(MainActivity.class,null);
                         }else{
 
                         }

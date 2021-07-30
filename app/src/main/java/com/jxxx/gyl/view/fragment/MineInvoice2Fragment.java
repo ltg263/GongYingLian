@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.jxxx.gyl.MainActivity;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
@@ -18,6 +19,7 @@ import com.jxxx.gyl.bean.DedicatedReceiptInfoBean;
 import com.jxxx.gyl.bean.PostOrderSubmit;
 import com.jxxx.gyl.utils.AddressPickTask;
 import com.jxxx.gyl.utils.StringUtil;
+import com.jxxx.gyl.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -67,7 +69,8 @@ public class MineInvoice2Fragment extends BaseFragment {
         Bundle bundle = getArguments();
         Log.w("bundle","bundle"+bundle);
         if(bundle!=null){
-            innerOrderNos = bundle.getStringArray(ConstValues.BASE_STR);
+            innerOrderNos = bundle.getStringArray("innerOrderNos");
+            mTvReceiptAmount.setText(bundle.getString("receiptAmount"));
             typeS = bundle.getString("type");
         }
     }
@@ -149,7 +152,7 @@ public class MineInvoice2Fragment extends BaseFragment {
             return;
         }
 
-        if(typeS.equals("OrderAffirmActivity")){
+        if(StringUtil.isNotBlank(typeS) && typeS.equals("OrderAffirmActivity")){
             DedicatedReceiptInfoBean mDedicatedReceiptInfoBean = new DedicatedReceiptInfoBean(account, address, bank, phone, ratepayerNo, receiptAmount, receiptTitle, bankPhone, contact, detailsAddress, region);
             //Activity返回时传递数据，也是通过意图对象
             Intent data = new Intent();
@@ -181,7 +184,8 @@ public class MineInvoice2Fragment extends BaseFragment {
                     @Override
                     public void onNext(Result result) {
                         if(result.getCode()==200) {
-
+                            ToastUtils.showShort("提交成功");
+                            baseStartActivity(MainActivity.class,null);
                         }else{
 
                         }

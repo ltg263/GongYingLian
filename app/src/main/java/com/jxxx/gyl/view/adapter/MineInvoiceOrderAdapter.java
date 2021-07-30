@@ -1,5 +1,7 @@
 package com.jxxx.gyl.view.adapter;
 
+import android.widget.ImageView;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -19,6 +21,13 @@ public class MineInvoiceOrderAdapter extends BaseQuickAdapter<OrderHistoryDetail
 
     @Override
     protected void convert(BaseViewHolder helper, OrderHistoryDetailBean item) {
+        helper.addOnClickListener(R.id.iv_select);
+        ImageView iv_select = helper.getView(R.id.iv_select);
+        iv_select.setSelected(false);
+        if(item.isSelect()){
+            iv_select.setSelected(true);
+        }
+
         RecyclerView rvShopList = helper.getView(R.id.rv_shop_list);
         rvShopList.setAdapter(new OrderImageAdapter(item.getOrderDetailList()));
         helper.setText(R.id.tv_time,item.getPlaceTime()+"下单")

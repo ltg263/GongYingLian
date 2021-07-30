@@ -78,6 +78,16 @@ public class OrderHistoryDetailBean {
     private String userId;
     private String userRemark;
     private String warehouseId;
+    private boolean isSelect;
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
     private List<OrderDetailListBean> orderDetailList;
 
     public String getAutoDeliveryTime() {
