@@ -1,5 +1,8 @@
 package com.jxxx.gyl.view.activity;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -7,8 +10,10 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.utils.MagicIndicatorUtils;
+import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.view.fragment.MineInvoice1Fragment;
 import com.jxxx.gyl.view.fragment.MineInvoice2Fragment;
 
@@ -30,6 +35,8 @@ public class MineInvoiceActivity extends BaseActivity {
 
     private final String[] CHANNELS = new String[]{"电子普通发票", "专用发票"};
     private List<String> mDataList = Arrays.asList(CHANNELS);
+    String[] innerOrderNos = new String[1];
+    String type;
     @Override
     public int intiLayout() {
         return R.layout.activity_toolbar_indicator_viewpager;
@@ -42,6 +49,12 @@ public class MineInvoiceActivity extends BaseActivity {
         initVP();
     }
     private void initVP() {
+        String innerOrderNo = getIntent().getStringExtra(ConstValues.BASE_STR);
+        type = getIntent().getStringExtra("type");
+        if(StringUtil.isNotBlank(innerOrderNo)){
+//            innerOrderNos = "[\""+innerOrderNo+"\"]";
+            innerOrderNos[0] = innerOrderNo;
+        }
         getFragments();
         mViewPager.setOffscreenPageLimit(CHANNELS.length);
         mViewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
@@ -65,11 +78,22 @@ public class MineInvoiceActivity extends BaseActivity {
         mViewPager.setCurrentItem(0);
     }
 
-    //1,待支付;2,待发货;3,待收货;4,待评价;5,已完成;6,已取消;7,已过期;8,已结束
     List<Fragment> fragments = new ArrayList<>();
     private List<Fragment> getFragments() {
-        fragments.add( new MineInvoice1Fragment());
-        fragments.add( new MineInvoice2Fragment());
+        Log.w("innerOrderNos","innerOrderNos"+innerOrderNos);
+        Bundle mBundle = new Bundle();
+        mBundle.putStringArray(ConstValues.BASE_STR,innerOrderNos);
+        mBundle.putString("type",type);
+        mBundle.putString("receiptAmount", getIntent().getStringExtra("receiptAmount"));
+        mBundle.putString("receiptContent", getIntent().getStringExtra("receiptContent"));
+
+        MineInvoice1Fragment mMineInvoice1Fragment = new MineInvoice1Fragment();
+        mMineInvoice1Fragment.setArguments(mBundle);
+        fragments.add(mMineInvoice1Fragment);
+
+        MineInvoice2Fragment mMineInvoice2Fragment = new MineInvoice2Fragment();
+        mMineInvoice2Fragment.setArguments(mBundle);
+        fragments.add(mMineInvoice2Fragment);
         return fragments;
     }
     @Override

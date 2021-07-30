@@ -51,6 +51,8 @@ public class OrderDetailsActivity extends BaseActivity {
     TextView tv_payChannel;
     @BindView(R.id.tv_state)
     TextView tv_state;
+    @BindView(R.id.tv_receiptType)
+    TextView tv_receiptType;
     @BindView(R.id.bnt_1)
     TextView bnt_1;
     @BindView(R.id.bnt_2)
@@ -190,6 +192,17 @@ public class OrderDetailsActivity extends BaseActivity {
         tv_innerOrderNo.setText(mData.getInnerOrderNo());
         tv_placeTime.setText(mData.getPlaceTime());
         tv_payChannel.setText(mData.getPayChannel());
+        switch (mData.getReceiptType()){
+            case "0":
+                tv_receiptType.setText("未开票");
+                break;
+            case "1":
+                tv_receiptType.setText("电子普通发票");
+                break;
+            case "2":
+                tv_receiptType.setText("专用发票");
+                break;
+        }
     }
 
     @OnClick({R.id.bnt_1, R.id.bnt_2, R.id.bnt_3})

@@ -11,6 +11,7 @@ import com.jxxx.gyl.bean.CategoryDataList;
 import com.jxxx.gyl.bean.CategoryTreeData;
 import com.jxxx.gyl.bean.ChannelsListBean;
 import com.jxxx.gyl.bean.CouponTemplateData;
+import com.jxxx.gyl.bean.DedicatedReceiptInfoBean;
 import com.jxxx.gyl.bean.GlobalAdconfigBean;
 import com.jxxx.gyl.bean.HomeActivityData;
 import com.jxxx.gyl.bean.HomeBannerData;
@@ -301,6 +302,12 @@ public interface ApiService {
     @GET("api/scmp-application-mall/order/history")
     Observable<Result<OrderHistoryBean>> getOrderHistoryList(@Query("orderStatusString") String orderStatusString,
                                                              @Query("current") int current,@Query("size") int size);
+    /**
+     * 订单列表页-订单历史
+     */
+    @GET("api/scmp-application-mall/order/history")
+    Observable<Result<OrderHistoryBean>> getOrderHistoryList(@Query("current") int current,@Query("size") int size,
+                                                             @Query("unInvoiced") boolean unInvoiced);
 
     /**
      * 订单列表页-订单详情
@@ -365,5 +372,12 @@ public interface ApiService {
      */
     @POST("api/scmp-application-mall/pay/query")
     Observable<Result<PayDataBean>> payQuery(@Query("innerOrderNo") String innerOrderNo,@Query("orderType") String orderType);
+
+    /**
+     * 订单详情-发票信息-发票补开
+     * @return
+     */
+    @POST("api/scmp-application-mall/receipt/apply")
+    Observable<Result> postReceiptApply(@Body PostOrderSubmit.ReceiptApply mReceiptApply);
 
 }

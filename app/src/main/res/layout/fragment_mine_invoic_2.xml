@@ -50,6 +50,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_receiptTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -80,6 +81,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_ratepayerNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -99,6 +101,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <TextView
@@ -110,6 +113,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
+                        android:id="@+id/tv_receiptContent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_10"
@@ -141,8 +145,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_10"
-                        android:text="￥0.00"
+                        android:paddingStart="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="￥"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp_14" />
+
+                    <TextView
+                        android:id="@+id/tv_receiptAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="0.00"
                         android:textColor="@color/color_333333"
                         android:textSize="@dimen/sp_14" />
 
@@ -185,6 +199,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_bank"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -215,6 +230,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_account"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -245,10 +261,11 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="请填写注册地址"
+                        android:hint="请填写详细开户行地址"
                         android:padding="@dimen/dp_10"
                         android:textColor="@color/color_333333"
                         android:textCursorDrawable="@drawable/common_edit_input_line"
@@ -275,6 +292,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_bankPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -323,6 +341,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_contact"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -353,6 +372,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -383,6 +403,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
+                        android:id="@+id/tv_region"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -414,6 +435,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <EditText
+                        android:id="@+id/et_detailsAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"

@@ -24,6 +24,7 @@ import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.bean.AddressModel;
 import com.jxxx.gyl.bean.ChannelsListBean;
 import com.jxxx.gyl.bean.CouponTemplateData;
+import com.jxxx.gyl.bean.DedicatedReceiptInfoBean;
 import com.jxxx.gyl.bean.OrderPreviewBean;
 import com.jxxx.gyl.bean.PostOrderSubmit;
 import com.jxxx.gyl.utils.PickerViewUtils;
@@ -73,10 +74,14 @@ public class OrderAffirmActivity extends BaseActivity {
     TextView tv_userRemark;
     @BindView(R.id.tv_payChannel)
     TextView tv_payChannel;
+    @BindView(R.id.tv_invoice)
+    TextView tv_invoice;
     private OrderPreviewBean mData;
     private List<CouponTemplateData> recommendCoupon;
     OrderPreviewBean.PreviewOrderDTOBean previewOrderDTO;
     public String userCouponId,userCouponAmount,shippingAddressId,shippingAddressNameP,shippingAddress;
+    String receiptType = "0";
+    DedicatedReceiptInfoBean mDedicatedReceiptInfoBean;
     @Override
     public int intiLayout() {
         return R.layout.activity_order_affirm;
@@ -166,7 +171,11 @@ public class OrderAffirmActivity extends BaseActivity {
                 ActivityAddressList.startActivity(OrderAffirmActivity.this,2);
                 break;
             case R.id.tv_invoice:
-                baseStartActivity(MineInvoiceActivity.class,null);
+                Intent mIntentInvoice = new Intent(this,MineInvoiceActivity.class);
+                mIntentInvoice.putExtra("type","OrderAffirmActivity");
+                mIntentInvoice.putExtra("receiptAmount",previewOrderDTO.getPayAmount());
+                mIntentInvoice.putExtra("receiptContent","食品");
+                startActivityForResult(mIntentInvoice, 19);
                 break;
             case R.id.tv_coupon:
                 if(recommendCoupon!=null && recommendCoupon.size()>0){
@@ -217,14 +226,19 @@ public class OrderAffirmActivity extends BaseActivity {
                     ToastUtils.showLong("请选择支付方式");
                     return;
                 }
-                mPostOrderSubmit.setReceiptType("0");
                 mPostOrderSubmit.setInnerOrderNo(previewOrderDTO.getInnerOrderNo());
                 mPostOrderSubmit.setPayChannel(payChannel);
                 mPostOrderSubmit.setShippingAddressId(shippingAddressId);
                 mPostOrderSubmit.setUserCouponId(userCouponId);
                 mPostOrderSubmit.setUserRemark(tv_userRemark.getText().toString());
-                mPostOrderSubmit.setDedicatedReceiptInfo(new PostOrderSubmit.DedicatedReceiptInfoBean());
-                mPostOrderSubmit.setGeneralReceiptInfo(new PostOrderSubmit.DedicatedReceiptInfoBean());
+                if(receiptType.equals("1") && mDedicatedReceiptInfoBean!=null){
+                    mDedicatedReceiptInfoBean.setReceiptAmount(tv_payAmount.getText().toString());
+                    mPostOrderSubmit.setGeneralReceiptInfo(mDedicatedReceiptInfoBean);
+                }else if(receiptType.equals("2") && mDedicatedReceiptInfoBean!=null){
+                    mDedicatedReceiptInfoBean.setReceiptAmount(tv_payAmount.getText().toString());
+                    mPostOrderSubmit.setDedicatedReceiptInfo(mDedicatedReceiptInfoBean);
+                }
+                mPostOrderSubmit.setReceiptType(receiptType);
                 OrderPayActivity.startActivityPay(this,mPostOrderSubmit);
                 break;
         }
@@ -245,6 +259,15 @@ public class OrderAffirmActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == 1){
+            if (requestCode == 19) {
+                receiptType = data.getStringExtra("receiptType");
+                if(receiptType.equals("1")){
+                    tv_invoice.setText("电子普通发票");
+                }else if(receiptType.equals("2")){
+                    tv_invoice.setText("专用发票");
+                }
+                mDedicatedReceiptInfoBean = (DedicatedReceiptInfoBean) data.getSerializableExtra("mDedicatedReceiptInfoBean");
+            }
             if (requestCode == 20) {
                 shippingAddressId = data.getStringExtra("shippingAddressId");
                 shippingAddress = data.getStringExtra("shippingAddress");

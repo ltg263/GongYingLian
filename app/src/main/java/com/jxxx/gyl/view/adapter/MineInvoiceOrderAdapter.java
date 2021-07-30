@@ -5,25 +5,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.bean.OrderHistoryDetailBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MineInvoiceOrderAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+public class MineInvoiceOrderAdapter extends BaseQuickAdapter<OrderHistoryDetailBean, BaseViewHolder> {
 
-    public MineInvoiceOrderAdapter(List<String> data) {
+    public MineInvoiceOrderAdapter(List<OrderHistoryDetailBean> data) {
         super(R.layout.item_mine_invoice_order, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, OrderHistoryDetailBean item) {
         RecyclerView rvShopList = helper.getView(R.id.rv_shop_list);
-        List<String> list = new ArrayList<>();
-        list.add("http://img.netbian.com/file/2021/0527/1f20f9804cb7390efc842f02f4765901.jpg");
-        list.add("http://img.netbian.com/file/2021/0527/1f20f9804cb7390efc842f02f4765901.jpg");
-        list.add("http://img.netbian.com/file/2021/0527/1f20f9804cb7390efc842f02f4765901.jpg");
-        rvShopList.setAdapter(new ShopImageAdapter(null));
+        rvShopList.setAdapter(new OrderImageAdapter(item.getOrderDetailList()));
+        helper.setText(R.id.tv_time,item.getPlaceTime()+"下单")
+                .setText(R.id.tv_shop_num,"共"+item.getTotalItemNum()+"件 商品")
+                .setText(R.id.tv_shop_price,"￥"+item.getPayAmount());
     }
 
 }

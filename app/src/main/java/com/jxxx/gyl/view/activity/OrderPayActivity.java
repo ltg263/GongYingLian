@@ -21,6 +21,7 @@ import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.bean.ChannelsListBean;
 import com.jxxx.gyl.bean.OrderSubmitData;
 import com.jxxx.gyl.bean.PostOrderSubmit;
+import com.jxxx.gyl.utils.DialogUtils;
 import com.jxxx.gyl.utils.alipay.PaymentContract;
 import com.jxxx.gyl.utils.alipay.PaymentParameterBean;
 import com.jxxx.gyl.utils.alipay.PaymentPresenter;
@@ -121,6 +122,13 @@ public class OrderPayActivity extends BaseActivity implements PaymentContract.Vi
                                 mPayCreate.setPayChannel(mPostOrderSubmit.getPayChannel());
                                 mPayCreate.setOrderType("PURCHASE");
                             }
+                        }else{
+                            DialogUtils.showDialogHint(OrderPayActivity.this, result.getMessage(), true, new DialogUtils.ErrorDialogInterface() {
+                                @Override
+                                public void btnConfirm() {
+                                    OrderPayActivity.this.finish();
+                                }
+                            });
                         }
                     }
 
@@ -161,10 +169,11 @@ public class OrderPayActivity extends BaseActivity implements PaymentContract.Vi
                 mIvSelectYhk.setSelected(true);
                 break;
             case R.id.btn:
-                if(mPostOrderSubmit==null){
-                    appPayZfb(getIntent().getStringExtra("payNo"));
-                    return;
-                }
+//                if(mPostOrderSubmit==null){
+//                    HttpsUtils.shouldOverrideUrlLoading(OrderPayActivity.this,getIntent().getStringExtra("payNo"));
+////                    appPayZfb(getIntent().getStringExtra("payNo"));
+//                    return;
+//                }
                 mPayCreate.setPayChannel(mPayChannelsAdapter.getChannelCode());
                 HttpsUtils.payCreate(mPayCreate, new HttpsUtils.ShoppingCartInterface() {
                     @Override
