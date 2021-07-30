@@ -12,24 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
-import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.bean.OrderHistoryBean;
 import com.jxxx.gyl.bean.OrderHistoryDetailBean;
-import com.jxxx.gyl.bean.PostOrderSubmit;
 import com.jxxx.gyl.utils.OrderListBntUtils;
-import com.jxxx.gyl.view.activity.OrderApplyAfterActivity;
 import com.jxxx.gyl.view.activity.OrderDetailsActivity;
-import com.jxxx.gyl.view.activity.OrderPayActivity;
 import com.jxxx.gyl.view.adapter.HomeOrderAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -81,8 +76,16 @@ public class HomeOrderListFragment extends BaseFragment {
                     case R.id.bnt_1:
                     case R.id.bnt_2:
                     case R.id.bnt_3:
-                        OrderListBntUtils.startOrderType(mContext,((TextView)view).getText().toString(),
-                                mHomeOrderAdapter.getData().get(position));
+                        OrderListBntUtils.startOrderType(mContext, ((TextView) view).getText().toString(),
+                                mHomeOrderAdapter.getData().get(position), new OrderListBntUtils.ShoppingCartInterface() {
+                                    @Override
+                                    public void isResult(Boolean isResult, String num) {
+                                        if(isResult){
+                                            current=1;
+                                            initData();
+                                        }
+                                    }
+                                });
                         break;
                 }
             }

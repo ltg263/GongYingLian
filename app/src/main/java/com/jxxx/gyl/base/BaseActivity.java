@@ -131,9 +131,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showLoading() {
         if (mLoading != null && !mLoading.isShowing()) {
-//            mLoading.show();
+            mLoading.show();
         } else {
-//            mLoading = LoadingDialog.show(this, R.string.loading_text, false, null);
+            mLoading = LoadingDialog.show(this, R.string.loading_text, false, null);
         }
     }
 

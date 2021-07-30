@@ -21,6 +21,7 @@ import com.jxxx.gyl.bean.OrderHistoryBean;
 import com.jxxx.gyl.bean.OrderHistoryDetailBean;
 import com.jxxx.gyl.bean.OrderInfoBean;
 import com.jxxx.gyl.bean.OrderPreviewBean;
+import com.jxxx.gyl.bean.OrderRefundHistoryBean;
 import com.jxxx.gyl.bean.OrderSubmitData;
 import com.jxxx.gyl.bean.ParamData;
 import com.jxxx.gyl.bean.PayDataBean;
@@ -302,16 +303,44 @@ public interface ApiService {
                                                              @Query("current") int current,@Query("size") int size);
 
     /**
-     * 订单列表页-订单历史
+     * 订单列表页-订单详情
      */
     @GET("api/scmp-application-mall/order/detail/{innerOrderNo}")
     Observable<Result<OrderHistoryDetailBean>> getOrderHistoryDetail(@Path("innerOrderNo") String innerOrderNo);
+
+    /**
+     * 订单列表页-取消订单
+     * @return
+     */
+    @POST("api/scmp-application-mall/order/cancel")
+    Observable<Result> orderCancel(@Body PostOrderSubmit.OrderCancel mPayCreate);
+
+    /**
+     * 订单列表页-再来一单
+     * @return
+     */
+    @POST("api/scmp-application-mall/order/again")
+    Observable<Result> orderAgain(@Body PostOrderSubmit.OrderCancel mPayCreate);
+
+    /**
+     * 订单列表页-确认收货
+     * @return
+     */
+    @POST("api/scmp-application-mall/order/confirm")
+    Observable<Result> orderConfirm(@Body PostOrderSubmit.OrderCancel mPayCreate);
+
+    /**
+     * 退款订单列表页-退货-售后
+     * @return
+     */
+    @POST("api/scmp-application-mall/order/refund/history")
+    Observable<Result<OrderRefundHistoryBean>> orderRefundHistory(@Body PostOrderSubmit.RefundHistory mRefundHistory);
+
     /**
      * 设置默认地址
      *
      * @return
      */
-
     @GET("backstage/api/v1/wallet/recharge/all")
     Observable<Result<RechargeAllBean>> backstageRechargeAll();
 
@@ -321,6 +350,7 @@ public interface ApiService {
      */
     @GET("api/scmp-application-mall/pay/channels")
     Observable<Result<List<ChannelsListBean>>> payChannelsList(@Query("orderType") String orderType);
+
 
     /**
      * 支付页-预支付

@@ -382,7 +382,7 @@ public class HttpsUtils {
     public static void shouldOverrideUrlLoading(Context mContext , String url) {
         // 获取上下文, H5PayDemoActivity 为当前页面
         String alipayUrl = "alipays://platformapi/startapp?appId=2021002156632327"
-                + "&page=pages/index/index&payData="+url;//启动参数
+                + "&page=pages/index/index?payData="+url;//启动参数
         mContext.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(alipayUrl)));
         if(url.startsWith("alipays:") || url.startsWith("alipay")) {
             try {

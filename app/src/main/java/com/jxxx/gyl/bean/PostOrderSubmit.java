@@ -1,6 +1,7 @@
 package com.jxxx.gyl.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class PostOrderSubmit implements Serializable {
 
@@ -278,6 +279,104 @@ public class PostOrderSubmit implements Serializable {
 
         public void setPayChannel(String payChannel) {
             this.payChannel = payChannel;
+        }
+    }
+    public static class OrderCancel{
+
+        /**
+         * cancelDesc : 拍错了
+         * innerOrderNo : 454158125549748224
+         */
+
+        private String cancelDesc;
+        private String innerOrderNo;
+
+        public String getCancelDesc() {
+            return cancelDesc;
+        }
+
+        public void setCancelDesc(String cancelDesc) {
+            this.cancelDesc = cancelDesc;
+        }
+
+        public String getInnerOrderNo() {
+            return innerOrderNo;
+        }
+
+        public void setInnerOrderNo(String innerOrderNo) {
+            this.innerOrderNo = innerOrderNo;
+        }
+    }
+    public static class RefundHistory{
+
+        /**
+         * current : 1
+         * orders : [{"asc":false,"column":"id"}]
+         * size : 10
+         * status : 1
+         */
+
+        private int current;
+        private int size;
+        private int status;
+        private List<OrdersBean> orders;
+
+        public int getCurrent() {
+            return current;
+        }
+
+        public void setCurrent(int current) {
+            this.current = current;
+        }
+
+        public int getSize() {
+            return size;
+        }
+
+        public void setSize(int size) {
+            this.size = size;
+        }
+
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
+        }
+
+        public List<OrdersBean> getOrders() {
+            return orders;
+        }
+
+        public void setOrders(List<OrdersBean> orders) {
+            this.orders = orders;
+        }
+
+        public static class OrdersBean {
+            /**
+             * asc : false
+             * column : id
+             */
+
+            private boolean asc;
+            private String column;
+
+            public boolean isAsc() {
+                return asc;
+            }
+
+            public void setAsc(boolean asc) {
+                this.asc = asc;
+            }
+
+            public String getColumn() {
+                return column;
+            }
+
+            public void setColumn(String column) {
+                this.column = column;
+            }
         }
     }
 }

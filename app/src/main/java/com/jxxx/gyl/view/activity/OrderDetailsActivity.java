@@ -49,6 +49,8 @@ public class OrderDetailsActivity extends BaseActivity {
     TextView tv_placeTime;
     @BindView(R.id.tv_payChannel)
     TextView tv_payChannel;
+    @BindView(R.id.tv_state)
+    TextView tv_state;
     @BindView(R.id.bnt_1)
     TextView bnt_1;
     @BindView(R.id.bnt_2)
@@ -155,6 +157,7 @@ public class OrderDetailsActivity extends BaseActivity {
                 bnt_1.setText("");
                 bnt_2.setText("");
                 bnt_3.setText("再来一单");
+                tv_state.setText(mData.getCancelDesc());
                 orderStatusString = "已取消";
                 break;
             case "WAITING_REFUND":
@@ -195,7 +198,15 @@ public class OrderDetailsActivity extends BaseActivity {
             case R.id.bnt_1:
             case R.id.bnt_2:
             case R.id.bnt_3:
-                OrderListBntUtils.startOrderType(this,((TextView)view).getText().toString(),mData);
+                OrderListBntUtils.startOrderType(this, ((TextView) view).getText().toString(), mData,
+                        new OrderListBntUtils.ShoppingCartInterface() {
+                    @Override
+                    public void isResult(Boolean isResult, String num) {
+                        if(isResult){
+                            initData();
+                        }
+                    }
+                });
                 break;
         }
     }

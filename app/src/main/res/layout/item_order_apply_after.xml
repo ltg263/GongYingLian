@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_refundNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_10"
@@ -28,7 +29,7 @@
         android:padding="@dimen/dp_10">
 
         <TextView
-            android:id="@+id/tv_tx"
+            android:id="@+id/tv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="退款状态"
@@ -37,9 +38,10 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_status1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_tx"
+            android:layout_below="@id/tv_status"
             android:layout_marginTop="5dp"
             android:text="退款状态..."
             android:textColor="@color/color_666666"

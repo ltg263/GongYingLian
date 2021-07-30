@@ -17,6 +17,7 @@ import com.jxxx.gyl.bean.RechargeAllBean;
 import com.jxxx.gyl.bean.UserInfoUpdate;
 import com.jxxx.gyl.view.activity.MineCouponListActivity;
 import com.jxxx.gyl.view.activity.MineInvoiceOrderActivity;
+import com.jxxx.gyl.view.activity.OrderApplyAfterActivity;
 import com.jxxx.gyl.view.activity.address.ActivityAddressList;
 import com.jxxx.gyl.view.activity.login.LoginActivity;
 import com.jxxx.gyl.view.activity.mine.MineMessageListActivity;
@@ -146,6 +147,7 @@ public class HomeFiveFragment extends BaseFragment {
                 baseStartActivity(MineSetSmrzActivity.class,null);
                 break;
             case R.id.ll_center_4:
+                baseStartActivity(OrderApplyAfterActivity.class,null);
                 break;
             case R.id.ll_below_1:
                 break;

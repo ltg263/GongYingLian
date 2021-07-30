@@ -67,7 +67,9 @@ public class PickerViewUtils {
         OptionsPickerView pvOptions = new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3 , View v) {
-                textView.setText(list.get(options1));
+                if(textView!=null){
+                    textView.setText(list.get(options1));
+                }
             }
         }) .setOptionsSelectChangeListener(new OnOptionsSelectChangeListener() {
             @Override
