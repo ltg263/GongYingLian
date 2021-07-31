@@ -32,7 +32,7 @@ public class CreateShopResultActivity extends BaseActivity {
     @Override
     public void initView() {
         setToolbar(mMyToolbar, "审核结果");
-        str = getIntent().getStringExtra(ConstValues.BASE_STR);
+        str = getIntent().getStringExtra(ConstValues.APPNAME_ENGLISH);
         if(StringUtil.isNotBlank(str)){
             mTvR.setText(str);
             tv.setVisibility(View.INVISIBLE);

@@ -18,13 +18,16 @@ public class OrderApplyAfterAdapter extends BaseQuickAdapter<OrderRefundHistoryB
     protected void convert(BaseViewHolder helper, OrderRefundHistoryBean.RecordsBean item) {
         String status = "";
         if(item.getStatus().equals("1")){
-            status= "审核通过";
+            status= "退款成功";
+            helper.setText(R.id.tv_status1,"退款将退回至您的微信账户，请注意查收");
         }else  if(item.getStatus().equals("2")){
-            status= "审核失败";
+            status= "退款失败";
+            helper.setText(R.id.tv_status1,"退款失败请联系客服");
         }else  if(item.getStatus().equals("3")){
-            status= "进行中";
+            status= "退款中";
+            helper.setText(R.id.tv_status1,"退款中请耐心等待");
         }
-        GlideImageLoader.loadImageViewRadius(mContext, item.getAuditUserId(), 30, helper.getView(R.id.siv_img));
+//        GlideImageLoader.loadImageViewRadius(mContext, item.getAuditUserId(), 30, helper.getView(R.id.siv_img));
         helper.setText(R.id.tv_refundNo,"退款单号："+item.getRefundNo()).setText(R.id.tv_status,status);
     }
 

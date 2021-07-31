@@ -54,7 +54,7 @@ public class SearchResultTopicActivity extends BaseActivity {
     @Override
     public void initView() {
         setToolbar(mMyToolbar, "搜索");
-        search = getIntent().getStringExtra(ConstValues.BASE_STR);
+        search = getIntent().getStringExtra(ConstValues.APPNAME_ENGLISH);
         tvTopTitle.setText(search);
         mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setEnableRefresh(false);

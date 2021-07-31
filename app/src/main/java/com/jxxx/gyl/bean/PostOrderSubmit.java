@@ -205,7 +205,7 @@ public class PostOrderSubmit implements Serializable {
 
         private int current;
         private int size;
-        private int status;
+        private String status;
         private List<OrdersBean> orders;
 
         public int getCurrent() {
@@ -224,11 +224,11 @@ public class PostOrderSubmit implements Serializable {
             this.size = size;
         }
 
-        public int getStatus() {
+        public String getStatus() {
             return status;
         }
 
-        public void setStatus(int status) {
+        public void setStatus(String status) {
             this.status = status;
         }
 

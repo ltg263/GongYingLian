@@ -208,7 +208,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void baseStartActivity(Class<?> cls,String str){
         Intent mIntent = new Intent(this,cls);
         if(StringUtil.isNotBlank(str)){
-            mIntent.putExtra(ConstValues.BASE_STR,str);
+            mIntent.putExtra(ConstValues.APPNAME_ENGLISH,str);
         }
         startActivity(mIntent);
 

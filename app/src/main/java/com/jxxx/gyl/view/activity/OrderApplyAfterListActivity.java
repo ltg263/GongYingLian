@@ -58,7 +58,7 @@ public class OrderApplyAfterListActivity extends BaseActivity {
         mOrderApplyAfterAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                baseStartActivity(OrderDetailsActivity.class,mOrderApplyAfterAdapter.getData().get(position).getInnerOrderNo());
             }
         });
 

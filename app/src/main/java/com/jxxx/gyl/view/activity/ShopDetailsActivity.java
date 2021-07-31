@@ -112,7 +112,7 @@ public class ShopDetailsActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        String url = "api/scmp-application-mall/product/detail/" + getIntent().getStringExtra(ConstValues.BASE_STR);
+        String url = "api/scmp-application-mall/product/detail/" + getIntent().getStringExtra(ConstValues.APPNAME_ENGLISH);
         RetrofitUtil.getInstance().apiService()
                 .productDetail(url)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -211,7 +211,7 @@ public class ShopDetailsActivity extends BaseActivity {
 
     public static void startActivityIntent(Context mContext, String id) {
         Intent mIntent = new Intent(mContext, ShopDetailsActivity.class);
-        mIntent.putExtra(ConstValues.BASE_STR, id);
+        mIntent.putExtra(ConstValues.APPNAME_ENGLISH, id);
         mContext.startActivity(mIntent);
     }
 
@@ -231,7 +231,7 @@ public class ShopDetailsActivity extends BaseActivity {
                     return;
                 }
                 HttpsUtils.userRechargeOrder(this, skuId,
-                        getIntent().getStringExtra(ConstValues.BASE_STR), new HttpsUtils.ShoppingCartInterface() {
+                        getIntent().getStringExtra(ConstValues.APPNAME_ENGLISH), new HttpsUtils.ShoppingCartInterface() {
                     @Override
                     public void isResult(Boolean isResult,String num) {
 
