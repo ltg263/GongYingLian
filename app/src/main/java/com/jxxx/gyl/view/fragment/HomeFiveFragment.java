@@ -1,6 +1,7 @@
 package com.jxxx.gyl.view.fragment;
 
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.bean.AccoutInfoBean;
 import com.jxxx.gyl.bean.UserInfoUpdate;
+import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.view.activity.MineCouponListActivity;
 import com.jxxx.gyl.view.activity.MineInvoiceOrderActivity;
 import com.jxxx.gyl.view.activity.OrderApplyAfterActivity;
@@ -23,6 +25,7 @@ import com.jxxx.gyl.view.activity.mine.MineMessageListActivity;
 import com.jxxx.gyl.view.activity.mine.MineSetSmrzActivity;
 import com.jxxx.gyl.view.activity.mine.MineSettingActivity;
 import com.jxxx.gyl.view.activity.payActivity.ActivityPayHomeQb;
+import com.jxxx.gyl.view.activity.payActivity.ActivityPayHomeQk;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -160,9 +163,14 @@ public class HomeFiveFragment extends BaseFragment {
                 baseStartActivity(LoginActivity.class, null);
                 break;
             case R.id.ll_top_1:
-                baseStartActivity(ActivityPayHomeQb.class, null);
+
+                Intent mIntent = new Intent(getActivity(),ActivityPayHomeQb.class);
+                mIntent.putExtra(ConstValues.APPNAME_ENGLISH,mTvBalance.getText().toString());
+                mIntent.putExtra("owedAmount",mTvOwedAmount.getText().toString());
+                startActivity(mIntent);
                 break;
             case R.id.ll_top_2:
+                baseStartActivity(ActivityPayHomeQk.class, mTvOwedAmount.getText().toString());
                 break;
             case R.id.ll_top_3:
                 baseStartActivity(MineCouponListActivity.class, null);

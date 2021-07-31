@@ -51,7 +51,7 @@ public class OrderPayOkActivity extends BaseActivity {
             btn.setText("支付失败");
             return;
         }
-        if(status.equals("PAYING")){
+        if(status.equals("PAID")){
             btn.setText("支付成功");
             return;
         }

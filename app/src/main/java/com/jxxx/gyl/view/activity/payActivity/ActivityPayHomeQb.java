@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.bean.AccoutInfoBean;
 import com.jxxx.gyl.bean.UserInfoUpdate;
@@ -31,10 +32,8 @@ import io.reactivex.schedulers.Schedulers;
 public class ActivityPayHomeQb extends BaseActivity {
     @BindView(R.id.my_toolbar)
     Toolbar myToolbar;
-    @BindView(R.id.rv_yz_list)
-    RecyclerView mRvYzList;
-    @BindView(R.id.tv_ye)
-    TextView mTvYe;
+    @BindView(R.id.tv_balance)
+    TextView tv_balance;
     private AdapterPayLogList mAdapterPayLogList;
 
     @Override
@@ -46,11 +45,11 @@ public class ActivityPayHomeQb extends BaseActivity {
     public void initView() {
         setToolbar(myToolbar, "我的钱包");
         getAccount();
-        initOrder();
     }
 
     @Override
     public void initData() {
+        tv_balance.setText(getIntent().getStringExtra(ConstValues.APPNAME_ENGLISH));
         getAccount();
     }
 
@@ -82,7 +81,7 @@ public class ActivityPayHomeQb extends BaseActivity {
                 });
     }
 
-    @OnClick({R.id.tv_yz_tx, R.id.tv_yz_zz, R.id.tv_yz_rq})
+    @OnClick({R.id.tv_yz_tx, R.id.tv_yz_zz,R.id.ll_1,R.id.ll_2,R.id.ll_3})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_yz_tx:
@@ -91,44 +90,15 @@ public class ActivityPayHomeQb extends BaseActivity {
             case R.id.tv_yz_zz:
                 baseStartActivity(ActivityPayChongZhi.class,null);
                 break;
-            case R.id.tv_yz_rq:
-//                baseStartActivity(MineWdyzDdcxActivity.class,null);
+            case R.id.ll_1:
+
+                break;
+            case R.id.ll_2:
+                baseStartActivity(ActivityPayHomeQk.class, getIntent().getStringExtra("owedAmount"));
+                break;
+            case R.id.ll_3:
+
                 break;
         }
     }
-
-    private void initOrder() {
-        List<String> list = new ArrayList<>();
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        mRvYzList.setFocusable(false);
-        mRvYzList.setLayoutManager(new LinearLayoutManager(this));
-        mAdapterPayLogList = new AdapterPayLogList(list);
-        mRvYzList.setAdapter(mAdapterPayLogList);
-        mAdapterPayLogList.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MineWdyzDetailsActivity.startIntentActivity(MineWdqbHomeActivity.this);
-            }
-        });
-    }
-
 }

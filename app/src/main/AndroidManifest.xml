@@ -95,6 +95,7 @@
         <activity android:name=".view.activity.search.SearchResultTopicActivity" />
         <activity android:name=".view.activity.address.ActivityAddressList" />
         <activity android:name=".view.activity.address.ActivityAddressEdit" />
+        <activity android:name=".view.activity.payActivity.ActivityPayHomeQk" />
 
         <!--com.deepexp.zsnavidemo对应的key-->
         <meta-data

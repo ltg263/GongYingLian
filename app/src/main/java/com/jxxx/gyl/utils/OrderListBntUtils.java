@@ -31,7 +31,7 @@ public class OrderListBntUtils {
                         recordsBean.getPayableAmount(),recordsBean.getPayChannel(),recordsBean.getPayNo());
                 break;
             case "确认收货":
-                orderAgain(mContext, recordsBean.getInnerOrderNo(), new ShoppingCartInterface() {
+                orderConfirm(mContext, recordsBean.getInnerOrderNo(), new ShoppingCartInterface() {
                     @Override
                     public void isResult(Boolean isResult, String num) {
                         if(isResult){
