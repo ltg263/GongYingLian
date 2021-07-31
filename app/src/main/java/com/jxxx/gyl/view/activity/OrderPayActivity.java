@@ -12,16 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.jxxx.gyl.MainActivity;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
+import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.app.MainApplication;
 import com.jxxx.gyl.base.BaseActivity;
 import com.jxxx.gyl.bean.ChannelsListBean;
 import com.jxxx.gyl.bean.OrderSubmitData;
 import com.jxxx.gyl.bean.PostOrderSubmit;
 import com.jxxx.gyl.utils.DialogUtils;
+import com.jxxx.gyl.utils.StringUtil;
 import com.jxxx.gyl.utils.alipay.PaymentContract;
 import com.jxxx.gyl.utils.alipay.PaymentParameterBean;
 import com.jxxx.gyl.utils.alipay.PaymentPresenter;
@@ -57,6 +60,7 @@ public class OrderPayActivity extends BaseActivity implements PaymentContract.Vi
     private PaymentPresenter paymentPresenter;
     private IWXAPI api;
 
+    boolean isPay = false;
     @Override
     public int intiLayout() {
         return R.layout.activity_order_pay;
@@ -178,11 +182,30 @@ public class OrderPayActivity extends BaseActivity implements PaymentContract.Vi
                 HttpsUtils.payCreate(mPayCreate, new HttpsUtils.ShoppingCartInterface() {
                     @Override
                     public void isResult(Boolean isResult, String num) {
+                        isPay = true;
                         HttpsUtils.shouldOverrideUrlLoading(OrderPayActivity.this,num);
 //                        appPayZfb(num);
                     }
                 });
                 break;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isPay){
+            HttpsUtils.payQuery(mPayCreate.getInnerOrderNo(), new HttpsUtils.ShoppingCartInterface() {
+                @Override
+                public void isResult(Boolean isResult, String status) {
+                    ToastUtils.showShort(status);
+                    baseStartActivity(MainActivity.class);
+//                    Intent mIntent = new Intent(OrderPayActivity.this,OrderPayOkActivity.class);
+//                    mIntent.putExtra("isResult",isResult);
+//                    mIntent.putExtra("status",status);
+//                    startActivity(mIntent);
+                }
+            });
         }
     }
 

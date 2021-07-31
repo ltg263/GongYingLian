@@ -105,6 +105,7 @@
                     android:padding="@dimen/dp_10">
 
                     <TextView
+                        android:id="@+id/tv_balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
@@ -132,6 +133,7 @@
                     android:padding="@dimen/dp_10">
 
                     <TextView
+                        android:id="@+id/tv_owedAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
@@ -159,6 +161,7 @@
                     android:padding="@dimen/dp_10">
 
                     <TextView
+                        android:id="@+id/tv_couponNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"

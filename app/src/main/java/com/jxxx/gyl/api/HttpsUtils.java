@@ -362,13 +362,15 @@ public class HttpsUtils {
                     @Override
                     public void onNext(Result<PayDataBean> result) {
                         if(result.getCode()==200) {
-                            mShoppingCartInterface.isResult(null,result.getData().getStatus());
+                            mShoppingCartInterface.isResult(true,result.getData().getStatus());
                         }else{
+                            mShoppingCartInterface.isResult(false,"支付失败");
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        mShoppingCartInterface.isResult(false,"支付失败");
 //                        dismiss();
                     }
 

@@ -155,7 +155,7 @@ public class MineInvoiceOrderActivity extends BaseActivity {
     @Override
     public void initData() {
         RetrofitUtil.getInstance().apiService()
-                .getOrderHistoryList(current,10,false)
+                .getOrderHistoryList(current,10,true)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Result<OrderHistoryBean>>() {

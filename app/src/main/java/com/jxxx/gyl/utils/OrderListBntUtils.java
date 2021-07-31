@@ -61,7 +61,12 @@ public class OrderListBntUtils {
 
                 break;
             case "再来一单":
-                orderAgain(mContext,  recordsBean.getInnerOrderNo(), null);
+                orderAgain(mContext, recordsBean.getInnerOrderNo(), new ShoppingCartInterface() {
+                    @Override
+                    public void isResult(Boolean isResult, String num) {
+
+                    }
+                });
                 break;
             case "删除订单":
 

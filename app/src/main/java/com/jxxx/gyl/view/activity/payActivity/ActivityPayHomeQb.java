@@ -9,13 +9,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxx.gyl.R;
+import com.jxxx.gyl.api.Result;
+import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseActivity;
+import com.jxxx.gyl.bean.AccoutInfoBean;
+import com.jxxx.gyl.bean.UserInfoUpdate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 我的钱包
@@ -47,34 +55,31 @@ public class ActivityPayHomeQb extends BaseActivity {
     }
 
     private void getAccount() {
-//        show();
-//        RetrofitUtil.getInstance().apiService()
-//                .getAccount(1, StringUtil.getNyrDate())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Observer<Result<AccountBean>>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(Result<AccountBean> result) {
-//                        if (isDataInfoSucceed(result)) {
-//                            AccountBean data = result.getData();
-//                            mTvYe.setText(data.getBalance()+"");
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//                        dismiss();
-//                    }
-//                });
+        RetrofitUtil.getInstance().apiService()
+                .accountInfo().observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<AccoutInfoBean>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<AccoutInfoBean> result) {
+                        if(isResultOk(result)) {
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @OnClick({R.id.tv_yz_tx, R.id.tv_yz_zz, R.id.tv_yz_rq})

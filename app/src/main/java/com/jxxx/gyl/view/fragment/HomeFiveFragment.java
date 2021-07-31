@@ -7,13 +7,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseFragment;
-import com.jxxx.gyl.bean.RechargeAllBean;
+import com.jxxx.gyl.bean.AccoutInfoBean;
 import com.jxxx.gyl.bean.UserInfoUpdate;
 import com.jxxx.gyl.view.activity.MineCouponListActivity;
 import com.jxxx.gyl.view.activity.MineInvoiceOrderActivity;
@@ -24,8 +23,6 @@ import com.jxxx.gyl.view.activity.mine.MineMessageListActivity;
 import com.jxxx.gyl.view.activity.mine.MineSetSmrzActivity;
 import com.jxxx.gyl.view.activity.mine.MineSettingActivity;
 import com.jxxx.gyl.view.activity.payActivity.ActivityPayHomeQb;
-
-import net.lucode.hackware.magicindicator.buildins.UIUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -66,6 +63,12 @@ public class HomeFiveFragment extends BaseFragment {
     LinearLayout mLlBelow3;
     @BindView(R.id.ll_below_4)
     LinearLayout mLlBelow4;
+    @BindView(R.id.tv_balance)
+    TextView mTvBalance;
+    @BindView(R.id.tv_owedAmount)
+    TextView mTvOwedAmount;
+    @BindView(R.id.tv_couponNum)
+    TextView mTvCouponNum;
 
     @Override
     protected int setLayoutResourceID() {
@@ -80,7 +83,7 @@ public class HomeFiveFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(!ConstValues.ISLOGIN){
+        if (!ConstValues.ISLOGIN) {
             mTvUserName.setText("请先登录");
             mTvUserInfo.setVisibility(View.GONE);
         }
@@ -99,7 +102,7 @@ public class HomeFiveFragment extends BaseFragment {
 
                     @Override
                     public void onNext(Result<UserInfoUpdate> result) {
-                        if(isResultOk(result)) {
+                        if (isResultOk(result)) {
                             UserInfoUpdate.BaseInfoBean baseInfo = result.getData().getBaseInfo();
                             mTvUserName.setText(baseInfo.getStorefrontName());
                         }
@@ -114,40 +117,67 @@ public class HomeFiveFragment extends BaseFragment {
 
                     }
                 });
+        RetrofitUtil.getInstance().apiService()
+                .accountInfo().observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Result<AccoutInfoBean>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result<AccoutInfoBean> result) {
+                        if (isResultOk(result)) {
+                            mTvBalance.setText(result.getData().getBalance());
+                            mTvOwedAmount.setText(result.getData().getOwedAmount());
+                            mTvCouponNum.setText(result.getData().getCouponNum());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
-    @OnClick({R.id.iv_set,R.id.iv_msg,R.id.rl_user_info, R.id.ll_top_1, R.id.ll_top_2, R.id.ll_top_3, R.id.ll_center_1,
+    @OnClick({R.id.iv_set, R.id.iv_msg, R.id.rl_user_info, R.id.ll_top_1, R.id.ll_top_2, R.id.ll_top_3, R.id.ll_center_1,
             R.id.ll_center_2, R.id.ll_center_3, R.id.ll_center_4, R.id.ll_below_1, R.id.ll_below_2, R.id.ll_below_3, R.id.ll_below_4})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_set:
-                baseStartActivity(MineSettingActivity.class,null);
+                baseStartActivity(MineSettingActivity.class, null);
                 break;
             case R.id.iv_msg:
-                baseStartActivity(MineMessageListActivity.class,null);
+                baseStartActivity(MineMessageListActivity.class, null);
                 break;
             case R.id.rl_user_info:
-                baseStartActivity(LoginActivity.class,null);
+                baseStartActivity(LoginActivity.class, null);
                 break;
             case R.id.ll_top_1:
-                baseStartActivity(ActivityPayHomeQb.class,null);
+                baseStartActivity(ActivityPayHomeQb.class, null);
                 break;
             case R.id.ll_top_2:
                 break;
             case R.id.ll_top_3:
-                baseStartActivity(MineCouponListActivity.class,null);
+                baseStartActivity(MineCouponListActivity.class, null);
                 break;
             case R.id.ll_center_1:
-                ActivityAddressList.startActivity(getActivity(),0);
+                ActivityAddressList.startActivity(getActivity(), 0);
                 break;
             case R.id.ll_center_2:
-                baseStartActivity(MineInvoiceOrderActivity.class,null);
+                baseStartActivity(MineInvoiceOrderActivity.class, null);
                 break;
             case R.id.ll_center_3:
-                baseStartActivity(MineSetSmrzActivity.class,null);
+                baseStartActivity(MineSetSmrzActivity.class, null);
                 break;
             case R.id.ll_center_4:
-                baseStartActivity(OrderApplyAfterActivity.class,null);
+                baseStartActivity(OrderApplyAfterActivity.class, null);
                 break;
             case R.id.ll_below_1:
                 break;

@@ -6,6 +6,7 @@ import com.jxxx.gyl.base.CommodityCategory;
 import com.jxxx.gyl.base.HomeCategoryTypeData;
 import com.jxxx.gyl.base.ShopInfoData;
 import com.jxxx.gyl.base.ShopInfoListData;
+import com.jxxx.gyl.bean.AccoutInfoBean;
 import com.jxxx.gyl.bean.AddressModel;
 import com.jxxx.gyl.bean.CategoryDataList;
 import com.jxxx.gyl.bean.CategoryTreeData;
@@ -251,6 +252,12 @@ public interface ApiService {
     /**
      * 全局-当前用户信息接口
      */
+    @POST("api/scmp-application-mall/account/info")
+    Observable<Result<AccoutInfoBean>> accountInfo();
+
+    /**
+     * 全局-当前用户信息接口
+     */
     @GET("api/scmp-application-mall/global/adConfig")
     Observable<Result<GlobalAdconfigBean>> globalAdConfig();
 
@@ -370,7 +377,7 @@ public interface ApiService {
      * 支付页-查询支付结果
      * @return
      */
-    @POST("api/scmp-application-mall/pay/query")
+    @GET("api/scmp-application-mall/pay/query")
     Observable<Result<PayDataBean>> payQuery(@Query("innerOrderNo") String innerOrderNo,@Query("orderType") String orderType);
 
     /**
