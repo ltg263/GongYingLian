@@ -154,6 +154,27 @@ public class OrderPayActivity extends BaseActivity implements PaymentContract.Vi
         });
     }
 
+    @Override
+    protected void onToolbarClickListener() {
+        if(mPostOrderSubmit!=null) {
+            DialogUtils.showDialogHint(OrderPayActivity.this, "订单未支付，确定放弃吗？",
+                    false, new DialogUtils.ErrorDialogInterface() {
+                        @Override
+                        public void btnConfirm() {
+                            baseStartActivity(MainActivity.class);
+                            finish();
+                        }
+                    });
+            return;
+        }
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        onToolbarClickListener();
+    }
+
     @OnClick({R.id.iv_select_wx, R.id.iv_select_zfb, R.id.iv_select_yhk, R.id.btn})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -199,11 +220,11 @@ public class OrderPayActivity extends BaseActivity implements PaymentContract.Vi
                 @Override
                 public void isResult(Boolean isResult, String status) {
                     ToastUtils.showShort(status);
-                    baseStartActivity(MainActivity.class);
-//                    Intent mIntent = new Intent(OrderPayActivity.this,OrderPayOkActivity.class);
-//                    mIntent.putExtra("isResult",isResult);
-//                    mIntent.putExtra("status",status);
-//                    startActivity(mIntent);
+                    Intent mIntent = new Intent(OrderPayActivity.this,OrderPayOkActivity.class);
+                    mIntent.putExtra("isResult",isResult);
+                    mIntent.putExtra("status",status);
+                    mIntent.putExtra("orderAmount",mPayCreate.getOrderAmount());
+                    startActivity(mIntent);
                 }
             });
         }

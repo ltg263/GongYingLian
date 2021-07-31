@@ -110,11 +110,15 @@ public abstract class BaseActivity extends AppCompatActivity {
             mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    finish();
+                    onToolbarClickListener();
                 }
             });
         }
     }
+
+    protected void onToolbarClickListener(){
+        finish();
+    };
 
     protected void onTitleRightClickListener(){
 

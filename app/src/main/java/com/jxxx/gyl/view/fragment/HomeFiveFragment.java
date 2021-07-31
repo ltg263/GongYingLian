@@ -174,7 +174,7 @@ public class HomeFiveFragment extends BaseFragment {
                 baseStartActivity(MineInvoiceOrderActivity.class, null);
                 break;
             case R.id.ll_center_3:
-                baseStartActivity(MineSetSmrzActivity.class, null);
+//                baseStartActivity(MineSetSmrzActivity.class, null);
                 break;
             case R.id.ll_center_4:
                 baseStartActivity(OrderApplyAfterActivity.class, null);

@@ -339,7 +339,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/group_993" />
+                            android:src="@drawable/group_3705" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -363,7 +363,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/group_991" />
+                            android:src="@drawable/group_3705" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -388,7 +388,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/group_991" />
+                            android:src="@drawable/group_3698" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -413,7 +413,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/group_986" />
+                            android:src="@drawable/frame_9" />
 
                         <TextView
                             android:layout_width="wrap_content"
