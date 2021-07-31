@@ -166,8 +166,17 @@ public class PostOrderSubmit implements Serializable {
          * innerOrderNo : 454158125549748224
          */
 
+        private String refundDesc;
         private String cancelDesc;
         private String innerOrderNo;
+
+        public void setRefundDesc(String refundDesc) {
+            this.refundDesc = refundDesc;
+        }
+
+        public String getRefundDesc() {
+            return refundDesc;
+        }
 
         public String getCancelDesc() {
             return cancelDesc;

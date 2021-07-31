@@ -46,7 +46,7 @@ public class HomeOrderAdapter extends BaseQuickAdapter<OrderHistoryDetailBean, B
             case "UN_DELIVERY":
                 helper.setVisible(R.id.bnt_1,false).setText(R.id.bnt_1,"")
                         .setVisible(R.id.bnt_2,true).setText(R.id.bnt_2,"再来一单")
-                        .setVisible(R.id.bnt_3,true).setText(R.id.bnt_3,"售后申请");
+                        .setVisible(R.id.bnt_3,true).setText(R.id.bnt_3,"申请售后");
                 orderStatusString = "待发货";
                 break;
             case "UN_RECEIVE":
@@ -58,7 +58,7 @@ public class HomeOrderAdapter extends BaseQuickAdapter<OrderHistoryDetailBean, B
             case "FINISHED":
                 helper.setVisible(R.id.bnt_1,false).setText(R.id.bnt_1,"")
                         .setVisible(R.id.bnt_2,true).setText(R.id.bnt_2,"再来一单")
-                        .setVisible(R.id.bnt_3,true).setText(R.id.bnt_3,"售后申请");
+                        .setVisible(R.id.bnt_3,true).setText(R.id.bnt_3,"申请售后");
                 orderStatusString = "已完成";
                 break;
             case "CANCELLED":

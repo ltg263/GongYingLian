@@ -131,7 +131,7 @@ public class OrderDetailsActivity extends BaseActivity {
                 bnt_3.setVisibility(View.VISIBLE);
                 bnt_1.setText("");
                 bnt_2.setText("再来一单");
-                bnt_3.setText("售后申请");
+                bnt_3.setText("申请售后");
                 orderStatusString = "待发货";
                 break;
             case "UN_RECEIVE":
@@ -149,7 +149,7 @@ public class OrderDetailsActivity extends BaseActivity {
                 bnt_3.setVisibility(View.VISIBLE);
                 bnt_1.setText("");
                 bnt_2.setText("再来一单");
-                bnt_3.setText("售后申请");
+                bnt_3.setText("申请售后");
                 orderStatusString = "已完成";
                 break;
             case "CANCELLED":

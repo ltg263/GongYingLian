@@ -351,6 +351,13 @@ public interface ApiService {
     Observable<Result<OrderRefundHistoryBean>> orderRefundHistory(@Body PostOrderSubmit.RefundHistory mRefundHistory);
 
     /**
+     * 订单列表页-申请退款
+     * @return
+     */
+    @POST("api/scmp-application-mall/order/refund")
+    Observable<Result> orderRefund(@Body PostOrderSubmit.OrderCancel mRefund);
+
+    /**
      * 设置默认地址
      *
      * @return

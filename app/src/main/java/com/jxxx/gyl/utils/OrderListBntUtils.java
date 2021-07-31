@@ -2,17 +2,21 @@ package com.jxxx.gyl.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.jxxx.gyl.MainActivity;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.bean.OrderHistoryDetailBean;
 import com.jxxx.gyl.bean.PostOrderSubmit;
 import com.jxxx.gyl.view.activity.OrderAffirmActivity;
+import com.jxxx.gyl.view.activity.OrderApplyAfterActivity;
 import com.jxxx.gyl.view.activity.OrderPayActivity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,13 +62,18 @@ public class OrderListBntUtils {
                 });
                 break;
             case "申请售后":
-
+                Intent mIntent = new Intent(mContext,OrderApplyAfterActivity.class);
+                mIntent.putParcelableArrayListExtra("orderDetailList",
+                        (ArrayList<? extends Parcelable>) recordsBean.getOrderDetailList());
+                mIntent.putExtra("innerOrderNo",recordsBean.getInnerOrderNo());
+                mContext.startActivity(mIntent);
                 break;
             case "再来一单":
                 orderAgain(mContext, recordsBean.getInnerOrderNo(), new ShoppingCartInterface() {
                     @Override
                     public void isResult(Boolean isResult, String num) {
-
+                        ConstValues.SHOW_MAIN_FRAGMENT = "购物车";
+                        mContext.startActivity(new Intent(mContext,MainActivity.class));
                     }
                 });
                 break;

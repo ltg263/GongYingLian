@@ -1,8 +1,12 @@
 package com.jxxx.gyl.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class OrderHistoryDetailBean {
+public class OrderHistoryDetailBean implements Serializable {
 
     /**
      * autoDeliveryTime : 
@@ -377,7 +381,7 @@ public class OrderHistoryDetailBean {
     public void setOrderDetailList(List<OrderDetailListBean> orderDetailList) {
         this.orderDetailList = orderDetailList;
     }
-    public static class OrderDetailListBean {
+    public static class OrderDetailListBean implements Parcelable {
         /**
          * id : 0
          * shareAmount : 0
@@ -432,7 +436,7 @@ public class OrderHistoryDetailBean {
             this.userOrderSpuDTO = userOrderSpuDTO;
         }
 
-        public static class UserOrderSpuDTOBean {
+        public static class UserOrderSpuDTOBean implements Parcelable {
             /**
              * iconUrl : 
              * id : 
@@ -527,7 +531,7 @@ public class OrderHistoryDetailBean {
                 this.supplierName = supplierName;
             }
 
-            public static class PriceInfoBean {
+            public static class PriceInfoBean implements Parcelable {
                 /**
                  * price : 0
                  * unit : 
@@ -551,9 +555,45 @@ public class OrderHistoryDetailBean {
                 public void setUnit(String unit) {
                     this.unit = unit;
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(this.price);
+                    dest.writeString(this.unit);
+                }
+
+                public void readFromParcel(Parcel source) {
+                    this.price = source.readString();
+                    this.unit = source.readString();
+                }
+
+                public PriceInfoBean() {
+                }
+
+                protected PriceInfoBean(Parcel in) {
+                    this.price = in.readString();
+                    this.unit = in.readString();
+                }
+
+                public static final Creator<PriceInfoBean> CREATOR = new Creator<PriceInfoBean>() {
+                    @Override
+                    public PriceInfoBean createFromParcel(Parcel source) {
+                        return new PriceInfoBean(source);
+                    }
+
+                    @Override
+                    public PriceInfoBean[] newArray(int size) {
+                        return new PriceInfoBean[size];
+                    }
+                };
             }
 
-            public static class SkuBean {
+            public static class SkuBean implements Parcelable {
                 /**
                  * id : 
                  * priceInfo : {"price":0,"unit":""}
@@ -627,7 +667,160 @@ public class OrderHistoryDetailBean {
                 public void setSpuId(String spuId) {
                     this.spuId = spuId;
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(this.id);
+                    dest.writeParcelable(this.priceInfo, flags);
+                    dest.writeString(this.skuImage);
+                    dest.writeString(this.skuName);
+                    dest.writeString(this.skuNum);
+                    dest.writeString(this.skuUnit);
+                    dest.writeString(this.spuId);
+                }
+
+                public void readFromParcel(Parcel source) {
+                    this.id = source.readString();
+                    this.priceInfo = source.readParcelable(PriceInfoBean.class.getClassLoader());
+                    this.skuImage = source.readString();
+                    this.skuName = source.readString();
+                    this.skuNum = source.readString();
+                    this.skuUnit = source.readString();
+                    this.spuId = source.readString();
+                }
+
+                public SkuBean() {
+                }
+
+                protected SkuBean(Parcel in) {
+                    this.id = in.readString();
+                    this.priceInfo = in.readParcelable(PriceInfoBean.class.getClassLoader());
+                    this.skuImage = in.readString();
+                    this.skuName = in.readString();
+                    this.skuNum = in.readString();
+                    this.skuUnit = in.readString();
+                    this.spuId = in.readString();
+                }
+
+                public static final Creator<SkuBean> CREATOR = new Creator<SkuBean>() {
+                    @Override
+                    public SkuBean createFromParcel(Parcel source) {
+                        return new SkuBean(source);
+                    }
+
+                    @Override
+                    public SkuBean[] newArray(int size) {
+                        return new SkuBean[size];
+                    }
+                };
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(this.iconUrl);
+                dest.writeString(this.id);
+                dest.writeParcelable(this.priceInfo, flags);
+                dest.writeParcelable(this.sku, flags);
+                dest.writeString(this.spuImgs);
+                dest.writeString(this.spuName);
+                dest.writeString(this.spuSupplyType);
+                dest.writeString(this.supplierId);
+                dest.writeString(this.supplierName);
+            }
+
+            public void readFromParcel(Parcel source) {
+                this.iconUrl = source.readString();
+                this.id = source.readString();
+                this.priceInfo = source.readParcelable(PriceInfoBean.class.getClassLoader());
+                this.sku = source.readParcelable(SkuBean.class.getClassLoader());
+                this.spuImgs = source.readString();
+                this.spuName = source.readString();
+                this.spuSupplyType = source.readString();
+                this.supplierId = source.readString();
+                this.supplierName = source.readString();
+            }
+
+            public UserOrderSpuDTOBean() {
+            }
+
+            protected UserOrderSpuDTOBean(Parcel in) {
+                this.iconUrl = in.readString();
+                this.id = in.readString();
+                this.priceInfo = in.readParcelable(PriceInfoBean.class.getClassLoader());
+                this.sku = in.readParcelable(SkuBean.class.getClassLoader());
+                this.spuImgs = in.readString();
+                this.spuName = in.readString();
+                this.spuSupplyType = in.readString();
+                this.supplierId = in.readString();
+                this.supplierName = in.readString();
+            }
+
+            public static final Creator<UserOrderSpuDTOBean> CREATOR = new Creator<UserOrderSpuDTOBean>() {
+                @Override
+                public UserOrderSpuDTOBean createFromParcel(Parcel source) {
+                    return new UserOrderSpuDTOBean(source);
+                }
+
+                @Override
+                public UserOrderSpuDTOBean[] newArray(int size) {
+                    return new UserOrderSpuDTOBean[size];
+                }
+            };
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.id);
+            dest.writeString(this.shareAmount);
+            dest.writeString(this.skuNum);
+            dest.writeString(this.totalAmount);
+            dest.writeParcelable(this.userOrderSpuDTO, flags);
+        }
+
+        public void readFromParcel(Parcel source) {
+            this.id = source.readString();
+            this.shareAmount = source.readString();
+            this.skuNum = source.readString();
+            this.totalAmount = source.readString();
+            this.userOrderSpuDTO = source.readParcelable(UserOrderSpuDTOBean.class.getClassLoader());
+        }
+
+        public OrderDetailListBean() {
+        }
+
+        protected OrderDetailListBean(Parcel in) {
+            this.id = in.readString();
+            this.shareAmount = in.readString();
+            this.skuNum = in.readString();
+            this.totalAmount = in.readString();
+            this.userOrderSpuDTO = in.readParcelable(UserOrderSpuDTOBean.class.getClassLoader());
+        }
+
+        public static final Parcelable.Creator<OrderDetailListBean> CREATOR = new Parcelable.Creator<OrderDetailListBean>() {
+            @Override
+            public OrderDetailListBean createFromParcel(Parcel source) {
+                return new OrderDetailListBean(source);
+            }
+
+            @Override
+            public OrderDetailListBean[] newArray(int size) {
+                return new OrderDetailListBean[size];
+            }
+        };
     }
 }
