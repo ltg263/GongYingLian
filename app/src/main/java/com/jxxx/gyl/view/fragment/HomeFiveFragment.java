@@ -15,14 +15,13 @@ import com.jxxx.gyl.app.ConstValues;
 import com.jxxx.gyl.base.BaseFragment;
 import com.jxxx.gyl.bean.AccoutInfoBean;
 import com.jxxx.gyl.bean.UserInfoUpdate;
-import com.jxxx.gyl.utils.StringUtil;
+import com.jxxx.gyl.utils.GlideImageLoader;
 import com.jxxx.gyl.view.activity.MineCouponListActivity;
 import com.jxxx.gyl.view.activity.MineInvoiceOrderActivity;
-import com.jxxx.gyl.view.activity.OrderApplyAfterActivity;
+import com.jxxx.gyl.view.activity.OrderApplyAfterListActivity;
 import com.jxxx.gyl.view.activity.address.ActivityAddressList;
-import com.jxxx.gyl.view.activity.login.LoginActivity;
+import com.jxxx.gyl.view.activity.mine.MineInfoActivity;
 import com.jxxx.gyl.view.activity.mine.MineMessageListActivity;
-import com.jxxx.gyl.view.activity.mine.MineSetSmrzActivity;
 import com.jxxx.gyl.view.activity.mine.MineSettingActivity;
 import com.jxxx.gyl.view.activity.payActivity.ActivityPayHomeQb;
 import com.jxxx.gyl.view.activity.payActivity.ActivityPayHomeQk;
@@ -88,8 +87,13 @@ public class HomeFiveFragment extends BaseFragment {
         super.onResume();
         if (!ConstValues.ISLOGIN) {
             mTvUserName.setText("请先登录");
+            mTvBalance.setText("0");
+            mTvOwedAmount.setText("0");
+            mTvCouponNum.setText("0");
             mTvUserInfo.setVisibility(View.GONE);
+            return;
         }
+        initData();
     }
 
     @Override
@@ -107,6 +111,7 @@ public class HomeFiveFragment extends BaseFragment {
                     public void onNext(Result<UserInfoUpdate> result) {
                         if (isResultOk(result)) {
                             UserInfoUpdate.BaseInfoBean baseInfo = result.getData().getBaseInfo();
+                            GlideImageLoader.loadImageViewRadius(mContext,baseInfo.getStorefrontImageUrl(),mTvUserImg);
                             mTvUserName.setText(baseInfo.getStorefrontName());
                         }
                     }
@@ -160,7 +165,7 @@ public class HomeFiveFragment extends BaseFragment {
                 baseStartActivity(MineMessageListActivity.class, null);
                 break;
             case R.id.rl_user_info:
-                baseStartActivity(LoginActivity.class, null);
+                baseStartActivity(MineInfoActivity.class,null);
                 break;
             case R.id.ll_top_1:
 
@@ -185,7 +190,7 @@ public class HomeFiveFragment extends BaseFragment {
 //                baseStartActivity(MineSetSmrzActivity.class, null);
                 break;
             case R.id.ll_center_4:
-                baseStartActivity(OrderApplyAfterActivity.class, null);
+                baseStartActivity(OrderApplyAfterListActivity.class,null);
                 break;
             case R.id.ll_below_1:
                 break;
