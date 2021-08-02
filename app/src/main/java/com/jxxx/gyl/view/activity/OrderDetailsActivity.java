@@ -169,8 +169,8 @@ public class OrderDetailsActivity extends BaseActivity {
                 bnt_2.setVisibility(View.INVISIBLE);
                 bnt_3.setVisibility(View.VISIBLE);
                 bnt_1.setText("");
-                bnt_2.setText("再来一单");
-                bnt_3.setText("确认收货");
+                bnt_2.setText("");
+                bnt_3.setText("再来一单");
                 tv_state.setText("等待客服审核");
                 orderStatusString = "申请退款中";
                 break;
