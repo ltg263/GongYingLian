@@ -35,12 +35,18 @@ public class OrderListBntUtils {
                         recordsBean.getPayableAmount(),recordsBean.getPayChannel(),recordsBean.getPayNo());
                 break;
             case "确认收货":
-                orderConfirm(mContext, recordsBean.getInnerOrderNo(), new ShoppingCartInterface() {
+                DialogUtils.showDialogHint(mContext, "确认收到货了吗？", false, new DialogUtils.ErrorDialogInterface() {
                     @Override
-                    public void isResult(Boolean isResult, String num) {
-                        if(isResult){
-                            ToastUtils.showLong("确认收货成功");
-                        }
+                    public void btnConfirm() {
+                        orderConfirm(mContext, recordsBean.getInnerOrderNo(), new ShoppingCartInterface() {
+                            @Override
+                            public void isResult(Boolean isResult, String num) {
+                                if(isResult){
+                                    ToastUtils.showLong("确认收货成功");
+                                    mContext.startActivity(new Intent(mContext,MainActivity.class));
+                                }
+                            }
+                        });
                     }
                 });
                 break;
@@ -99,8 +105,7 @@ public class OrderListBntUtils {
                     @Override
                     public void onNext(Result result) {
                         if(result.getCode()==200) {
-                            Intent mIntent = new Intent(mContext,OrderAffirmActivity.class);
-                            mContext.startActivity(mIntent);
+                            mShoppingCartInterface.isResult(true,"");
                         }else{
                             if(mShoppingCartInterface!=null){
                                 mShoppingCartInterface.isResult(false,"");

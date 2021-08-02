@@ -57,8 +57,8 @@ public class HomeOrderAdapter extends BaseQuickAdapter<OrderHistoryDetailBean, B
                 break;
             case "FINISHED":
                 helper.setVisible(R.id.bnt_1,false).setText(R.id.bnt_1,"")
-                        .setVisible(R.id.bnt_2,true).setText(R.id.bnt_2,"再来一单")
-                        .setVisible(R.id.bnt_3,true).setText(R.id.bnt_3,"申请售后");
+                        .setVisible(R.id.bnt_2,false).setText(R.id.bnt_2,"")
+                        .setVisible(R.id.bnt_3,true).setText(R.id.bnt_3,"再来一单");
                 orderStatusString = "已完成";
                 break;
             case "CANCELLED":

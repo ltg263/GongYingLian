@@ -1,6 +1,5 @@
 package com.jxxx.gyl.view.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -8,7 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jxxx.gyl.R;
-import com.jxxx.gyl.api.HttpsUtils;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.app.ConstValues;
@@ -148,11 +146,11 @@ public class OrderDetailsActivity extends BaseActivity {
                 break;
             case "FINISHED":
                 bnt_1.setVisibility(View.INVISIBLE);
-                bnt_2.setVisibility(View.VISIBLE);
+                bnt_2.setVisibility(View.INVISIBLE);
                 bnt_3.setVisibility(View.VISIBLE);
                 bnt_1.setText("");
-                bnt_2.setText("再来一单");
-                bnt_3.setText("申请售后");
+                bnt_2.setText("");
+                bnt_3.setText("再来一单");
                 tv_state.setText("您任何意见，都欢迎联系我们");
                 orderStatusString = "已完成";
                 break;
