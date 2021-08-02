@@ -123,6 +123,7 @@ public class OrderDetailsActivity extends BaseActivity {
                 bnt_1.setText("");
                 bnt_2.setText("取消订单");
                 bnt_3.setText("去支付");
+                tv_state.setText("订单已提交，请尽快完成支付");
                 orderStatusString = "待支付";
                 break;
             case "UN_DELIVERY":
@@ -132,6 +133,7 @@ public class OrderDetailsActivity extends BaseActivity {
                 bnt_1.setText("");
                 bnt_2.setText("再来一单");
                 bnt_3.setText("申请售后");
+                tv_state.setText("您任何意见，都欢迎联系我们");
                 orderStatusString = "待发货";
                 break;
             case "UN_RECEIVE":
@@ -141,6 +143,7 @@ public class OrderDetailsActivity extends BaseActivity {
                 bnt_1.setText("");
                 bnt_2.setText("再来一单");
                 bnt_3.setText("确认收货");
+                tv_state.setText("您任何意见，都欢迎联系我们");
                 orderStatusString = "待收货";
                 break;
             case "FINISHED":
@@ -150,6 +153,7 @@ public class OrderDetailsActivity extends BaseActivity {
                 bnt_1.setText("");
                 bnt_2.setText("再来一单");
                 bnt_3.setText("申请售后");
+                tv_state.setText("您任何意见，都欢迎联系我们");
                 orderStatusString = "已完成";
                 break;
             case "CANCELLED":
@@ -167,9 +171,10 @@ public class OrderDetailsActivity extends BaseActivity {
                 bnt_2.setVisibility(View.INVISIBLE);
                 bnt_3.setVisibility(View.VISIBLE);
                 bnt_1.setText("");
-                bnt_2.setText("");
-                bnt_3.setText("再来一单");
-                orderStatusString = "待退款";
+                bnt_2.setText("再来一单");
+                bnt_3.setText("确认收货");
+                tv_state.setText("等待客服审核");
+                orderStatusString = "申请退款中";
                 break;
             case "REFUNDED":
                 bnt_1.setVisibility(View.INVISIBLE);
@@ -178,6 +183,7 @@ public class OrderDetailsActivity extends BaseActivity {
                 bnt_1.setText("");
                 bnt_2.setText("");
                 bnt_3.setText("再来一单");
+                tv_state.setText("退款将退回至您的微信账户，请注意查收");
                 orderStatusString = "已退款";
                 break;
         }
