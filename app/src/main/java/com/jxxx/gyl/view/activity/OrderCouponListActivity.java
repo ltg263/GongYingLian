@@ -1,9 +1,11 @@
 package com.jxxx.gyl.view.activity;
 
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,16 +14,18 @@ import com.jxxx.gyl.R;
 import com.jxxx.gyl.api.Result;
 import com.jxxx.gyl.api.RetrofitUtil;
 import com.jxxx.gyl.base.BaseActivity;
-import com.jxxx.gyl.bean.CategoryTreeData;
 import com.jxxx.gyl.bean.CouponTemplateData;
 import com.jxxx.gyl.bean.OrderInfoBean;
-import com.jxxx.gyl.view.adapter.HomeOrderAdapter;
 import com.jxxx.gyl.view.adapter.OrderCouponAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -33,6 +37,10 @@ public class OrderCouponListActivity extends BaseActivity {
     Toolbar mMyToolbar;
     @BindView(R.id.rv_list)
     RecyclerView mRvList;
+    @BindView(R.id.tv_not_data)
+    TextView mTvNotData;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout mRefreshLayout;
 
     private OrderCouponAdapter mOrderCouponAdapter;
     private List<CouponTemplateData> recommendCoupon;
@@ -51,15 +59,23 @@ public class OrderCouponListActivity extends BaseActivity {
         mRvList.setAdapter(mOrderCouponAdapter);
         recommendCoupon = getIntent().getParcelableArrayListExtra("recommendCoupon");
 
+        mRefreshLayout.setEnableLoadMore(false);
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                initData();
+            }
+        });
+
         mOrderCouponAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()){
+                switch (view.getId()) {
                     case R.id.tv_yhq_type_1:
-                        if(recommendCoupon!=null){
+                        if (recommendCoupon != null) {
                             Intent data = new Intent();
                             //把要传递的数据封装至意图对象中
-                            data.putExtra("userCouponId",  recommendCoupon.get(position).getId());
+                            data.putExtra("userCouponId", recommendCoupon.get(position).getId());
                             data.putExtra("userCouponAmount", recommendCoupon.get(position).getCouponValue());
                             //当前Activity销毁时，data这个意图就会传递给启动当前Activity的那个Activity
                             setResult(1, data);
@@ -67,9 +83,9 @@ public class OrderCouponListActivity extends BaseActivity {
                             finish();
                             return;
                         }
-                        if(mOrderCouponAdapter.getData().get(position).getIsDraw().equals("0")){
+                        if (mOrderCouponAdapter.getData().get(position).getIsDraw().equals("0")) {
                             couponTemplateReceive(mOrderCouponAdapter.getData().get(position).getId());
-                        }else{
+                        } else {
                             finish();
                         }
                         break;
@@ -113,7 +129,7 @@ public class OrderCouponListActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        if(recommendCoupon!=null){
+        if (recommendCoupon != null) {
             mOrderCouponAdapter.setNewData(recommendCoupon);
             return;
         }
@@ -131,6 +147,13 @@ public class OrderCouponListActivity extends BaseActivity {
                     public void onNext(Result<List<CouponTemplateData>> result) {
                         hideLoading();
                         if (isResultOk(result)) {
+                            if(result.getData().size()==0){
+                                mTvNotData.setVisibility(View.VISIBLE);
+                                mRefreshLayout.setVisibility(View.GONE);
+                                return;
+                            }
+                            mTvNotData.setVisibility(View.GONE);
+                            mRefreshLayout.setVisibility(View.VISIBLE);
                             mOrderCouponAdapter.setNewData(result.getData());
                         }
                     }
@@ -146,5 +169,4 @@ public class OrderCouponListActivity extends BaseActivity {
                     }
                 });
     }
-
 }

@@ -2,6 +2,7 @@ package com.jxxx.gyl.view.fragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -30,6 +31,8 @@ public class MineCouponFragment extends BaseFragment {
     Toolbar myToolbar;
     @BindView(R.id.rv_list)
     RecyclerView mRvList;
+    @BindView(R.id.tv_not_data)
+    TextView mTvNotData;
     MineCouponListAdapter mMineCouponListAdapter;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
@@ -55,6 +58,7 @@ public class MineCouponFragment extends BaseFragment {
                 initData();
             }
         });
+
     }
 
     @Override
@@ -74,6 +78,14 @@ public class MineCouponFragment extends BaseFragment {
                         hideLoading();
                         mRefreshLayout.finishRefresh();
                         if (isResultOk(result)) {
+                            if(result.getData().size()==0){
+                                mTvNotData.setVisibility(View.VISIBLE);
+                                mRefreshLayout.setVisibility(View.GONE);
+                                return;
+                            }
+                            mTvNotData.setVisibility(View.GONE);
+                            mRefreshLayout.setVisibility(View.VISIBLE);
+
                             mMineCouponListAdapter.setNewData(result.getData());
                         }
                     }

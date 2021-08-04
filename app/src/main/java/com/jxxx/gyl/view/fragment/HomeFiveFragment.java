@@ -20,6 +20,7 @@ import com.jxxx.gyl.view.activity.MineCouponListActivity;
 import com.jxxx.gyl.view.activity.MineInvoiceOrderActivity;
 import com.jxxx.gyl.view.activity.OrderApplyAfterListActivity;
 import com.jxxx.gyl.view.activity.address.ActivityAddressList;
+import com.jxxx.gyl.view.activity.login.LoginActivity;
 import com.jxxx.gyl.view.activity.mine.MineInfoActivity;
 import com.jxxx.gyl.view.activity.mine.MineMessageListActivity;
 import com.jxxx.gyl.view.activity.mine.MineSettingActivity;
@@ -157,6 +158,10 @@ public class HomeFiveFragment extends BaseFragment {
     @OnClick({R.id.iv_set, R.id.iv_msg, R.id.rl_user_info, R.id.ll_top_1, R.id.ll_top_2, R.id.ll_top_3, R.id.ll_center_1,
             R.id.ll_center_2, R.id.ll_center_3, R.id.ll_center_4, R.id.ll_below_1, R.id.ll_below_2, R.id.ll_below_3, R.id.ll_below_4})
     public void onClick(View view) {
+        if (!ConstValues.ISLOGIN) {
+            LoginActivity.startActivityLogin(mContext);
+            return;
+        }
         switch (view.getId()) {
             case R.id.iv_set:
                 baseStartActivity(MineSettingActivity.class, null);
