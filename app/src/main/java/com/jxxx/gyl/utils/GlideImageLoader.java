@@ -87,7 +87,7 @@ public class GlideImageLoader extends ImageLoader {
 
     //加载圆角
     public static void loadImageViewRadius(Context mContext, String path, int r, ImageView mImageView) {
-        Glide.with(mContext).load(path).apply(new RequestOptions().transforms(new CenterCrop(), new RoundedCorners(r))).into(mImageView);
+        Glide.with(mContext).load(path).apply(new RequestOptions().transform(new CenterCrop(), new RoundedCorners(r)).error(R.mipmap.icon_logo)).into(mImageView);
     }
 
     //加载圆角
